@@ -18,43 +18,74 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints">
 
-        <Button
-            android:id="@+id/button1"
+        <EditText
+            android:id="@+id/userName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="50dp"
+            android:textSize="18sp"
+            android:hint="@string/userName"
+            android:textColorHint="@color/lightGreen"
+            android:gravity="center"
+            android:ems="10"
+            android:background="@drawable/textview_border"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:ems="10"
+            android:hint="@string/password"
+            android:textColorHint="@color/lightGreen"
+            android:inputType="textPassword"
+            android:background="@drawable/textview_border" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/login"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/Green"
+            android:backgroundTint="@color/lightGreen"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/textview_border"/>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/register"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/register"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/Green"
+            android:backgroundTint="@color/lightGreen"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/textview_border"/>
 
         <Button
             android:id="@+id/button4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/login_with_google"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/Green"
+            android:backgroundTint="@color/lightGreen"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingLeft="45dp"
+            android:paddingRight="30dp"
+            android:drawableLeft="@drawable/google"
+            android:background="@drawable/textview_border"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
