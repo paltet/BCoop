@@ -4,8 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/log"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/Green"/>
 
     <LinearLayout
         android:layout_width="300dp"
@@ -16,76 +25,76 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:ignore="MissingConstraints">
-
-        <EditText
-            android:id="@+id/userName"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textSize="18sp"
-            android:hint="@string/userName"
-            android:textColorHint="@color/lightGreen"
-            android:gravity="center"
-            android:ems="10"
-            android:background="@drawable/textview_border"/>
-
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:textSize="18sp"
+            android:background="@drawable/textview_border"
             android:ems="10"
+            android:gravity="center"
             android:hint="@string/password"
-            android:textColorHint="@color/lightGreen"
             android:inputType="textPassword"
-            android:background="@drawable/textview_border" />
+            android:textColorHint="@color/lightGreen"
+            android:textSize="18sp"
+            android:layout_below="@id/userName"/>
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/textview_border"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/userName"
+            android:inputType="text"
+            android:textColorHint="@color/lightGreen"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/textview_border"
+            android:backgroundTint="@color/lightGreen"
             android:text="@string/login"
+            android:textColor="@color/Green"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/Green"
-            android:backgroundTint="@color/lightGreen"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/textview_border"/>
+            android:layout_below="@id/password"/>
 
         <Button
             android:id="@+id/register"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/textview_border"
+            android:backgroundTint="@color/lightGreen"
             android:text="@string/register"
+            android:textColor="@color/Green"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/Green"
-            android:backgroundTint="@color/lightGreen"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/textview_border"/>
+            android:layout_below="@id/login"/>
 
         <Button
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:text="@string/login_with_google"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/Green"
+            android:background="@drawable/textview_border"
             android:backgroundTint="@color/lightGreen"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:drawableLeft="@drawable/google"
             android:paddingLeft="45dp"
             android:paddingRight="30dp"
-            android:drawableLeft="@drawable/google"
-            android:background="@drawable/textview_border"/>
+            android:text="@string/login_with_google"
+            android:textColor="@color/Green"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_below="@id/register"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
