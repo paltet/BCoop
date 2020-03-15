@@ -1,37 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/Green"/>
-
-    <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_margin="50dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:ignore="MissingConstraints">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/Green"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@drawable/logo" />
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/password"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/textview_border"
+            android:backgroundTint="@color/lightGreen"
+            android:text="@string/login"
+            android:textColor="@color/Green"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/login"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/textview_border"
+            android:backgroundTint="@color/lightGreen"
+            android:text="@string/register"
+            android:textColor="@color/Green"
+            android:textSize="18sp" />
+
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/register"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/textview_border"
+            android:backgroundTint="@color/lightGreen"
+            android:drawableStart="@drawable/google"
+            android:paddingStart="45dp"
+            android:paddingEnd="30dp"
+            android:text="@string/login_with_google"
+            android:textColor="@color/Green"
+            android:textSize="18sp" />
+
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_below="@id/userName"
             android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:background="@drawable/textview_border"
             android:ems="10"
             android:gravity="center"
@@ -39,62 +84,24 @@
             android:inputType="textPassword"
             android:textColorHint="@color/lightGreen"
             android:textSize="18sp"
-            android:layout_below="@id/userName"/>
+            android:autofillHints="@string/password"/>
 
         <EditText
             android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:background="@drawable/textview_border"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/userName"
             android:inputType="text"
             android:textColorHint="@color/lightGreen"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/login"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/textview_border"
-            android:backgroundTint="@color/lightGreen"
-            android:text="@string/login"
-            android:textColor="@color/Green"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_below="@id/password"/>
+            android:layout_below="@+id/imageView"
+            android:autofillHints="@string/userName"/>
+    </RelativeLayout>
 
-        <Button
-            android:id="@+id/register"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/textview_border"
-            android:backgroundTint="@color/lightGreen"
-            android:text="@string/register"
-            android:textColor="@color/Green"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_below="@id/login"/>
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/textview_border"
-            android:backgroundTint="@color/lightGreen"
-            android:drawableLeft="@drawable/google"
-            android:paddingLeft="45dp"
-            android:paddingRight="30dp"
-            android:text="@string/login_with_google"
-            android:textColor="@color/Green"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_below="@id/register"/>
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
