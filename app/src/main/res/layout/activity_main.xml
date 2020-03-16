@@ -52,8 +52,8 @@
             android:textSize="18sp" />
 
 
-        <Button
-            android:id="@+id/button4"
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/loginWithGoogle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@id/register"

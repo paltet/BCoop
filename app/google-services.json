@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "42198210865-utrm22rs7u5gv6mip1d75or97jrvtepk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bcoop.bcoop",
+            "certificate_hash": "bff00a4fcc01286b8534fda3e01fa2dc7455b540"
+          }
+        },
+        {
           "client_id": "42198210865-21ra8bs8isqpro4uil4dj1g4aheseghm.apps.googleusercontent.com",
           "client_type": 3
         }

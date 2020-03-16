@@ -103,11 +103,13 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            if(!task.isSuccessful()){
-                                Toast.makeText(RegisterActivity.this, "Error during register, Try Again", Toast.LENGTH_SHORT).show();
+                            if(task.isSuccessful()){
+                                Toast.makeText(RegisterActivity.this, "Register successful!", Toast.LENGTH_SHORT).show();
+                                //startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
                             }
                             else{
-                                startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+                                Toast.makeText(RegisterActivity.this, "Error during register, Try Again", Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     });
