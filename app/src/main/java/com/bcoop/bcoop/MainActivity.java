@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private int RC_SIGN_IN = 1;
     Button registerBtn;
     private FirebaseAuth mAuth;
-    private SignInButton signInButton;
+    private Button signInButton;
     private GoogleSignInClient googleSignInClient;
 
     @Override
@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        signInButton = findViewById(R.id.loginWithGoogle);
+        signInButton = (Button) findViewById(R.id.loginWithGoogle);
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -71,23 +72,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount>  completeTask) {
-        try {
-            GoogleSignInAccount acc = completeTask.getResult(ApiException.class);
-            Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-            FirebaseGoogleAuth(acc);
-        }
-        catch (ApiException e){
-            Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-            FirebaseGoogleAuth(null);
+            try {
+                GoogleSignInAccount acc = task.getResult(ApiException.class);
+                Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                FirebaseGoogleAuth(acc);
+            }
+            catch (ApiException e){
+                Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                FirebaseGoogleAuth(null);
+            }
         }
     }
 
@@ -99,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "successful", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
+                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
                 } else {
                     Toast.makeText(MainActivity.this, "failed", Toast.LENGTH_SHORT).show();
                 }
