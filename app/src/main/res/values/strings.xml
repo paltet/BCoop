@@ -20,4 +20,13 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
+
+    <string name="unvalid_username">Please enter a valid username</string>
+    <string name="unvalid_email">Please enter a valid email</string>
+    <string name="unvalid_passwd">Please enter a valid password
+                                \nMinimum: 8 characters long</string>
+    <string name="confirm_passwd">Confirmation password does not match</string>
+
+    <string name="error_register_email_already_used">Email address already used</string>
+    <string name="error_register">Error during register, Try Again</string>
 </resources>
