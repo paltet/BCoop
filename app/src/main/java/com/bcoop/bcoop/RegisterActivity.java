@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -20,15 +21,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText password, mail;
-    ImageView eye;
-    EditText confirm_password;
-    ImageView confirm_eye;
+    EditText password, mail, username, confirm_password;
+    ImageView eye, confirm_eye;
     Button buttonRegister;
-    boolean isOpenEyeP;
-    boolean isOpenEyeC;
+    boolean isOpenEyeP, isOpenEyeC;
     private FirebaseAuth mAuth;
 
     @Override
@@ -36,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ActionBar actionBar = this.getSupportActionBar();
-        actionBar.setTitle("Register");
+        actionBar.setTitle(getString(R.string.register));
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
@@ -47,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         confirm_password = (EditText) findViewById(R.id.register_confirm_password);
         confirm_eye = (ImageView) findViewById(R.id.eye_confirm);
         buttonRegister = findViewById(R.id.register);
+        username = (EditText) findViewById(R.id.register_username);
 
         isOpenEyeP = false;
         isOpenEyeC = false;
@@ -86,17 +88,26 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = mail.getText().toString();
                 String psw = password.getText().toString();
+                String cpsw = confirm_password.getText().toString();
+                String usrn = username.getText().toString();
 
-                if(email.isEmpty()) {
-                    mail.setError("Please enter a valid email");
+
+
+                if (usrn.isEmpty()){
+                    username.setError(getString(R.string.unvalid_username));
+                    username.requestFocus();
+                }
+                if(email.isEmpty() || !isValid(email)) {
+                    mail.setError(getString(R.string.unvalid_email));
                     mail.requestFocus();
                 }
-                else if(psw.isEmpty()){
-                    password.setError("Please enter a valid password");
+                else if(psw.length() < 8){
+                    password.setError(getString(R.string.unvalid_passwd));
                     password.requestFocus();
                 }
-                else if(email.isEmpty() && psw.isEmpty()){
-                    Toast.makeText(RegisterActivity.this, "Fields are empty", Toast.LENGTH_SHORT).show();
+                else if(!psw.equals(cpsw)){
+                    confirm_password.setError(getString(R.string.confirm_passwd));
+                    confirm_password.requestFocus();
                 }
                 else{
                     mAuth.createUserWithEmailAndPassword(email, psw).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
@@ -108,8 +119,13 @@ public class RegisterActivity extends AppCompatActivity {
                                 startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
                             }
                             else{
-                                Toast.makeText(RegisterActivity.this, "Error during register, Try Again", Toast.LENGTH_SHORT).show();
-
+                                try {
+                                    throw task.getException();
+                                } catch (FirebaseAuthUserCollisionException e) {
+                                    Toast.makeText(RegisterActivity.this, R.string.error_register_email_already_used, Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    Toast.makeText(RegisterActivity.this, R.string.error_register, Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                     });
@@ -127,5 +143,18 @@ public class RegisterActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static boolean isValid(String email)
+    {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
     }
 }
