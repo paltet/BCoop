@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private int RC_SIGN_IN = 1;
     Button registerBtn;
     private FirebaseAuth mAuth;
+    private Button loginBtn;
+    private EditText mail;
+    private EditText password;
     private Button signInButton;
     private GoogleSignInClient googleSignInClient;
 
@@ -38,6 +42,46 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+
+        mail = findViewById(R.id.mail);
+        password = findViewById(R.id.password);
+
+        if(mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+            finish();
+        }
+
+        loginBtn = (Button) findViewById(R.id.login);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String usr = mail.getText().toString();
+                String psw = password.getText().toString();
+
+                if (usr.isEmpty()){
+                    mail.setError(getString(R.string.unvalid_username));
+                    mail.requestFocus();
+                }
+                else if(psw.length() < 8){
+                    password.setError(getString(R.string.unvalid_passwd));
+                    password.requestFocus();
+                }
+                else {
+                    mAuth.signInWithEmailAndPassword(usr, psw).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()) {
+                                Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                            }
+                            else {
+                                Toast.makeText(MainActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
 
         registerBtn = (Button) findViewById(R.id.register);
         registerBtn.setOnClickListener(new View.OnClickListener() {

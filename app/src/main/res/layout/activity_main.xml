@@ -73,7 +73,7 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/userName"
+            android:layout_below="@id/mail"
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
@@ -87,21 +87,21 @@
             android:autofillHints="@string/password"/>
 
         <EditText
-            android:id="@+id/userName"
+            android:id="@+id/mail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_below="@+id/imageView"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
+            android:autofillHints="@string/userName"
             android:background="@drawable/textview_border"
             android:ems="10"
             android:gravity="center"
-            android:hint="@string/userName"
+            android:hint="@string/email"
             android:inputType="text"
             android:textColorHint="@color/lightGreen"
-            android:textSize="18sp"
-            android:layout_below="@+id/imageView"
-            android:autofillHints="@string/userName"/>
+            android:textSize="18sp" />
     </RelativeLayout>
 
 </RelativeLayout>
