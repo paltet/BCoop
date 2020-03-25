@@ -121,11 +121,9 @@ public class MainActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount acc = task.getResult(ApiException.class);
-                Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                 FirebaseGoogleAuth(acc);
             }
             catch (ApiException e){
-                Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                 FirebaseGoogleAuth(null);
             }
         }
@@ -137,13 +135,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
                     startActivity(new Intent(MainActivity.this, HomeActivity.class));
                 } else {
-                    Toast.makeText(MainActivity.this, "failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        if ("ExitApp".equals(intent.getAction())) {
+            finish();
+        }
     }
 }

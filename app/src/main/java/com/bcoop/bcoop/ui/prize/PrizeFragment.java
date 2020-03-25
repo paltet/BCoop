@@ -1,4 +1,4 @@
-package com.bcoop.bcoop.ui.home;
+package com.bcoop.bcoop.ui.prize;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.bcoop.bcoop.R;
 
-public class HomeFragment extends Fragment {
+public class PrizeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private PrizeViewModel prizeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        prizeViewModel =
+                ViewModelProviders.of(this).get(PrizeViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_prize, container, false);
+        final TextView textView = root.findViewById(R.id.text_prize);
+        prizeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
