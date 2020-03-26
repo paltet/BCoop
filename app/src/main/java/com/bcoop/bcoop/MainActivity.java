@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
         mail = findViewById(R.id.mail);
         password = findViewById(R.id.password);
 
-        /*if(mAuth.getCurrentUser() != null) {
+        if(mAuth.getCurrentUser() != null) {
             startActivity(new Intent(MainActivity.this, HomeActivity.class));
             finish();
-        }*/
+        }
 
         loginBtn = (Button) findViewById(R.id.login);
         loginBtn.setOnClickListener(new View.OnClickListener() {

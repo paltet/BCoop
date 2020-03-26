@@ -15,6 +15,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText password, mail, username, confirm_password;
     ImageView eye, confirm_eye;
     Button buttonRegister;
+    private TextView privacy;
     boolean isOpenEyeP, isOpenEyeC;
     private FirebaseAuth mAuth;
 
@@ -41,6 +43,9 @@ public class RegisterActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
+
+        privacy = findViewById(R.id.text_privacy);
+        privacy.setText(R.string.accept_privacy);
 
         mail = (EditText) findViewById(R.id.register_email);
         password = (EditText) findViewById(R.id.register_password);

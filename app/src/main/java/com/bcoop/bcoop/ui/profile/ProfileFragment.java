@@ -18,12 +18,14 @@ import androidx.lifecycle.ViewModelProviders;
 import com.bcoop.bcoop.HomeActivity;
 import com.bcoop.bcoop.MainActivity;
 import com.bcoop.bcoop.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
+    private FirebaseAuth mAuth;
 
     private Button logout;
 
@@ -46,6 +48,8 @@ public class ProfileFragment extends Fragment {
                 Intent intent = new Intent();
                 intent.setClass(Objects.requireNonNull(ProfileFragment.super.getActivity()), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
                 startActivity(intent);
             }
         });
