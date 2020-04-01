@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "42198210865",
+    "firebase_url": "https://bcoop-4291d.firebaseio.com",
+    "project_id": "bcoop-4291d",
+    "storage_bucket": "bcoop-4291d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42198210865:android:cf85ec3ccee6e004d57810",
+        "android_client_info": {
+          "package_name": "com.bcoop.bcoop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42198210865-0ujss2h1v7giqf40o7hokepp5m1m0brb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bcoop.bcoop",
+            "certificate_hash": "6bbcb8632b890c1917c1511d30e3cfcf44bfff2a"
+          }
+        },
+        {
+          "client_id": "42198210865-utrm22rs7u5gv6mip1d75or97jrvtepk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bcoop.bcoop",
+            "certificate_hash": "bff00a4fcc01286b8534fda3e01fa2dc7455b540"
+          }
+        },
+        {
+          "client_id": "42198210865-21ra8bs8isqpro4uil4dj1g4aheseghm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4l7bX66QLLZG3XpigacLxLyD3JxkWuRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "42198210865-21ra8bs8isqpro4uil4dj1g4aheseghm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
