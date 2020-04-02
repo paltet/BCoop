@@ -22,4 +22,8 @@
 
     <string name="error_register_email_already_used">Email address already used</string>
     <string name="error_register">Error during register, Try Again</string>
+
+    <string name="en" translatable="false">EN</string>
+    <string name="es" translatable="false">ES</string>
+    <string name="ca" translatable="false">CA</string>
 </resources>

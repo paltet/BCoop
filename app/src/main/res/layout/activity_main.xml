@@ -35,7 +35,7 @@
             android:backgroundTint="@color/lightGreen"
             android:text="@string/login"
             android:textColor="@color/Green"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/register"
@@ -49,7 +49,7 @@
             android:backgroundTint="@color/lightGreen"
             android:text="@string/register"
             android:textColor="@color/Green"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
 
         <Button
@@ -67,7 +67,7 @@
             android:paddingEnd="30dp"
             android:text="@string/login_with_google"
             android:textColor="@color/Green"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/password"
@@ -83,7 +83,7 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:textColorHint="@color/lightGreen"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:autofillHints="@string/password"/>
 
         <EditText
@@ -101,7 +101,48 @@
             android:hint="@string/email"
             android:inputType="text"
             android:textColorHint="@color/lightGreen"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/language"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/loginWithGoogle"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            android:textColorHint="@color/lightGreen"
+            android:textSize="16sp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/en"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/en"
+                android:textColor="@color/Green"
+                android:background="@drawable/textview_border"
+                android:onClick="onClick"/>
+            <Button
+                android:id="@+id/es"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/es"
+                android:textColor="@color/Green"
+                android:background="@drawable/textview_border"
+                android:onClick="onClick"/>
+            <Button
+                android:id="@+id/ca"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/ca"
+                android:textColor="@color/Green"
+                android:background="@drawable/textview_border"
+                android:onClick="onClick"/>
+        </LinearLayout>
     </RelativeLayout>
 
 </RelativeLayout>

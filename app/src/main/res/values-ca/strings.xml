@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">BCoop</string>
+    <string name="userName">Nom d\'usuari</string>
+    <string name="password">Contrasenya</string>
+    <string name="login">Iniciar essió</string>
+    <string name="register">Registrar-se</string>
+    <string name="login_with_google">Iniciar la sessió amb Google</string>
+    <string name="confirm">Confirmar la contrassenya</string>
+    <string name="email">Correu electrònic</string>
+    <string name="logout">Tancar sessió</string>
+    <string name="search">Cercar</string>
+    <string name="prize">Premi</string>
+    <string name="chat">Xat</string>
+    <string name="profile">Perfil</string>
+
+    <string name="accept_privacy">Fent clic a continuació, acceptes les Condicions del servei i la Política de privadesa de BCoop.</string>
+    <string name="unvalid_username">Introduïu un nom d’usuari vàlid</string>
+    <string name="unvalid_email">Introduïu un correu electrònic vàlid</string>
+    <string name="unvalid_passwd">Introduïu una contrasenya vàlida
+                                \nMínim: 8 caràcters de longitud</string>
+    <string name="confirm_passwd">La contrasenya de confirmació no coincideix</string>
+
+    <string name="error_register_email_already_used">Adreça de correu electrònic ja utilitzada</string>
+    <string name="error_register">S\'ha produït un error durant el registre i torna-ho a provar</string>
+
+    <string name="en" translatable="false">EN</string>
+    <string name="es" translatable="false">ES</string>
+    <string name="ca" translatable="false">CA</string>
+</resources>
