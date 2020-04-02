@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
@@ -132,7 +133,8 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseGoogleAuth(acc);
             }
             catch (ApiException e){
-                FirebaseGoogleAuth(null);
+                Log.e("", "Google sign in failed", e);
+                Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
             }
         }
     }
