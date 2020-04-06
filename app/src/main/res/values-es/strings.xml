@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">BCoop</string>
+    <string name="userName">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="register">Registrarse</string>
+    <string name="login_with_google">Iniciar la sesión con google</string>
+    <string name="confirm">Confirmar contraseña</string>
+    <string name="email">Correo electrónico</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="search">Buscar</string>
+    <string name="prize">Premio</string>
+    <string name="chat">Charla</string>
+    <string name="profile">Perfil</string>
+
+    <string name="accept_privacy">Al hacer clic a continuación, acepta los Términos de servicio y la Política de privacidad de BCoop.</string>
+    <string name="unvalid_username">Por favor ingrese un nombre de usuario válido</string>
+    <string name="unvalid_email">Por favor introduzca una dirección de correo electrónico válida</string>
+    <string name="unvalid_passwd">Por favor introduce una contraseña válida
+                                \nMínimo: 8 caracteres de largo</string>
+    <string name="confirm_passwd">La contraseña de confirmación no coincide</string>
+
+    <string name="error_register_email_already_used">Dirección de correo electrónico ya utilizada</string>
+    <string name="error_register">Error durante el registro, intente nuevamente</string>
+
+    <string name="en" translatable="false">EN</string>
+    <string name="es" translatable="false">ES</string>
+    <string name="ca" translatable="false">CA</string>
+</resources>

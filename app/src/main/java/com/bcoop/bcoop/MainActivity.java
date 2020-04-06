@@ -4,9 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +31,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     private int RC_SIGN_IN = 1;
@@ -40,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setLanguage();
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
@@ -146,13 +154,68 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    @Override
+    /*@Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
         if ("ExitApp".equals(intent.getAction())) {
             finish();
         }
+    }*/
+
+    public void onClick(View v) {
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        String language = "en";
+         switch (v.getId()) {
+            case R.id.en:
+                config.locale = Locale.ENGLISH;
+                language = "en";
+                break;
+            case R.id.es:
+                config.locale = new Locale("es", "ES");
+                language = "es";
+                break;
+            case R.id.ca:
+                config.locale = new Locale("ca", "ES");
+                language = "ca";
+                break;
+             default:
+                 break;
+         }
+         editLanguage(language);
+         resources.updateConfiguration(config, dm);
+         Intent intent = new Intent(this, MainActivity.class);
+         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+         startActivity(intent);
+     }
+
+     public void editLanguage(String language){
+        SharedPreferences preferences=getSharedPreferences("language", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("current_language", language);
+        editor.apply();
     }
+
+    public void setLanguage() {
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        SharedPreferences preferences=getSharedPreferences("language", Context.MODE_PRIVATE);
+        String language = preferences.getString("current_language", "");
+        switch (language) {
+            case "en":
+                config.locale = Locale.ENGLISH;
+                break;
+            case "es":
+                config.locale = new Locale("es", "ES");
+                break;
+            case "ca":
+                config.locale = new Locale("ca", "ES");
+                break;
+        }
+        resources.updateConfiguration(config, dm);
+    }
+
 }
