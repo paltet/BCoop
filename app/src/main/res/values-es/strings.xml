@@ -26,4 +26,6 @@
     <string name="en" translatable="false">EN</string>
     <string name="es" translatable="false">ES</string>
     <string name="ca" translatable="false">CA</string>
+    <string name="gifts">Premios</string>
+    <string name="accept">Aceptar</string>
 </resources>
