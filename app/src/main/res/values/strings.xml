@@ -34,4 +34,6 @@
     <string name="initial_setup_photo">Would you like to add an image to your profile?</string>
     <string name="click_to_change_image">Press the image above to upload an image</string>
     <string name="initial_setup_location">Confirm this is your home location</string>
+
+    <string name="failed">Failed. Please try again</string>
 </resources>
