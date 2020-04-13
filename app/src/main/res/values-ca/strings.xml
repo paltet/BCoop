@@ -29,4 +29,6 @@
     <string name="en" translatable="false">EN</string>
     <string name="es" translatable="false">ES</string>
     <string name="ca" translatable="false">CA</string>
+
+    <string name="failed">Fracassat. Si us plau torna-ho a provar</string>
 </resources>

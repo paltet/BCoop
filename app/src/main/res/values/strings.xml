@@ -31,4 +31,14 @@
     <string name="en" translatable="false">EN</string>
     <string name="es" translatable="false">ES</string>
     <string name="ca" translatable="false">CA</string>
+
+    <string name="accept">Accept</string>
+    <string name="remind_me_later">Remind me later</string>
+    <string name="welcome_user">Welcome </string>
+    <string name="initial_config_first">Please take a few steps to set up your account</string>
+    <string name="initial_setup_photo">Would you like to add an image to your profile?</string>
+    <string name="click_to_change_image">Press the image above to upload an image</string>
+    <string name="initial_setup_location">Confirm this is your home location</string>
+
+    <string name="failed">Failed. Please try again</string>
 </resources>
