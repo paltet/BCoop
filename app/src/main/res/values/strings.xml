@@ -14,6 +14,8 @@
     <string name="profile">Profile</string>
     <string name="gifts"> Gifts </string>
     <string name="accept"> Accept </string>
+    <string name="success"> Seccessful purchase </string>
+    <string name="abort"> Purchase Canceled </string>
 
 
     <string name="accept_privacy">By clicking below, you agree to BCoop Terms of Service and Privacy Policy.</string>
@@ -32,7 +34,6 @@
     <string name="es" translatable="false">ES</string>
     <string name="ca" translatable="false">CA</string>
 
-    <string name="accept">Accept</string>
     <string name="remind_me_later">Remind me later</string>
     <string name="welcome_user">Welcome </string>
     <string name="initial_config_first">Please take a few steps to set up your account</string>

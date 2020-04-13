@@ -14,6 +14,10 @@
     <string name="profile">Perfil</string>
     <string name="gifts"> Premis </string>
     <string name="accept"> Acceptar </string>
+    <string name="success"> Compra satisfactoria </string>
+    <string name="abort"> Compra cancel·lada </string>
+
+
 
 
     <string name="accept_privacy">Fent clic a continuació, acceptes les Condicions del servei i la Política de privadesa de BCoop.</string>
