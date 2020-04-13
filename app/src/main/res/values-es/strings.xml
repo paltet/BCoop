@@ -30,5 +30,12 @@
     <string name="es" translatable="false">ES</string>
     <string name="ca" translatable="false">CA</string>
 
+    <string name="remind_me_later">Recuérdamelo luego</string>
+    <string name="welcome_user">Bienvenido </string>
+    <string name="initial_config_first">Por favor, sigue estos pasos para configurar tu cuenta</string>
+    <string name="initial_setup_photo">¿Te gustaría añadir una imagen a tu perfil?</string>
+    <string name="click_to_change_image">Presiona la imagen de arriba para subir la tuya</string>
+    <string name="initial_setup_location">Confirma tu lugar de residencia</string>
+
     <string name="failed">Ha fallado. Inténtalo de nuevo</string>
 </resources>

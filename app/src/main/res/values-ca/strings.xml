@@ -30,5 +30,12 @@
     <string name="es" translatable="false">ES</string>
     <string name="ca" translatable="false">CA</string>
 
-    <string name="failed">Fracassat. Si us plau torna-ho a provar</string>
+    <string name="remind_me_later">Recorda-m\'ho després</string>
+    <string name="welcome_user">Benvingut </string>
+    <string name="initial_config_first">Siusplau, segueix aquests passos per a configurar el teu compte</string>
+    <string name="initial_setup_photo">T\'agradaría afegir una imatge al teu perfil?</string>
+    <string name="click_to_change_image">Fes clic a la imatge per pujar la teva</string>
+    <string name="initial_setup_location">Confirma que resideixes aquí</string>
+
+    <string name="failed">Ha fallat. Si us plau torna-ho a provar</string>
 </resources>
