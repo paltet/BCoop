@@ -104,13 +104,16 @@
                 android:id="@+id/imageButton"
                 android:layout_width="195dp"
                 android:layout_height="161dp"
+                android:onClick="showAlertDialog"
                 android:src="@drawable/regalo" />
+
 
             <ImageButton
                 android:id="@+id/imageButton2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="showAlertDialog"
                 android:src="@drawable/regalo" />
         </LinearLayout>
     </ScrollView>
