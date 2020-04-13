@@ -12,6 +12,9 @@
     <string name="prize">Prize</string>
     <string name="chat">Chat</string>
     <string name="profile">Profile</string>
+    <string name="gifts"> Gifts </string>
+    <string name="accept"> Accept </string>
+
 
     <string name="accept_privacy">By clicking below, you agree to BCoop Terms of Service and Privacy Policy.</string>
     <string name="unvalid_username">Please enter a valid username</string>
@@ -22,6 +25,8 @@
 
     <string name="error_register_email_already_used">Email address already used</string>
     <string name="error_register">Error during register, Try Again</string>
+
+
 
     <string name="en" translatable="false">EN</string>
     <string name="es" translatable="false">ES</string>

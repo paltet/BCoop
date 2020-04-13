@@ -12,6 +12,9 @@
     <string name="prize">Premi</string>
     <string name="chat">Xat</string>
     <string name="profile">Perfil</string>
+    <string name="gifts"> Premis </string>
+    <string name="accept"> Acceptar </string>
+
 
     <string name="accept_privacy">Fent clic a continuació, acceptes les Condicions del servei i la Política de privadesa de BCoop.</string>
     <string name="unvalid_username">Introduïu un nom d’usuari vàlid</string>
