@@ -28,13 +28,14 @@ public class PrizeFragment extends Fragment {
         prizeViewModel =
                 ViewModelProviders.of(this).get(PrizeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_prize, container, false);
+        /*
         final TextView textView = root.findViewById(R.id.text_prize);
         prizeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });
+        });*/
         return root;
     }
 
