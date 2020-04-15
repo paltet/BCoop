@@ -1,4 +1,4 @@
-package model;
+package com.bcoop.bcoop.ui.prize;
 
 public class Premi {
     private String nom;
@@ -7,6 +7,13 @@ public class Premi {
     private double preu;
 
     public Premi() {
+    }
+
+    public Premi(String nom, String descripció, String imatge, double preu) {
+        this.nom = nom;
+        this.descripció = descripció;
+        this.imatge = imatge;
+        this.preu = preu;
     }
 
     public String getNom() {

@@ -3,11 +3,13 @@ package com.bcoop.bcoop.ui.prize;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +27,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 import static android.content.ContentValues.TAG;
 
 public class PrizeFragment extends Fragment {
@@ -33,12 +42,17 @@ public class PrizeFragment extends Fragment {
     public static final String AUTHOR_KEY = "author";
     public static final String QUOTE_KEY = "author";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    List<Premi> premiList;
+    ListView listView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         prizeViewModel =
                 ViewModelProviders.of(this).get(PrizeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_prize, container, false);
+
+        premiList = new ArrayList<>();
+        listView = (ListView) root.findViewById(R.id.listView);
         db.collection("Premi")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -46,21 +60,20 @@ public class PrizeFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                String nom = document.getString("nom");
+                                String descripció = document.getString("descripció");
+                                String imatge = document.getString("imatge");
+                                Double preu = document.getDouble("preu");
+                                premiList.add(new Premi(nom, descripció,imatge, preu));
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
+                        PremiAdapter adapter = new PremiAdapter(getContext(), R.layout.my_list_item, premiList);
+                        listView.setAdapter(adapter);
                     }
+
                 });
-        /*
-        final TextView textView = root.findViewById(R.id.text_prize);
-        prizeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
         return root;
     }
 
