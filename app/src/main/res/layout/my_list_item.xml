@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/Comprar"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_below="@+id/imageView3"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF"
+        android:text="@string/accept"
+        android:textColor="#FF44B654"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="243dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="230dp"
+        android:layout_height="239dp"
+        app:srcCompat="@drawable/regalo"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="-2dp" />
+
+    <TextView
+        android:id="@+id/Titol"
+        android:layout_width="170dp"
+        android:layout_height="53dp"
+        android:layout_above="@+id/Descripció"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toEndOf="@+id/imageView3"
+        android:text="Titol"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="222dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/Descripció"
+        android:layout_width="154dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/Preu"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toEndOf="@+id/imageView3"
+        android:text="Descripció"
+        tools:layout_editor_absoluteX="222dp"
+        tools:layout_editor_absoluteY="81dp" />
+
+    <TextView
+        android:id="@+id/Preu"
+        android:layout_width="157dp"
+        android:layout_height="28dp"
+        android:layout_above="@+id/Comprar"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/imageView3"
+        android:text="Preu"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="222dp"
+        tools:layout_editor_absoluteY="202dp" />
+
+</RelativeLayout>
