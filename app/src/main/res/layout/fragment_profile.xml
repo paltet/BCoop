@@ -6,30 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
-    <TextView
-        android:id="@+id/text_profile"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="2dp"
-        android:text="@string/logout"
-        android:textColor="@color/red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="16dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/border">
+
+                <ImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/add" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginVertical="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/usernameText"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginVertical="5dp"
+                        android:text="User"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/levelText"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:text="@string/level"
+                        app:autoSizeTextType="uniform"
+                        android:gravity="center_vertical" />
+
+                    <TextView
+                        android:id="@+id/moneyText"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:text="$"
+                        app:autoSizeTextType="uniform"
+                        android:gravity="center_vertical" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ExpandableListView
+                android:id="@+id/listHabilitats"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/initial_setup_photo"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="0.5dp"/>
+
+            <ExpandableListView
+                android:id="@+id/listPrizes"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/initial_setup_photo"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="0.5dp"/>
+
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="60dp"
+                android:text="@string/logout"
+                android:textColor="@color/red" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
