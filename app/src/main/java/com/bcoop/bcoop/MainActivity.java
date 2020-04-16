@@ -154,14 +154,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    /*@Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-
-        if ("ExitApp".equals(intent.getAction())) {
-            finish();
-        }
-    }*/
 
     public void onClick(View v) {
         Resources resources = getResources();
