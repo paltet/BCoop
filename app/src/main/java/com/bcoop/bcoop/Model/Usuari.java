@@ -1,6 +1,5 @@
 package com.bcoop.bcoop.Model;
 
-
 import com.bcoop.bcoop.ui.prize.Premi;
 
 import java.util.List;

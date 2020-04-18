@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.bcoop.bcoop.Model.Habilitat;
+import com.bcoop.bcoop.Model.HabilitatDetall;
 import com.bcoop.bcoop.Model.Usuari;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationAvailability;
@@ -26,6 +28,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class InitConfigLocationActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -110,9 +115,23 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
         if (currentLocation != null)
             usuari = new Usuari(email, usrname, url_foto, currentLocation.toString());
         else usuari = new Usuari(email, usrname, url_foto, null);
+
+        addHabilitatsProba(usuari);
+
         DocumentReference documentReference = firestore.collection("Usuari").document(email);
         documentReference.set(usuari);
         startActivity(new Intent(InitConfigLocationActivity.this, HomeActivity.class));
+    }
+
+    private void addHabilitatsProba(Usuari usuari) {
+        Habilitat hab1 = new Habilitat("Programacion");
+        Habilitat hab2 = new Habilitat("Mates");
+        HabilitatDetall d1 = new HabilitatDetall(5, null);
+        HabilitatDetall d2 = new HabilitatDetall();
+        Map<String, HabilitatDetall> map = new HashMap<>();
+        map.put(hab1.getNom(), d1);
+        map.put(hab2.getNom(), d2);
+        usuari.setHabilitats(map);
     }
 
     @Override
