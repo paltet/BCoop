@@ -1,6 +1,11 @@
 package com.bcoop.bcoop.Model;
 
 
+import com.bcoop.bcoop.ui.prize.Premi;
+
+import java.util.List;
+import java.util.Map;
+
 public class Usuari {
     private String email;
     private String nom;
@@ -9,8 +14,13 @@ public class Usuari {
     private double monedes;
     private String localitzacio;
     private boolean esAdministrador;
+    private Map<String, HabilitatDetall> habilitats;
+    private List<Xat> xats;
+    private List<String> idiomas;
+    private List<Servei> serveis;
     private int nivell;
     private int valoracio;
+    private List<Premi> premis;
 
     public Usuari(String mail, String usrname, String foto, String localitzacio) {
         this.email = mail;
@@ -94,5 +104,45 @@ public class Usuari {
 
     public void setValoracio(int valoracio) {
         this.valoracio = valoracio;
+    }
+
+    public Map<String, HabilitatDetall> getHabilitats() {
+        return habilitats;
+    }
+
+    public void setHabilitats(Map<String, HabilitatDetall> habilitats) {
+        this.habilitats = habilitats;
+    }
+
+    public List<Xat> getXats() {
+        return xats;
+    }
+
+    public void setXats(List<Xat> xats) {
+        this.xats = xats;
+    }
+
+    public List<String> getIdiomas() {
+        return idiomas;
+    }
+
+    public void setIdiomas(List<String> idiomas) {
+        this.idiomas = idiomas;
+    }
+
+    public List<Servei> getServeis() {
+        return serveis;
+    }
+
+    public void setServeis(List<Servei> serveis) {
+        this.serveis = serveis;
+    }
+
+    public List<Premi> getPremis() {
+        return premis;
+    }
+
+    public void setPremis(List<Premi> premis) {
+        this.premis = premis;
     }
 }

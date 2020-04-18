@@ -104,23 +104,15 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
     }
 
     private void saveUser() {
-        Usuari usuari = new Usuari(email, usrname, url_foto, currentLocation.toString());
+        Usuari usuari;
+        if (url_foto.equals(""))
+            url_foto = null;
+        if (currentLocation != null)
+            usuari = new Usuari(email, usrname, url_foto, currentLocation.toString());
+        else usuari = new Usuari(email, usrname, url_foto, null);
         DocumentReference documentReference = firestore.collection("Usuari").document(email);
         documentReference.set(usuari);
         startActivity(new Intent(InitConfigLocationActivity.this, HomeActivity.class));
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
-        if (mapViewBundle == null) {
-            mapViewBundle = new Bundle();
-            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
-        }
-
-        mapView.onSaveInstanceState(mapViewBundle);
     }
 
     @Override
