@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class InitConfigActivity extends AppCompatActivity {
     @Override
@@ -18,7 +17,9 @@ public class InitConfigActivity extends AppCompatActivity {
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(InitConfigActivity.this, InitConfigImageActivity.class));
+                Intent intent = new Intent(InitConfigActivity.this, InitConfigImageActivity.class);
+                intent.putExtra("username", getIntent().getStringExtra("username"));
+                startActivity(intent);
             }
         });
     }

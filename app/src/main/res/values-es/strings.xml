@@ -42,4 +42,6 @@
     <string name="initial_setup_location">Confirma tu lugar de residencia</string>
 
     <string name="failed">Ha fallado. Inténtalo de nuevo</string>
+    <string name="select_image">Seleccione una imagen</string>
+    <string name="location_no_available">Asegúrate de que tu ubicación esté disponible</string>
 </resources>

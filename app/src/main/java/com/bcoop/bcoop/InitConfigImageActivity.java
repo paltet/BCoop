@@ -6,11 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,11 +16,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.IOException;
 
 public class InitConfigImageActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST = 0;
@@ -40,7 +38,10 @@ public class InitConfigImageActivity extends AppCompatActivity {
         remindLater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(InitConfigImageActivity.this, InitConfigLocationActivity.class));
+                Intent intent = new Intent(InitConfigImageActivity.this, InitConfigLocationActivity.class);
+                intent.putExtra("username", getIntent().getStringExtra("username"));
+                intent.putExtra("url_img", "");
+                startActivity(intent);
             }
         });
 
@@ -61,44 +62,46 @@ public class InitConfigImageActivity extends AppCompatActivity {
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Save img
-                imagePath = FirebaseStorage.getInstance().getReference().child("ProfileImage").child("email.jpg");
-                imagePath.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                if (imgUri == null)
+                    Toast.makeText(InitConfigImageActivity.this, R.string.select_image, Toast.LENGTH_SHORT).show();
+                else
+                    saveImage();
+            }
+        });
+    }
 
-                        //Add uri to Profile
-                        /*
-                        profile.setImageAddress(imagePath.toString());
-                         */
-                        startActivity(new Intent(InitConfigImageActivity.this, InitConfigLocationActivity.class));
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(InitConfigImageActivity.this, R.string.failed, Toast.LENGTH_SHORT);
-                    }
-                });
+    private void saveImage() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String email = mAuth.getCurrentUser().getEmail();
+        email = email.substring(0, email.lastIndexOf('@'));
+        String extension = imgUri.getLastPathSegment();
+        extension = extension.substring(extension.lastIndexOf('.'));
 
+        imagePath = FirebaseStorage.getInstance().getReference().child("ProfileImage").child(email.concat(extension));
+        imagePath.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Intent intent = new Intent(InitConfigImageActivity.this, InitConfigLocationActivity.class);
+                intent.putExtra("username", getIntent().getStringExtra("username"));
+                intent.putExtra("url_img", imagePath.toString());
+                startActivity(intent);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(InitConfigImageActivity.this, R.string.failed, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == PERMISSION_REQUEST) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openGallery();
-            }
-            else {
-                Toast.makeText(InitConfigImageActivity.this, "Permission not granted", Toast.LENGTH_SHORT).show();
-            }
-        }
+        if (requestCode == PERMISSION_REQUEST && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            openGallery();
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     private void openGallery() {
-        //Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         Intent gallery = new Intent(Intent.ACTION_PICK);
         gallery.setType("image/*");
         startActivityForResult(gallery, RESULT_LOAD_IMAGE);
@@ -109,13 +112,6 @@ public class InitConfigImageActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == RESULT_LOAD_IMAGE) {
             imgUri = data.getData();
-            /*String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(imgUri, filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int n = cursor.getColumnIndex(filePathColumn[0]);
-            String imgPath = cursor.getString(n);
-            cursor.close();
-            img.setImageBitmap(BitmapFactory.decodeFile(imgPath));*/
             img.setImageURI(imgUri);
         }
     }

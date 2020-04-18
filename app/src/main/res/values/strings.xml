@@ -43,4 +43,6 @@
     <string name="initial_setup_location">Confirm this is your home location</string>
 
     <string name="failed">Failed. Please try again</string>
+    <string name="select_image">Please select an image</string>
+    <string name="location_no_available">Please make sure that your location is available</string>
 </resources>

@@ -43,4 +43,6 @@
     <string name="initial_setup_location">Confirma que resideixes aquí</string>
 
     <string name="failed">Ha fallat. Si us plau torna-ho a provar</string>
+    <string name="select_image">Seleccioneu una imatge</string>
+    <string name="location_no_available">Assegureu-vos que la vostra ubicació estigui disponible</string>
 </resources>
