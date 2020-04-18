@@ -16,8 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.bcoop.bcoop.MainActivity;
+import com.bcoop.bcoop.Model.Comentari;
 import com.bcoop.bcoop.Model.Habilitat;
 import com.bcoop.bcoop.Model.HabilitatDetall;
+import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,7 +71,6 @@ public class ProfileFragment extends Fragment {
         final TextView level = root.findViewById(R.id.levelText);
         final TextView money = root.findViewById(R.id.moneyText);
         final ExpandableListView listHabilitats = root.findViewById(R.id.listHabilitats);
-        final ExpandableListView listPrizes = root.findViewById(R.id.listPrizes);
 
         //Obtenir dades des de FirebaseFirestore
         firestore = FirebaseFirestore.getInstance();
@@ -85,11 +86,21 @@ public class ProfileFragment extends Fragment {
                     uriImage = documentSnapshot.getString("foto");
                     getImageFromStorage();
 
+                    Usuari usuari = new Usuari();
+                    usuari = documentSnapshot.toObject(Usuari.class);
+
                     // leer listHabilitats
                     List<String> habilitatsUsuari = new ArrayList<>();
-                    Map<String, HabilitatDetall> detallHabilitatUsuari = (Map<String, HabilitatDetall>) documentSnapshot.get("habilitats");
+                    Map<String, HabilitatDetall> detallHabilitatUsuari = usuari.getHabilitats();
                     for (Map.Entry<String, HabilitatDetall> entry : detallHabilitatUsuari.entrySet()) {
                         habilitatsUsuari.add(entry.getKey());
+                    }
+
+                    //Crear comentaris
+                    for (String nom : habilitatsUsuari) {
+                        List<Comentari> comentaris = new ArrayList<>();
+                        comentaris.add(new Comentari("Esto es un comentario " + nom, usuari));
+                        usuari.getHabilitats().get(nom).setComentaris(comentaris);
                     }
                     HabilitatAdaptar habilitatAdaptar = new HabilitatAdaptar(getContext(), habilitatsUsuari, detallHabilitatUsuari);
                     listHabilitats.setAdapter(habilitatAdaptar);

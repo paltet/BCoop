@@ -5,10 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.TextView;
 
+import com.bcoop.bcoop.Model.Comentari;
 import com.bcoop.bcoop.Model.HabilitatDetall;
 import com.bcoop.bcoop.R;
-
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,7 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return detall.get(habilitats.get(groupPosition));
+        return detall.get(habilitats.get(groupPosition)).getComentaris().get(childPosition);
     }
 
     @Override
@@ -63,19 +64,22 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String hab = (String) getGroup(groupPosition);
         convertView = LayoutInflater.from(context).inflate(R.layout.habilitats_expandable_list, null);
-        // TextView nomHabilitat = convertView.findViewById(R.id.nomHab)
-        // nomHabilitat.setText(hab);
+        TextView nomHabilitat = convertView.findViewById(R.id.habilitatText);
+        nomHabilitat.setText(hab);
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        HabilitatDetall detallHab = (HabilitatDetall) getChild(groupPosition, childPosition);
+        Comentari coment = (Comentari) getChild(groupPosition, childPosition);
         convertView = LayoutInflater.from(context).inflate(R.layout.comentari_habilitat_expandable_list, null);
-        // TextView valoracio = convertView.findViewById(R.id.valoracio)
-        // valoracio.setText(detallHab.getNom());
-        // listView comentari = convertView.findViewById(R.id.valoracio)
-        // pintar comentaris
+
+        TextView comentari = convertView.findViewById(R.id.comentariText);
+        comentari.setText(coment.getContingut());
+
+        TextView ago = convertView.findViewById(R.id.comentariTimeText);
+        ago.setText(coment.getTemps().toString());
+
         return convertView;
     }
 

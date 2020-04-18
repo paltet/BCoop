@@ -70,21 +70,12 @@
 
             <ExpandableListView
                 android:id="@+id/listHabilitats"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="@string/initial_setup_photo"
-                android:divider="@android:color/darker_gray"
-                android:dividerHeight="0.5dp"/>
-
-            <ExpandableListView
-                android:id="@+id/listPrizes"
+                android:layout_height="378dp"
                 android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="@string/initial_setup_photo"
                 android:divider="@android:color/darker_gray"
-                android:dividerHeight="0.5dp"/>
+                android:dividerHeight="0.5dp"
+                android:text="@string/initial_setup_photo" />
 
             <Button
                 android:id="@+id/logout"

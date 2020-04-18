@@ -21,6 +21,8 @@ public class Usuari {
     private int valoracio;
     private List<Premi> premis;
 
+    public Usuari() {}
+
     public Usuari(String mail, String usrname, String foto, String localitzacio) {
         this.email = mail;
         this.nom = usrname;
