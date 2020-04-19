@@ -33,8 +33,6 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -96,11 +94,14 @@ public class ProfileFragment extends Fragment {
 
                     //Crear comentaris
                     for (String nom : habilitatsUsuari) {
-                        List<Comentari> comentaris = new ArrayList<>();
-                        comentaris.add(new Comentari("Esto es un comentario de " + nom, usuari));
-                        comentaris.add(new Comentari("Esto es otro comentario de " + nom, usuari));
-                        comentaris.add(new Comentari("Esto es ultimo comentario de " + nom, usuari));
-                        usuari.getHabilitats().get(nom).setComentaris(comentaris);
+                        if (nom.equals("Mates")) {
+                            List<Comentari> comentaris = new ArrayList<>();
+                            comentaris.add(new Comentari("Esto es un comentario de " + nom, usuari));
+                            comentaris.add(new Comentari("Esto es otro comentario de " + nom, usuari));
+                            comentaris.add(new Comentari("Esto es ultimo comentario de " + nom, usuari));
+                            comentaris.add(new Comentari("No me muestres hasta que te pida", usuari));
+                            usuari.getHabilitats().get(nom).setComentaris(comentaris);
+                        }
                     }
                     HabilitatAdaptar habilitatAdaptar = new HabilitatAdaptar(getContext(), habilitatsUsuari, detallHabilitatUsuari);
                     listHabilitats.setAdapter(habilitatAdaptar);

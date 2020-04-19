@@ -44,4 +44,7 @@
     <string name="failed">Ha fallado. Inténtalo de nuevo</string>
     <string name="select_image">Seleccione una imagen</string>
     <string name="location_no_available">Asegúrate de que tu ubicación esté disponible</string>
+    <string name="nivell" >Nivel</string>
+    <string name="money" >Monedas</string>
+    <string name="mostrar_mes_coment">Muestra más comentarios</string>
 </resources>

@@ -34,7 +34,7 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return detall.size() + 1;
+        return detall.get(habilitats.get(groupPosition)).getComentaris().size();
     }
 
     @Override
@@ -80,12 +80,12 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
         comentari.setText(coment.getContingut());
 
         String time = changeTimeFormat(coment.getTemps());
-
         TextView ago = convertView.findViewById(R.id.comentariTimeText);
         ago.setText(time);
 
         return convertView;
     }
+
 
     private String changeTimeFormat(Date temps) {
         String timeDate = temps.toString();

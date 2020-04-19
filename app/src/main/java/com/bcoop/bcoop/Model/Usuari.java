@@ -2,6 +2,8 @@ package com.bcoop.bcoop.Model;
 
 import com.bcoop.bcoop.ui.prize.Premi;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,8 +33,13 @@ public class Usuari {
         esPremium = false;
         monedes = 0;
         esAdministrador = false;
+        habilitats = new HashMap<>();
+        xats = new ArrayList<>();
+        idiomas = new ArrayList<>();
+        serveis = new ArrayList<>();
         nivell = 1;
         valoracio = 0;
+        premis = new ArrayList<>();
     }
 
     public String getEmail() {

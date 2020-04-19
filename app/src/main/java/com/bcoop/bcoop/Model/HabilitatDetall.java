@@ -1,5 +1,6 @@
 package com.bcoop.bcoop.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HabilitatDetall {
@@ -8,6 +9,7 @@ public class HabilitatDetall {
 
     public HabilitatDetall() {
         this.valoracio = 0;
+        comentaris = new ArrayList<>();
     }
 
     public HabilitatDetall(int valoracio, List<Comentari> comentaris) {
@@ -30,4 +32,5 @@ public class HabilitatDetall {
     public void setComentaris(List<Comentari> comentaris) {
         this.comentaris = comentaris;
     }
+
 }

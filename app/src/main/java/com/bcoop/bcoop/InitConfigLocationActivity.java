@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.bcoop.bcoop.Model.Comentari;
 import com.bcoop.bcoop.Model.Habilitat;
 import com.bcoop.bcoop.Model.HabilitatDetall;
 import com.bcoop.bcoop.Model.Usuari;
@@ -29,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -126,7 +128,7 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
     private void addHabilitatsProba(Usuari usuari) {
         Habilitat hab1 = new Habilitat("Programacion");
         Habilitat hab2 = new Habilitat("Mates");
-        HabilitatDetall d1 = new HabilitatDetall(5, null);
+        HabilitatDetall d1 = new HabilitatDetall(5, new ArrayList<Comentari>());
         HabilitatDetall d2 = new HabilitatDetall();
         Map<String, HabilitatDetall> map = new HashMap<>();
         map.put(hab1.getNom(), d1);
