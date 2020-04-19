@@ -14,20 +14,22 @@
         android:background="@drawable/border">
 
         <TextView
-            android:id = "@+id/habilitatText"
-            android:layout_width="wrap_content"
+            android:id="@+id/habilitatText"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="32sp"
-            android:textColor="@color/darkGrey" />
-
-        <ImageView
-            android:id = "@+id/habilitatValoracioImage"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
             android:layout_weight="1"
-            android:gravity="right"
-            android:scaleType="fitCenter"/>
+            android:text="Hola"
+            android:textColor="@color/darkGrey"
+            android:textSize="32sp" />
+
+        <LinearLayout
+            android:id="@+id/valoracioLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+        </LinearLayout>
 
     </LinearLayout>
 
