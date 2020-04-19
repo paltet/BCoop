@@ -8,26 +8,20 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40sp"
         android:orientation="horizontal"
         tools:ignore="MissingConstraints"
-        android:background="@drawable/border">
-
-        <TextView
-            android:id = "@+id/habilitatText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="32sp"
-            android:textColor="@color/darkGrey" />
+        android:background="@drawable/bordergreen"
+        android:layout_margin="5dp"
+        android:gravity="center">
 
         <ImageView
-            android:id = "@+id/habilitatValoracioImage"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:scaleType="fitCenter"/>
+            android:layout_marginVertical="5dp"
+            android:src="@drawable/more"
+            android:scaleType="fitCenter"
+            android:tint="@color/colorPrimary" />
 
     </LinearLayout>
 
