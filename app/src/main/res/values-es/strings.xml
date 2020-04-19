@@ -42,4 +42,8 @@
     <string name="initial_setup_location">Confirma tu lugar de residencia</string>
 
     <string name="failed">Ha fallado. Inténtalo de nuevo</string>
+
+    <string name="buy">Comprar premio</string>
+    <string name="sure">¿Quieres comprar este artículo?</string>
+    <string name="cancel">Cancel · lar</string>
 </resources>

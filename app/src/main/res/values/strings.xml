@@ -44,4 +44,8 @@
     <string name="initial_setup_location">Confirm this is your home location</string>
 
     <string name="failed">Failed. Please try again</string>
+
+    <string name="buy">Buy prize</string>
+    <string name="sure">Do you want to buy this item?</string>
+    <string name="cancel">Cancel</string>
 </resources>

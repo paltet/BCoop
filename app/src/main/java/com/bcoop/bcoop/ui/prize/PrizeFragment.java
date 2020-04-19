@@ -28,7 +28,6 @@ import static android.content.ContentValues.TAG;
 
 public class PrizeFragment extends Fragment {
 
-    private PrizeViewModel prizeViewModel;
     public static final String AUTHOR_KEY = "author";
     public static final String QUOTE_KEY = "author";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -37,8 +36,6 @@ public class PrizeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        prizeViewModel =
-                ViewModelProviders.of(this).get(PrizeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_prize, container, false);
 
         premiList = new ArrayList<>();
@@ -54,7 +51,7 @@ public class PrizeFragment extends Fragment {
                                 String descripció = document.getString("descripció");
                                 String imatge = document.getString("imatge");
                                 Double preu = document.getDouble("preu");
-                                premiList.add(new Premi(nom, descripció,imatge, preu));
+                                premiList.add(new Premi(nom, descripció, imatge, preu));
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
@@ -65,24 +62,5 @@ public class PrizeFragment extends Fragment {
 
                 });
         return root;
-    }
-
-    public void showAlertDialog(View v){
-        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-            alert.setTitle("Buy gift");
-            alert.setMessage("Do you want to buy this item?");
-            alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getContext(), "@string/success", Toast.LENGTH_SHORT).show();
-            }
-        });
-            alert.setNegativeButton("@string/abort", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getContext(), "@string/abort", Toast.LENGTH_SHORT).show();
-                }
-            });
-        alert.create().show();
     }
 }

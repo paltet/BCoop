@@ -44,4 +44,8 @@
     <string name="initial_setup_location">Confirma que resideixes aquí</string>
 
     <string name="failed">Ha fallat. Si us plau torna-ho a provar</string>
+
+    <string name="buy">Compra premi</string>
+    <string name="sure">Voleu comprar aquest article?</string>
+    <string name="cancel">Cancelar</string>
 </resources>
