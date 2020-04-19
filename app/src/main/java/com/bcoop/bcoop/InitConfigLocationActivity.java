@@ -118,23 +118,11 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
             usuari = new Usuari(email, usrname, url_foto, currentLocation.toString());
         else usuari = new Usuari(email, usrname, url_foto, null);
 
-        addHabilitatsProba(usuari);
-
         DocumentReference documentReference = firestore.collection("Usuari").document(email);
         documentReference.set(usuari);
         startActivity(new Intent(InitConfigLocationActivity.this, HomeActivity.class));
     }
 
-    private void addHabilitatsProba(Usuari usuari) {
-        Habilitat hab1 = new Habilitat("Programacion");
-        Habilitat hab2 = new Habilitat("Mates");
-        HabilitatDetall d1 = new HabilitatDetall(5, new ArrayList<Comentari>());
-        HabilitatDetall d2 = new HabilitatDetall();
-        Map<String, HabilitatDetall> map = new HashMap<>();
-        map.put(hab1.getNom(), d1);
-        map.put(hab2.getNom(), d2);
-        usuari.setHabilitats(map);
-    }
 
     @Override
     protected void onResume() {
