@@ -79,27 +79,27 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
-                    username.setText(documentSnapshot.getString("nom"));
-                    level.setText(documentSnapshot.get("nivell").toString());
-                    money.setText(documentSnapshot.get("monedes").toString());
-
-                    uriImage = documentSnapshot.getString("foto");
-                    getImageFromStorage();
-
                     Usuari usuari = new Usuari();
                     usuari = documentSnapshot.toObject(Usuari.class);
 
-                    // leer listHabilitats
+                    username.setText(usuari.getNom());
+                    level.setText(Integer.toString(usuari.getNivell()));
+                    money.setText(Double.toString(usuari.getMonedes()));
+
+                    uriImage = usuari.getFoto();
+                    getImageFromStorage();
+
                     List<String> habilitatsUsuari = new ArrayList<>();
                     Map<String, HabilitatDetall> detallHabilitatUsuari = usuari.getHabilitats();
-                    for (Map.Entry<String, HabilitatDetall> entry : detallHabilitatUsuari.entrySet()) {
+                    for (Map.Entry<String, HabilitatDetall> entry : detallHabilitatUsuari.entrySet())
                         habilitatsUsuari.add(entry.getKey());
-                    }
 
                     //Crear comentaris
                     for (String nom : habilitatsUsuari) {
                         List<Comentari> comentaris = new ArrayList<>();
-                        comentaris.add(new Comentari("Esto es un comentario " + nom, usuari));
+                        comentaris.add(new Comentari("Esto es un comentario de " + nom, usuari));
+                        comentaris.add(new Comentari("Esto es otro comentario de " + nom, usuari));
+                        comentaris.add(new Comentari("Esto es ultimo comentario de " + nom, usuari));
                         usuari.getHabilitats().get(nom).setComentaris(comentaris);
                     }
                     HabilitatAdaptar habilitatAdaptar = new HabilitatAdaptar(getContext(), habilitatsUsuari, detallHabilitatUsuari);
