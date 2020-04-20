@@ -48,7 +48,7 @@
     <string name="location_no_available">Please make sure that your location is available</string>
     <string name="nivell" >Level</string>
     <string name="money" >Money</string>
-    <string name="mostrar_mes_coment">Show more comments</string>
+    <string name="time_at">at</string>
 
     <string name="change">Change</string>
     <string name="userImage">User Image</string>

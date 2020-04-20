@@ -46,7 +46,7 @@
     <string name="location_no_available">Asegúrate de que tu ubicación esté disponible</string>
     <string name="nivell" >Nivel</string>
     <string name="money" >Monedas</string>
-    <string name="mostrar_mes_coment">Muestra más comentarios</string>
+    <string name="time_at">a las</string>
 
 
     <string name="change">Cambiar</string>
