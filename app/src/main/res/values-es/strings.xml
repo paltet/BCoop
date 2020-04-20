@@ -47,4 +47,19 @@
     <string name="nivell" >Nivel</string>
     <string name="money" >Monedas</string>
     <string name="mostrar_mes_coment">Muestra más comentarios</string>
+
+
+    <string name="change">Cambiar</string>
+    <string name="userImage">Imagen</string>
+    <string name="userLocation">Localización</string>
+    <string name="deleteUser">Eliminar Usuario</string>
+    <string name="writeNewUsername">Introduce tu nuevo nombre de usuario</string>
+    <string name="confirmbutton">Confirmar</string>
+    <string name="writeCurrentPassword">Introduce tu contraseña actual</string>
+    <string name="writeNewPassword">Introduce tu nueva contraseña</string>
+    <string name="currentPassword">Contraseña actual</string>
+    <string name="newPassword">Nueva contraseña</string>
+    <string name="confirmNewPassword">Confirmar nueva contraseña</string>
+    <string name="writeDelete">Escribe \'delete\' para eliminar el usuario</string>
+    <string name="confirmDelete">Confirmar Eliminar</string>
 </resources>

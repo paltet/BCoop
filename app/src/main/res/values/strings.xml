@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">BCoop</string>
     <string name="userName">Username</string>
     <string name="password">Password</string>
@@ -49,4 +49,18 @@
     <string name="nivell" >Level</string>
     <string name="money" >Money</string>
     <string name="mostrar_mes_coment">Show more comments</string>
+
+    <string name="change">Change</string>
+    <string name="userImage">User Image</string>
+    <string name="userLocation">Location</string>
+    <string name="deleteUser">Delete User</string>
+    <string name="writeNewUsername">Insert your new username</string>
+    <string name="confirmbutton">Confirm</string>
+    <string name="writeCurrentPassword">Insert your current password</string>
+    <string name="writeNewPassword">Insert your new password</string>
+    <string name="currentPassword">Current Password</string>
+    <string name="newPassword">New Password</string>
+    <string name="confirmNewPassword">Confirm New Password</string>
+    <string name="writeDelete">Type \'delete\' to delete your user</string>
+    <string name="confirmDelete">Confirm Delete</string>
 </resources>
