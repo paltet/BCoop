@@ -53,4 +53,18 @@
     <string name="nivell" >Nivell</string>
     <string name="money" >Monedes</string>
     <string name="mostrar_mes_coment">Mostra més comentaris</string>
+
+    <string name="change">Canviar</string>
+    <string name="userImage">Imatge</string>
+    <string name="userLocation">Localització</string>
+    <string name="deleteUser">Eliminar Usuari</string>
+    <string name="writeNewUsername">Introdueix el teu nou nom d\'usuari</string>
+    <string name="confirmbutton">Confirmar</string>
+    <string name="writeCurrentPassword">Introdueix la teva contrasenya actual</string>
+    <string name="writeNewPassword">Introdueix la teva nova contrasenya</string>
+    <string name="currentPassword">Contrasenya actual</string>
+    <string name="newPassword">Nova contrasenya</string>
+    <string name="confirmNewPassword">Confirmar nova contrasenya</string>
+    <string name="writeDelete">Escriu \'delete\' per a eliminar l\'usuari</string>
+    <string name="confirmDelete">Confirmar Eliminar</string>
 </resources>
