@@ -79,6 +79,7 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
         alert.setTitle(R.string.buy);
         alert.setMessage(R.string.sure);
         alert.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+            
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
