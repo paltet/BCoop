@@ -92,18 +92,20 @@ public class ProfileFragment extends Fragment {
                     for (Map.Entry<String, HabilitatDetall> entry : detallHabilitatUsuari.entrySet())
                         habilitatsUsuari.add(entry.getKey());
 
-                    //Crear comentaris
+                    //Crear comentaris, borrar al acabar visualització perfil
                     for (String nom : habilitatsUsuari) {
                         if (nom.equals("Mates")) {
                             List<Comentari> comentaris = new ArrayList<>();
-                            comentaris.add(new Comentari("Esto es un comentario de " + nom, usuari));
-                            comentaris.add(new Comentari("Esto es otro comentario de " + nom, usuari));
-                            comentaris.add(new Comentari("Esto es ultimo comentario de " + nom, usuari));
-                            comentaris.add(new Comentari("No me muestres hasta que te pida", usuari));
+                            comentaris.add(new Comentari("Esto es el comentario más antiguo de " + nom, usuari));
+                            comentaris.add(new Comentari("Esto es el segundo comentario más antiguo de " + nom, usuari));
+                            comentaris.add(new Comentari("Esto es comentario de " + nom, usuari));
+                            comentaris.add(new Comentari("Soy el penultimo comentario", usuari));
+                            comentaris.add(new Comentari("Soy el ultimo comentario", usuari));
                             usuari.getHabilitats().get(nom).setComentaris(comentaris);
                         }
                     }
-                    HabilitatAdaptar habilitatAdaptar = new HabilitatAdaptar(getContext(), habilitatsUsuari, detallHabilitatUsuari);
+
+                    HabilitatAdaptar habilitatAdaptar = new HabilitatAdaptar(getContext(), habilitatsUsuari, detallHabilitatUsuari, listHabilitats);
                     listHabilitats.setAdapter(habilitatAdaptar);
                 }
             }

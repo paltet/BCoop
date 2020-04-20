@@ -16,11 +16,12 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/moreImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginVertical="5dp"
-            android:src="@drawable/more"
             android:scaleType="fitCenter"
+            android:src="@drawable/more"
             android:tint="@color/colorPrimary" />
 
     </LinearLayout>

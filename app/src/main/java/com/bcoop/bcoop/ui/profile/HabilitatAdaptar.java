@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcoop.bcoop.Model.Comentari;
@@ -20,11 +22,15 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
     private List<String> habilitats;
     private Map<String, HabilitatDetall> detall;
     private Context context;
+    private Boolean onlyThree;
+    private ExpandableListView expandableListView;
 
-    public HabilitatAdaptar(Context context, List<String> habilitats, Map<String, HabilitatDetall> detall) {
+    public HabilitatAdaptar(Context context, List<String> habilitats, Map<String, HabilitatDetall> detall, ExpandableListView expandableListView) {
         this.habilitats = habilitats;
         this.detall = detall;
         this.context = context;
+        this.onlyThree = true;
+        this.expandableListView = expandableListView;
     }
 
     @Override
@@ -34,6 +40,9 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
+        int size = detall.get(habilitats.get(groupPosition)).getComentaris().size();
+        if (onlyThree && size > 2)
+            return 4;
         return detall.get(habilitats.get(groupPosition)).getComentaris().size();
     }
 
@@ -44,7 +53,8 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return detall.get(habilitats.get(groupPosition)).getComentaris().get(childPosition);
+        int size = detall.get(habilitats.get(groupPosition)).getComentaris().size();
+        return detall.get(habilitats.get(groupPosition)).getComentaris().get(size - childPosition - 1);
     }
 
     @Override
@@ -72,7 +82,29 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(final int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        if (onlyThree) {
+            if (childPosition < 3) {
+                convertView = mostrarDades(groupPosition, childPosition, convertView);
+            } else {
+                convertView = LayoutInflater.from(context).inflate(R.layout.more_comentari_habilitat_expandable_list, null);
+                ImageView more = convertView.findViewById(R.id.moreImageView);
+                more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onlyThree = false;
+                        expandableListView.collapseGroup(groupPosition);
+                        expandableListView.expandGroup(groupPosition);
+                    }
+                });
+            }
+        }
+        else convertView = mostrarDades(groupPosition, childPosition, convertView);
+
+        return convertView;
+    }
+
+    private View mostrarDades(int groupPosition, int childPosition, View convertView) {
         Comentari coment = (Comentari) getChild(groupPosition, childPosition);
         convertView = LayoutInflater.from(context).inflate(R.layout.comentari_habilitat_expandable_list, null);
 
@@ -150,4 +182,6 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return false;
     }
+
+
 }
