@@ -130,15 +130,14 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
         TextView comentari = convertView.findViewById(R.id.comentariText);
         comentari.setText(coment.getContingut());
 
-        String time = changeTimeFormat(coment.getTemps());
         TextView ago = convertView.findViewById(R.id.comentariTimeText);
-        ago.setText(time);
+        changeTimeFormat(coment.getTemps(), ago);
 
         return convertView;
     }
 
 
-    private String changeTimeFormat(Date temps) {
+    private void changeTimeFormat(Date temps, TextView ago) {
         String timeDate = temps.toString();
         String time = timeDate.substring(8, 10);
         time = time.concat("-");
@@ -149,9 +148,10 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
         time = time.concat(Integer.toString(num));
         time = time.concat("-");
         time = time.concat(timeDate.substring(timeDate.length()-4));
-        time = time.concat(" at ");
+        ago.setText(R.string.time_at);
+        time = time.concat(" ").concat(ago.getText().toString()).concat(" ");
         time = time.concat(timeDate.substring(11, 16));
-        return time;
+        ago.setText(time);
     }
 
     private int convertMonth(String mes) {
