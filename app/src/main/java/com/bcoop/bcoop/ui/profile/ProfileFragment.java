@@ -99,16 +99,19 @@ public class ProfileFragment extends Fragment {
         });
 
         logout = root.findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(Objects.requireNonNull(ProfileFragment.super.getActivity()), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                mAuth.signOut();
-                startActivity(intent);
-            }
-        });
+        if (email.equals(mAuth.getCurrentUser().getEmail())) {
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent();
+                    intent.setClass(Objects.requireNonNull(ProfileFragment.super.getActivity()), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    mAuth.signOut();
+                    startActivity(intent);
+                }
+            });
+        }
+        else logout.setVisibility(View.GONE);
         return root;
     }
 
