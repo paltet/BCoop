@@ -48,4 +48,9 @@
     <string name="buy">Compra premi</string>
     <string name="sure">Voleu comprar aquest article?</string>
     <string name="cancel">Cancelar</string>
+    <string name="select_image">Seleccioneu una imatge</string>
+    <string name="location_no_available">Assegureu-vos que la vostra ubicació estigui disponible</string>
+    <string name="nivell" >Nivell</string>
+    <string name="money" >Monedes</string>
+    <string name="mostrar_mes_coment">Mostra més comentaris</string>
 </resources>

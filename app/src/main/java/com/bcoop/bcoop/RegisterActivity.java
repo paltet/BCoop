@@ -8,16 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bcoop.bcoop.Model.Usuari;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -91,12 +90,10 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mail.getText().toString();
+                final String email = mail.getText().toString();
                 String psw = password.getText().toString();
                 String cpsw = confirm_password.getText().toString();
-                String usrn = username.getText().toString();
-
-
+                final String usrn = username.getText().toString();
 
                 if (usrn.isEmpty()){
                     username.setError(getString(R.string.unvalid_username));
@@ -121,7 +118,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                             if(task.isSuccessful()){
                                 Toast.makeText(RegisterActivity.this, "Register successful!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(RegisterActivity.this, InitConfigActivity.class));
+                                Intent intent = new Intent(RegisterActivity.this, InitConfigActivity.class);
+                                intent.putExtra("username", usrn);
+                                startActivity(intent);
                             }
                             else{
                                 try {

@@ -7,50 +7,55 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.bcoop.bcoop.Model.Comentari;
+import com.bcoop.bcoop.Model.Habilitat;
+import com.bcoop.bcoop.Model.HabilitatDetall;
+import com.bcoop.bcoop.Model.Usuari;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InitConfigLocationActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
-    private static final int PERMISSION_REQUEST_COARSE = 1;
     private static final int PERMISSION_REQUEST_FINE = 2;
     private MapView mapView;
     private Location currentLocation;
-    private GoogleMap gMap;
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    private String usrname;
+    private String url_foto;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial_config_location);
 
-
-        Button remindLater = findViewById(R.id.remindMeLaterButton);
-        remindLater.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(InitConfigLocationActivity.this, HomeActivity.class));
-            }
-        });
+        mAuth = FirebaseAuth.getInstance();
+        usrname = getIntent().getStringExtra("username");
+        url_foto = getIntent().getStringExtra("url_img");
+        email = mAuth.getCurrentUser().getEmail();
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -61,38 +66,74 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
         mapView = findViewById(R.id.setupMapView);
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
-    }
 
-    /*private void fetchLastLocation() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_FINE);
-                return;
-            }
-        }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+        Button remindLater = findViewById(R.id.remindMeLaterButton);
+        remindLater.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
-                }
+            public void onClick(View view) {
+                saveUser();
             }
         });
-    }*/
 
+        Button accept = findViewById(R.id.acceptButton);
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fusedLocationProviderClient.getLocationAvailability().addOnSuccessListener(new OnSuccessListener<LocationAvailability>() {
+                    @Override
+                    public void onSuccess(LocationAvailability locationAvailability) {
+                        if (locationAvailability.isLocationAvailable()) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_FINE);
+                                    return;
+                                }
+                            }
+                            Task<Location> locationTask = fusedLocationProviderClient.getLastLocation();
+                            locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
+                                @Override
+                                public void onSuccess(Location location) {
+                                    currentLocation = location;
+                                    saveUser();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(InitConfigLocationActivity.this, R.string.failed, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                        else Toast.makeText(InitConfigLocationActivity.this, R.string.location_no_available, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    private void saveUser() {
+        Usuari usuari;
+        if (url_foto.equals(""))
+            url_foto = null;
+        if (currentLocation != null)
+            usuari = new Usuari(email, usrname, url_foto, currentLocation.toString());
+        else usuari = new Usuari(email, usrname, url_foto, null);
 
-        Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
-        if (mapViewBundle == null) {
-            mapViewBundle = new Bundle();
-            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
-        }
+        addHabilitatsProba(usuari);
 
-        mapView.onSaveInstanceState(mapViewBundle);
+        DocumentReference documentReference = firestore.collection("Usuari").document(email);
+        documentReference.set(usuari);
+        startActivity(new Intent(InitConfigLocationActivity.this, HomeActivity.class));
+    }
+
+    private void addHabilitatsProba(Usuari usuari) {
+        Habilitat hab1 = new Habilitat("Programacion");
+        Habilitat hab2 = new Habilitat("Mates");
+        HabilitatDetall d1 = new HabilitatDetall(5, new ArrayList<Comentari>());
+        HabilitatDetall d2 = new HabilitatDetall();
+        Map<String, HabilitatDetall> map = new HashMap<>();
+        map.put(hab1.getNom(), d1);
+        map.put(hab2.getNom(), d2);
+        usuari.setHabilitats(map);
     }
 
     @Override
@@ -133,9 +174,6 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-        gMap = googleMap;
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_FINE);
@@ -143,23 +181,6 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
             }
         }
         googleMap.setMyLocationEnabled(true);
-        //googleMap.setMaxZoomPreference(5);
-
-        /*Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
-                    Toast.makeText(InitConfigLocationActivity.this, (CharSequence) currentLocation, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        /*LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng);
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
-        googleMap.addMarker(markerOptions);*/
     }
 
 
@@ -167,11 +188,12 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSION_REQUEST_FINE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(InitConfigLocationActivity.this, "Permission granted", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(InitConfigLocationActivity.this, InitConfigLocationActivity.class));
-                onMapReady(gMap);
+                Intent intent = new Intent(InitConfigLocationActivity.this, InitConfigLocationActivity.class);
+                intent.putExtra("username", getIntent().getStringExtra("username"));
+                intent.putExtra("url_img", getIntent().getStringExtra("url_img"));
+                startActivity(intent);
             }
-             else Toast.makeText(InitConfigLocationActivity.this, "Permission not granted", Toast.LENGTH_SHORT).show();
+             else saveUser();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
