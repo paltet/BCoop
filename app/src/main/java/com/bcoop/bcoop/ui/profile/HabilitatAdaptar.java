@@ -7,15 +7,20 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcoop.bcoop.Model.Comentari;
 import com.bcoop.bcoop.Model.HabilitatDetall;
 import com.bcoop.bcoop.R;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.Inflater;
+
+import javax.xml.validation.Validator;
 
 public class HabilitatAdaptar extends BaseExpandableListAdapter {
 
@@ -76,9 +81,23 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String hab = (String) getGroup(groupPosition);
         convertView = LayoutInflater.from(context).inflate(R.layout.habilitats_expandable_list, null);
+
         TextView nomHabilitat = convertView.findViewById(R.id.habilitatText);
         nomHabilitat.setText(hab);
-        return convertView;
+
+        int valoracio = detall.get(habilitats.get(groupPosition)).getValoracio();
+
+        LinearLayout estrelles = convertView.findViewById(R.id.valoracioLayout);
+        for (int i = 0; i < 5; ++i) {
+            View view = LayoutInflater.from(context).inflate(R.layout.star_layout, null);
+            ImageView est = view.findViewById(R.id.habilitatValoracioStar1);
+            if (valoracio > i)
+                est.setImageResource(R.drawable.star_full);
+            else est.setImageResource(R.drawable.star_empty);
+            estrelles.addView(view);
+        }
+
+    return convertView;
     }
 
     @Override

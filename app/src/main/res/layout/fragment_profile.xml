@@ -60,9 +60,8 @@
                         android:id="@+id/moneyText"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:text="$"
-                        app:autoSizeTextType="uniform"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        app:autoSizeTextType="uniform" />
 
                 </LinearLayout>
 

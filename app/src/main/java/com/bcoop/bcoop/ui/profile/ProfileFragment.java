@@ -33,6 +33,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -52,17 +53,11 @@ public class ProfileFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
-        /*
-        En crida al fragment:
-        Bundle bundle = new Bundle();
-        String email_perfil = "ejemplo@gmail.com";
-        bundle.putString("email", email_perfil);
-        PerfilFragment frag = new PerfilFragment();
-        frag.setArguments(bundle);
-        ........
-         */
-
-        String email = mAuth.getCurrentUser().getEmail();
+        final String perfil = getArguments().getString("email");
+        final String email;
+        if (perfil.equals("myPerfil"))
+            email = mAuth.getCurrentUser().getEmail();
+        else email = perfil;
 
         imageView = root.findViewById(R.id.userImage);
         final TextView username = root.findViewById(R.id.usernameText);
@@ -82,7 +77,9 @@ public class ProfileFragment extends Fragment {
 
                     username.setText(usuari.getNom());
                     level.setText(Integer.toString(usuari.getNivell()));
-                    money.setText(Double.toString(usuari.getMonedes()));
+
+                    if (mAuth.getCurrentUser().getEmail().equals(email))
+                        money.setText(Double.toString(usuari.getMonedes()));
 
                     uriImage = usuari.getFoto();
                     getImageFromStorage();
@@ -91,19 +88,6 @@ public class ProfileFragment extends Fragment {
                     Map<String, HabilitatDetall> detallHabilitatUsuari = usuari.getHabilitats();
                     for (Map.Entry<String, HabilitatDetall> entry : detallHabilitatUsuari.entrySet())
                         habilitatsUsuari.add(entry.getKey());
-
-                    //Crear comentaris, borrar al acabar visualització perfil
-                    for (String nom : habilitatsUsuari) {
-                        if (nom.equals("Mates")) {
-                            List<Comentari> comentaris = new ArrayList<>();
-                            comentaris.add(new Comentari("Esto es el comentario más antiguo de " + nom, usuari));
-                            comentaris.add(new Comentari("Esto es el segundo comentario más antiguo de " + nom, usuari));
-                            comentaris.add(new Comentari("Esto es comentario de " + nom, usuari));
-                            comentaris.add(new Comentari("Soy el penultimo comentario", usuari));
-                            comentaris.add(new Comentari("Soy el ultimo comentario", usuari));
-                            usuari.getHabilitats().get(nom).setComentaris(comentaris);
-                        }
-                    }
 
                     HabilitatAdaptar habilitatAdaptar = new HabilitatAdaptar(getContext(), habilitatsUsuari, detallHabilitatUsuari, listHabilitats);
                     listHabilitats.setAdapter(habilitatAdaptar);
