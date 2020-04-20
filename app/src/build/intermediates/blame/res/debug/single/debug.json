@@ -1,0 +1,194 @@
+[
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_log.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\log.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_user.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\user.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_see.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\see.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_chat.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable-v24\\chat.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_chat.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\layout\\fragment_chat.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\navigation_mobile_navigation.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\navigation\\mobile_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_initial_config_image.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\layout\\activity_initial_config_image.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_logo.jpg.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\logo.jpg"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_search.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable-v24\\search.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_search.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\layout\\fragment_search.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_google.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\google.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_initial_config.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\layout\\activity_initial_config.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_dashboard_black_24dp.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\ic_dashboard_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_google.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-mdpi\\google.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_email.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\email.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\ic_notifications_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_profile.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_home_black_24dp.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\ic_home_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_embudo.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable-v24\\embudo.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_logo.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-xxxhdpi\\logo.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_profile.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable-v24\\profile.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\menu_bottom_nav_menu.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\menu\\bottom_nav_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_register.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_logo_round.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-xxxhdpi\\logo_round.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_add.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable-v24\\add.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_home.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\layout\\activity_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_prize.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\layout\\fragment_prize.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_cup.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable-v24\\cup.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_initial_config_location.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\layout\\activity_initial_config_location.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_regalo.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\regalo.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_hide.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\hide.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_lock.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\lock.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\drawable_textview_border.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\drawable\\textview_border.xml"
+    },
+    {
+        "merged": "C:\\Users\\sheng\\bcoop\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\sheng\\bcoop\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+    }
+]
