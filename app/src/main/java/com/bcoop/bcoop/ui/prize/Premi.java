@@ -1,10 +1,13 @@
 package com.bcoop.bcoop.ui.prize;
 
+import java.sql.Time;
+
 public class Premi {
     private String nom;
     private String descripció;
     private String imatge;
     private double preu;
+    private Time time;
 
     public Premi() {
     }
@@ -46,5 +49,13 @@ public class Premi {
 
     public void setPreu(double preu) {
         this.preu = preu;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 }

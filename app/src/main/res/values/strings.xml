@@ -31,7 +31,6 @@
     <string name="error_register">Error during register, Try Again</string>
 
 
-
     <string name="en" translatable="false">EN</string>
     <string name="es" translatable="false">ES</string>
     <string name="ca" translatable="false">CA</string>
@@ -50,7 +49,7 @@
     <string name="cancel">Cancel</string>
     <string name="select_image">Please select an image</string>
     <string name="location_no_available">Please make sure that your location is available</string>
-    <string name="nivell" >Level</string>
-    <string name="money" >Money</string>
+    <string name="nivell">Level</string>
+    <string name="money">Money</string>
     <string name="mostrar_mes_coment">Show more comments</string>
 </resources>

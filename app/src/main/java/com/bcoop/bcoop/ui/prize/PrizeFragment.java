@@ -2,6 +2,7 @@ package com.bcoop.bcoop.ui.prize;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.bcoop.bcoop.Model.Usuari;
+import com.bcoop.bcoop.MyPremi;
 import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -28,8 +34,6 @@ import static android.content.ContentValues.TAG;
 
 public class PrizeFragment extends Fragment {
 
-    public static final String AUTHOR_KEY = "author";
-    public static final String QUOTE_KEY = "author";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<Premi> premiList;
     ListView listView;
@@ -61,6 +65,13 @@ public class PrizeFragment extends Fragment {
                     }
 
                 });
+        root.findViewById(R.id.VeurePremis).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MyPremi.class);
+                startActivity(intent);
+            }
+        });
         return root;
     }
 }
