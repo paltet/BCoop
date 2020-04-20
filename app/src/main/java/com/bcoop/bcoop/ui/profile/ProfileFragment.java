@@ -76,10 +76,13 @@ public class ProfileFragment extends Fragment {
                     usuari = documentSnapshot.toObject(Usuari.class);
 
                     username.setText(usuari.getNom());
-                    level.setText(Integer.toString(usuari.getNivell()));
+                    level.setText(R.string.nivell);
+                    level.setText(level.getText().toString().concat(": ").concat(Integer.toString(usuari.getNivell())));
 
-                    if (mAuth.getCurrentUser().getEmail().equals(email))
-                        money.setText(Double.toString(usuari.getMonedes()));
+                    if (mAuth.getCurrentUser().getEmail().equals(email)) {
+                        money.setText(R.string.money);
+                        money.setText(money.getText().toString().concat(": ").concat(Double.toString(usuari.getMonedes())));
+                    }
 
                     uriImage = usuari.getFoto();
                     getImageFromStorage();
