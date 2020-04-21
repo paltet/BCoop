@@ -37,7 +37,7 @@
         <EditText
             android:id="@+id/newUsernameForm"
             android:layout_marginTop="10dp"
-            android:hint="@string/deleteUser"
+            android:hint="@string/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp" />

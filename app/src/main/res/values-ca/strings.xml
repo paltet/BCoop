@@ -69,7 +69,7 @@
     <string name="currentPassword">Contrasenya actual</string>
     <string name="newPassword">Nova contrasenya</string>
     <string name="confirmNewPassword">Confirmar nova contrasenya</string>
-    <string name="writeDelete">Escriu \'delete\' per a eliminar l\'usuari</string>
+    <string name="writeDelete">Escriu la teva contrasenya per a eliminar l\'usuari</string>
     <string name="confirmDelete">Confirmar Eliminar</string>
     <string name="time_at" />
     <string name="incorrect_password">Wrong Password</string>

@@ -68,7 +68,7 @@
     <string name="currentPassword">Current Password</string>
     <string name="newPassword">New Password</string>
     <string name="confirmNewPassword">Confirm New Password</string>
-    <string name="writeDelete">Type \'delete\' to delete your user</string>
+    <string name="writeDelete">Type your password to delete your user</string>
     <string name="confirmDelete">Confirm Delete</string>
     <string name="time_at" />
     <string name="incorrect_password">Wrong Password</string>
