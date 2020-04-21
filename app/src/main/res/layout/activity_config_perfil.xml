@@ -164,7 +164,7 @@
 
                 <com.google.android.gms.maps.MapView
                     android:id="@+id/mapView"
-                    android:layout_width="168dp"
+                    android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="left"
                     android:apiKey="AIzaSyAxHuYNS3bbcr-r4MkNGkVS9uV_F8FibAw" />
