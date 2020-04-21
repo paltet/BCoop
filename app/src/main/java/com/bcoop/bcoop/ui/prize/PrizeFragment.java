@@ -1,18 +1,15 @@
 package com.bcoop.bcoop.ui.prize;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,17 +25,12 @@ import static android.content.ContentValues.TAG;
 
 public class PrizeFragment extends Fragment {
 
-    private PrizeViewModel prizeViewModel;
-    public static final String AUTHOR_KEY = "author";
-    public static final String QUOTE_KEY = "author";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<Premi> premiList;
     ListView listView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        prizeViewModel =
-                ViewModelProviders.of(this).get(PrizeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_prize, container, false);
 
         premiList = new ArrayList<>();
@@ -53,36 +45,24 @@ public class PrizeFragment extends Fragment {
                                 String nom = document.getString("nom");
                                 String descripció = document.getString("descripció");
                                 String imatge = document.getString("imatge");
-                                Double preu = document.getDouble("preu");
-                                premiList.add(new Premi(nom, descripció,imatge, preu));
+                                Integer preu = document.getDouble("preu").intValue();
+                                premiList.add(new Premi(nom, descripció, imatge, preu, null));
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
-                        PremiAdapter adapter = new PremiAdapter(getContext(), R.layout.my_list_item, premiList);
+                        PremiAdapter adapter = new PremiAdapter(getContext(), R.layout.my_list_item, premiList, false);
                         listView.setAdapter(adapter);
                     }
 
                 });
-        return root;
-    }
-
-    public void showAlertDialog(View v){
-        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-            alert.setTitle("Buy gift");
-            alert.setMessage("Do you want to buy this item?");
-            alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        root.findViewById(R.id.VeurePremis).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getContext(), "@string/success", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MyPremi.class);
+                startActivity(intent);
             }
         });
-            alert.setNegativeButton("@string/abort", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getContext(), "@string/abort", Toast.LENGTH_SHORT).show();
-                }
-            });
-        alert.create().show();
+        return root;
     }
 }

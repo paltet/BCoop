@@ -42,11 +42,19 @@
     <string name="initial_setup_location">Confirma tu lugar de residencia</string>
 
     <string name="failed">Ha fallado. Inténtalo de nuevo</string>
+
+    <string name="buy">Comprar premio</string>
+    <string name="sure">¿Quieres comprar este artículo?</string>
+    <string name="cancel">Cancel · lar</string>
     <string name="select_image">Seleccione una imagen</string>
     <string name="location_no_available">Asegúrate de que tu ubicación esté disponible</string>
     <string name="nivell" >Nivel</string>
     <string name="money" >Monedas</string>
-    <string name="time_at">a las</string>
+    <string name="price">Precio</string>
+    <string name="mostrar_mes_coment">Muestra más comentarios</string>
+    <string name="coins">Monedas</string>
+    <string name="use">Utilizar</string>
+    <string name="usePrize">¿Quieres utilizar este premio?</string>
 
 
     <string name="change">Cambiar</string>
@@ -62,9 +70,4 @@
     <string name="confirmNewPassword">Confirmar nueva contraseña</string>
     <string name="writeDelete">Escribe \'delete\' para eliminar el usuario</string>
     <string name="confirmDelete">Confirmar Eliminar</string>
-
-    <string name="delete_perfil">Eliminar Perfil</string>
-    <string name="perfil_deleted">El perfil se ha eliminado correctamente.</string>
-    <string name="perfil_cannot_delete">El perfil no se ha eliminado correctamente. Porfavor vuelva a intentar más tard.</string>
-    <string name="correct_password">Contraseña incorrecta</string>
 </resources>
