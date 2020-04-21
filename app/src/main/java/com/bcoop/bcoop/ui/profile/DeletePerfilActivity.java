@@ -66,18 +66,6 @@ public class DeletePerfilActivity extends AppCompatActivity {
                                                 });
                                             }
                                         });
-
-                                        AlertDialog alertDialog = new AlertDialog.Builder(DeletePerfilActivity.this).create();
-                                        alertDialog.setTitle(R.string.delete_perfil);
-                                        alertDialog.setMessage(Integer.toString(R.string.perfil_deleted));
-                                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
-                                                startActivity(new Intent(DeletePerfilActivity.this, MainActivity.class));
-                                            }
-                                        });
-                                        alertDialog.show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override

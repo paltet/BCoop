@@ -129,7 +129,7 @@ public class ConfigChangePasswordActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 if (e instanceof FirebaseAuthInvalidCredentialsException)
-                                    currentPwd.setError(getString(R.string.correct_password));
+                                    currentPwd.setError(getString(R.string.incorrect_password));
                             }
                         });
                     }
