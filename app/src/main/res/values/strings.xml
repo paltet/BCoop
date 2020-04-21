@@ -52,6 +52,10 @@
     <string name="nivell">Level</string>
     <string name="money">Money</string>
     <string name="mostrar_mes_coment">Show more comments</string>
+    <string name="price">Price</string>
+    <string name="coins">Coins</string>
+    <string name="use">Use</string>
+    <string name="usePrize">Do you want to use this prize?</string>
 
     <string name="change">Change</string>
     <string name="userImage">User Image</string>

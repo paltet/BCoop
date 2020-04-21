@@ -53,6 +53,10 @@
     <string name="nivell" >Nivell</string>
     <string name="money" >Monedes</string>
     <string name="mostrar_mes_coment">Mostra més comentaris</string>
+    <string name="price">Preu</string>
+    <string name="coins">Monedes</string>
+    <string name="use">Utilitzar</string>
+    <string name="usePrize">Voleu utilitzar aquest premi?</string>
 
     <string name="change">Canviar</string>
     <string name="userImage">Imatge</string>

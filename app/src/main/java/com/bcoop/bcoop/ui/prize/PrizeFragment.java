@@ -1,7 +1,5 @@
 package com.bcoop.bcoop.ui.prize;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,20 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.bcoop.bcoop.Model.Usuari;
-import com.bcoop.bcoop.MyPremi;
 import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -54,13 +45,13 @@ public class PrizeFragment extends Fragment {
                                 String nom = document.getString("nom");
                                 String descripció = document.getString("descripció");
                                 String imatge = document.getString("imatge");
-                                Double preu = document.getDouble("preu");
-                                premiList.add(new Premi(nom, descripció, imatge, preu));
+                                Integer preu = document.getDouble("preu").intValue();
+                                premiList.add(new Premi(nom, descripció, imatge, preu, null));
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
-                        PremiAdapter adapter = new PremiAdapter(getContext(), R.layout.my_list_item, premiList);
+                        PremiAdapter adapter = new PremiAdapter(getContext(), R.layout.my_list_item, premiList, false);
                         listView.setAdapter(adapter);
                     }
 

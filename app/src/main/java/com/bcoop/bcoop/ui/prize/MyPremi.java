@@ -1,4 +1,4 @@
-package com.bcoop.bcoop;
+package com.bcoop.bcoop.ui.prize;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,24 +6,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.bcoop.bcoop.Model.Usuari;
-import com.bcoop.bcoop.ui.prize.Premi;
-import com.bcoop.bcoop.ui.prize.PremiAdapter;
+import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
@@ -47,11 +43,22 @@ public class MyPremi extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    premiList = (List<Premi>) document.get("premis");
+                    if (document.exists()) {
+                        List<Map<String, Object>> list = (List<Map<String, Object>>) document.get("premis");
+                        for (Map<String, Object> hm : list) {
+                            String nom = (String) hm.get("nom");
+                            String descripció = (String) hm.get("descripció");
+                            String imatge = (String) hm.get("imatge");
+                            Integer preu = ((Long) hm.get("preu")).intValue();
+                            Timestamp time = (Timestamp) hm.get("time");
+                            premiList.add(new Premi(nom,descripció,imatge, preu, time));
+                        }
+                    }
+
                 } else {
                     Log.d(TAG, "Cached get failed: ", task.getException());
                 }
-                PremiAdapter adapter = new PremiAdapter(MyPremi.this, R.layout.my_list_item, premiList);
+                PremiAdapter adapter = new PremiAdapter(MyPremi.this, R.layout.my_list_item, premiList, true);
                 listView.setAdapter(adapter);
             }
 

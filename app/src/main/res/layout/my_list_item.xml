@@ -10,57 +10,60 @@
     <Button
         android:id="@+id/Comprar"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="30dp"
         android:layout_below="@+id/Preu"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
         android:background="#FFFFFF"
-        android:text="@string/accept"
+        android:text="@string/buy"
         android:textColor="#FF44B654"
         android:layout_toEndOf="@+id/imageView3"/>
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         app:srcCompat="@drawable/regalo" />
 
     <TextView
         android:id="@+id/Titol"
-        android:layout_width="170dp"
-        android:layout_height="53dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="3dp"
         android:layout_toEndOf="@+id/imageView3"
         android:text="Titol"
-        android:textSize="30sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/Descripció"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Titol"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="3dp"
         android:layout_toEndOf="@+id/imageView3"
-        android:text="Descripció"
-        tools:layout_editor_absoluteX="222dp"
-        tools:layout_editor_absoluteY="81dp" />
+        android:text="Descripció" />
 
     <TextView
         android:id="@+id/Preu"
-        android:layout_width="157dp"
-        android:layout_height="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/Descripció"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/imageView3"
         android:text="Preu"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
 
 </RelativeLayout>
