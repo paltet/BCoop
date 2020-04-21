@@ -3,6 +3,7 @@ package com.bcoop.bcoop.ui.profile;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -77,12 +79,14 @@ public class ProfileFragment extends Fragment {
                     usuari = documentSnapshot.toObject(Usuari.class);
 
                     username.setText(usuari.getNom());
-                    level.setText(R.string.nivell);
-                    level.setText(level.getText().toString().concat(": ").concat(Integer.toString(usuari.getNivell())));
+                    level.setText(getString(R.string.nivell).concat(": ").concat(Integer.toString(usuari.getNivell())));
 
                     if (mAuth.getCurrentUser().getEmail().equals(email)) {
-                        money.setText(R.string.money);
-                        money.setText(money.getText().toString().concat(": ").concat(Integer.toString(usuari.getMonedes())));
+                        money.setText(getString(R.string.money).concat(": ").concat(Integer.toString(usuari.getMonedes())));
+                    }
+                    else {
+                        String name = getLocality(usuari.getLocationLatitude(), usuari.getLocationLongitude());
+                        money.setText(name);
                     }
 
                     uriImage = usuari.getFoto();
@@ -117,6 +121,19 @@ public class ProfileFragment extends Fragment {
         }
         else logout.setVisibility(View.GONE);
         return root;
+    }
+
+    private String getLocality(double locationLatitude, double locationLongitude) {
+        String locality = "";
+        Geocoder myLocation = new Geocoder(ProfileFragment.super.getContext(), Locale.getDefault());
+        try {
+            List<Address> addresses = myLocation.getFromLocation(locationLatitude, locationLongitude, 1);
+            Address address = addresses.get(0);
+            locality = address.getLocality();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return locality;
     }
 
     private void codiPerFerProbes(Usuari usuari) {

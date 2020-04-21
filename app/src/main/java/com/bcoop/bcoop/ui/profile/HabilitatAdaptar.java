@@ -46,7 +46,7 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
         int size = detall.get(habilitats.get(groupPosition)).getComentaris().size();
-        if (onlyThree && size > 2)
+        if (onlyThree && size > 3)
             return 4;
         return detall.get(habilitats.get(groupPosition)).getComentaris().size();
     }
