@@ -3,6 +3,7 @@ package com.bcoop.bcoop.ui.profile;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,11 +82,14 @@ public class ProfileFragment extends Fragment {
 
                     if (mAuth.getCurrentUser().getEmail().equals(email)) {
                         money.setText(R.string.money);
-                        money.setText(money.getText().toString().concat(": ").concat(Double.toString(usuari.getMonedes())));
+                        money.setText(money.getText().toString().concat(": ").concat(Integer.toString(usuari.getMonedes())));
                     }
 
                     uriImage = usuari.getFoto();
                     getImageFromStorage();
+
+                    //Crear comentaris, borrar al acabar visualització perfil
+                    codiPerFerProbes(usuari);
 
                     List<String> habilitatsUsuari = new ArrayList<>();
                     Map<String, HabilitatDetall> detallHabilitatUsuari = usuari.getHabilitats();
@@ -115,6 +119,23 @@ public class ProfileFragment extends Fragment {
         return root;
     }
 
+    private void codiPerFerProbes(Usuari usuari) {
+        Map<String, HabilitatDetall> habs = new HashMap<>();
+
+        List<Comentari> comentaris = new ArrayList<>();
+        comentaris.add(new Comentari("Esto es el comentario más antiguo", usuari));
+        comentaris.add(new Comentari("Esto es el segundo comentario más antiguo", usuari));
+        comentaris.add(new Comentari("Esto es comentario", usuari));
+        comentaris.add(new Comentari("Soy el penultimo comentario", usuari));
+        comentaris.add(new Comentari("Soy el ultimo comentario", usuari));
+
+        habs.put("Proba 1", new HabilitatDetall(4, comentaris));
+        habs.put("Proba 2", new HabilitatDetall());
+
+        usuari.setHabilitats(habs);
+
+    }
+
     private void getImageFromStorage() {
         if (uriImage != null) {
             StorageReference storageReference = storage.getReferenceFromUrl(uriImage);
@@ -132,4 +153,6 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
+
+
 }

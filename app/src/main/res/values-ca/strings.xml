@@ -63,4 +63,9 @@
     <string name="confirmNewPassword">Confirmar nova contrasenya</string>
     <string name="writeDelete">Escriu \'delete\' per a eliminar l\'usuari</string>
     <string name="confirmDelete">Confirmar Eliminar</string>
+
+    <string name="delete_perfil">Eliminar Perfil</string>
+    <string name="perfil_deleted">El perfil s\'ha eliminat correctament.</string>
+    <string name="perfil_cannot_delete">El perfil no s\'ha eliminat correctament. Si us plau torneu intentar més tard.</string>
+    <string name="correct_password">Contrasenya incorrecta</string>
 </resources>

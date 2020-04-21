@@ -62,4 +62,9 @@
     <string name="confirmNewPassword">Confirmar nueva contraseña</string>
     <string name="writeDelete">Escribe \'delete\' para eliminar el usuario</string>
     <string name="confirmDelete">Confirmar Eliminar</string>
+
+    <string name="delete_perfil">Eliminar Perfil</string>
+    <string name="perfil_deleted">El perfil se ha eliminado correctamente.</string>
+    <string name="perfil_cannot_delete">El perfil no se ha eliminado correctamente. Porfavor vuelva a intentar más tard.</string>
+    <string name="correct_password">Contraseña incorrecta</string>
 </resources>

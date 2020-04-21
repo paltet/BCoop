@@ -12,8 +12,9 @@ public class Usuari {
     private String nom;
     private String foto;
     private boolean esPremium;
-    private double monedes;
-    private String localitzacio;
+    private int monedes;
+    private double locationLatitude;
+    private double locationLongitude;
     private boolean esAdministrador;
     private Map<String, HabilitatDetall> habilitats;
     private List<Xat> xats;
@@ -25,11 +26,12 @@ public class Usuari {
 
     public Usuari() {}
 
-    public Usuari(String mail, String usrname, String foto, String localitzacio) {
+    public Usuari(String mail, String usrname, String foto, Double locationLatitude, Double locationLongitude) {
         this.email = mail;
         this.nom = usrname;
         this.foto = foto;
-        this.localitzacio = localitzacio;
+        this.locationLatitude = locationLatitude;
+        this.locationLongitude = locationLongitude;
         esPremium = false;
         monedes = 0;
         esAdministrador = false;
@@ -74,20 +76,12 @@ public class Usuari {
         this.esPremium = esPremium;
     }
 
-    public double getMonedes() {
+    public int getMonedes() {
         return monedes;
     }
 
-    public void setMonedes(double monedes) {
+    public void setMonedes(int monedes) {
         this.monedes = monedes;
-    }
-
-    public String getLocalitzacio() {
-        return localitzacio;
-    }
-
-    public void setLocalitzacio(String localitzacio) {
-        this.localitzacio = localitzacio;
     }
 
     public boolean isEsAdministrador() {
@@ -152,5 +146,21 @@ public class Usuari {
 
     public void setPremis(List<Premi> premis) {
         this.premis = premis;
+    }
+
+    public double getLocationLatitude() {
+        return locationLatitude;
+    }
+
+    public void setLocationLatitude(double locationLatitude) {
+        this.locationLatitude = locationLatitude;
+    }
+
+    public double getLocationLongitude() {
+        return locationLongitude;
+    }
+
+    public void setLocationLongitude(double locationLongitude) {
+        this.locationLongitude = locationLongitude;
     }
 }
