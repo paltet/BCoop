@@ -62,27 +62,33 @@ public class DeletePerfilActivity extends AppCompatActivity {
                                     documentReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            mAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    if (imgUri != null) {
-                                                        StorageReference storageReference = storage.getReferenceFromUrl(imgUri);
-                                                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            if (imgUri != null) {
+                                                StorageReference storageReference = storage.getReferenceFromUrl(imgUri);
+                                                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        mAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                                             @Override
                                                             public void onSuccess(Void aVoid) {
                                                                 startActivity(new Intent(DeletePerfilActivity.this, MainActivity.class));
                                                             }
-                                                        }).addOnFailureListener(new OnFailureListener() {
-                                                            @Override
-                                                            public void onFailure(@NonNull Exception e) {
-                                                                Toast.makeText(DeletePerfilActivity.this, "No borra img", Toast.LENGTH_SHORT).show();
-                                                                startActivity(new Intent(DeletePerfilActivity.this, MainActivity.class));
-                                                            }
                                                         });
                                                     }
-                                                    else startActivity(new Intent(DeletePerfilActivity.this, MainActivity.class));
-                                                }
-                                            });
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        startActivity(new Intent(DeletePerfilActivity.this, ConfigProfileActivity.class));
+                                                    }
+                                                });
+                                            }
+                                            else {
+                                                mAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        startActivity(new Intent(DeletePerfilActivity.this, MainActivity.class));
+                                                    }
+                                                });
+                                            }
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override

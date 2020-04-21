@@ -92,9 +92,6 @@ public class ProfileFragment extends Fragment {
                     uriImage = usuari.getFoto();
                     getImageFromStorage();
 
-                    //Crear comentaris, borrar al acabar visualització perfil
-                    codiPerFerProbes(usuari);
-
                     List<String> habilitatsUsuari = new ArrayList<>();
                     Map<String, HabilitatDetall> detallHabilitatUsuari = usuari.getHabilitats();
                     for (Map.Entry<String, HabilitatDetall> entry : detallHabilitatUsuari.entrySet())
@@ -134,23 +131,6 @@ public class ProfileFragment extends Fragment {
             e.printStackTrace();
         }
         return locality;
-    }
-
-    private void codiPerFerProbes(Usuari usuari) {
-        Map<String, HabilitatDetall> habs = new HashMap<>();
-
-        List<Comentari> comentaris = new ArrayList<>();
-        comentaris.add(new Comentari("Esto es el comentario más antiguo", usuari));
-        comentaris.add(new Comentari("Esto es el segundo comentario más antiguo", usuari));
-        comentaris.add(new Comentari("Esto es comentario", usuari));
-        comentaris.add(new Comentari("Soy el penultimo comentario", usuari));
-        comentaris.add(new Comentari("Soy el ultimo comentario", usuari));
-
-        habs.put("Proba 1", new HabilitatDetall(4, comentaris));
-        habs.put("Proba 2", new HabilitatDetall());
-
-        usuari.setHabilitats(habs);
-
     }
 
     private void getImageFromStorage() {
