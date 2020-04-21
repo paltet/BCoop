@@ -86,6 +86,7 @@ public class ConfigChangeLocationActivity extends AppCompatActivity implements O
                                             if (documentSnapshot.exists()) {
                                                 documentReference.update("locationLatitude", currentLocation.getLatitude());
                                                 documentReference.update("locationLongitude", currentLocation.getLongitude());
+                                                startActivity(new Intent(ConfigChangeLocationActivity.this, ConfigProfileActivity.class));
                                             }
                                         }
                                     });
@@ -97,11 +98,59 @@ public class ConfigChangeLocationActivity extends AppCompatActivity implements O
                                 }
                             });
                         }
-                        else Toast.makeText(ConfigChangeLocationActivity.this, R.string.location_no_available, Toast.LENGTH_SHORT).show();
+                        else {
+                            final DocumentReference documentReference = firestore.collection("Usuari").document(mAuth.getCurrentUser().getEmail());
+                            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if (documentSnapshot.exists()) {
+                                        documentReference.update("locationLatitude", 0.0);
+                                        documentReference.update("locationLongitude", 0.0);
+                                        startActivity(new Intent(ConfigChangeLocationActivity.this, ConfigProfileActivity.class));
+                                    }
+                                }
+                            });
+                        }
                     }
                 });
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mapView.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
     }
 
     @Override
@@ -119,7 +168,7 @@ public class ConfigChangeLocationActivity extends AppCompatActivity implements O
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSION_REQUEST_FINE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                startActivity(new Intent(ConfigChangeLocationActivity.this, InitConfigLocationActivity.class));
+                startActivity(new Intent(ConfigChangeLocationActivity.this, ConfigChangeLocationActivity.class));
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }

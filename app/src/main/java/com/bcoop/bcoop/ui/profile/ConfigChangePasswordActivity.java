@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
@@ -29,6 +30,9 @@ public class ConfigChangePasswordActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private FirebaseAuth mAuth;
     private boolean isEyeOpenCurrent = false, isEyeOpenNew = false, isEyeOpenConfirmNew = false;
+    private TextView currentPwd, newPwd, confirmNewPwd;
+    private ImageView eyeCurrentPwd, eyeNewPwd, eyeConfirmNewPwd;
+    private Button confirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +42,13 @@ public class ConfigChangePasswordActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
-        final EditText currentPwd = findViewById(R.id.currentPasswordForm);
-        final ImageView eyeCurrentPwd = findViewById(R.id.eye_currentPassword);
-        final EditText newPwd = findViewById(R.id.newPasswordForm);
-        final ImageView eyeNewPwd = findViewById(R.id.eye_newPassword);
-        final EditText confirmNewPwd = findViewById(R.id.confirmationPasswordForm);
-        final ImageView eyeConfirmNewPwd = findViewById(R.id.eye_confirmationPassword);
-        Button confirm = findViewById(R.id.confirmButton);
+        currentPwd = findViewById(R.id.currentPasswordForm);
+        eyeCurrentPwd = findViewById(R.id.eye_currentPassword);
+        newPwd = findViewById(R.id.newPasswordForm);
+        eyeNewPwd = findViewById(R.id.eye_newPassword);
+        confirmNewPwd = findViewById(R.id.confirmationPasswordForm);
+        eyeConfirmNewPwd = findViewById(R.id.eye_confirmationPassword);
+        confirm = findViewById(R.id.confirmButton);
 
         eyeCurrentPwd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +78,7 @@ public class ConfigChangePasswordActivity extends AppCompatActivity {
                 }
             }
         });
-        eyeCurrentPwd.setOnClickListener(new View.OnClickListener() {
+        eyeConfirmNewPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!isEyeOpenConfirmNew) {
@@ -97,16 +101,16 @@ public class ConfigChangePasswordActivity extends AppCompatActivity {
                 final String confirmPassword = confirmNewPwd.getText().toString();
                 if(!current.isEmpty() && !newPassword.isEmpty() && !confirmPassword.isEmpty()) {
                     if (current.length() > 7) {
-                        AuthCredential credential = EmailAuthProvider.getCredential(mAuth.getCurrentUser().getEmail(), current);
-                        mAuth.getCurrentUser().reauthenticate(credential).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                if (newPassword.length() > 7) {
-                                    if (confirmPassword.equals(newPassword)){
+                        if (newPassword.length() > 7) {
+                            if (confirmPassword.equals(newPassword)) {
+                                AuthCredential credential = EmailAuthProvider.getCredential(mAuth.getCurrentUser().getEmail(), current);
+                                mAuth.getCurrentUser().reauthenticate(credential).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
                                         mAuth.getCurrentUser().updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                mAuth.getCurrentUser().reauthenticate(EmailAuthProvider.getCredential(mAuth.getCurrentUser().getEmail(), newPassword));
+                                                startActivity(new Intent(ConfigChangePasswordActivity.this, ConfigProfileActivity.class));
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
@@ -115,23 +119,23 @@ public class ConfigChangePasswordActivity extends AppCompatActivity {
                                             }
                                         });
                                     }
-                                    else {
-                                        confirmNewPwd.setError(getString(R.string.confirm_passwd));
-                                        confirmNewPwd.requestFocus();
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                                            currentPwd.setError(getString(R.string.incorrect_password));
+                                            currentPwd.requestFocus();
+                                        }
                                     }
-                                }
-                                else {
-                                    newPwd.setError(getString(R.string.unvalid_passwd));
-                                    newPwd.requestFocus();
-                                }
+                                });
+                            } else {
+                                confirmNewPwd.setError(getString(R.string.confirm_passwd));
+                                confirmNewPwd.requestFocus();
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                if (e instanceof FirebaseAuthInvalidCredentialsException)
-                                    currentPwd.setError(getString(R.string.incorrect_password));
-                            }
-                        });
+                        } else {
+                            newPwd.setError(getString(R.string.unvalid_passwd));
+                            newPwd.requestFocus();
+                        }
                     }
                     else {
                         currentPwd.setError(getString(R.string.unvalid_passwd));

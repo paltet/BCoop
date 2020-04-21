@@ -38,7 +38,10 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
     private FirebaseAuth mAuth;
     private FirebaseStorage storage;
     private ImageView img;
+    private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
+    private MapView mapView;
     private GoogleMap map;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +50,59 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
 
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
 
         final TextView usrn = findViewById(R.id.usernameText);
-        final Button usrnChange = findViewById(R.id.usernameButton);
+        Button usrnChange = findViewById(R.id.usernameButton);
         final TextView pwd = findViewById(R.id.passwordText);
-        final Button pwdChange = findViewById(R.id.passwordButton);
+        Button pwdChange = findViewById(R.id.passwordButton);
         img = findViewById(R.id.userImage);
-        final Button imgChange = findViewById(R.id.imageButton);
-        final MapView loc = findViewById(R.id.mapView);
-        final Button locChange = findViewById(R.id.locationButton);
-        final Button delete = findViewById(R.id.deleteUserButton);
+        Button imgChange = findViewById(R.id.imageButton);
+        mapView = findViewById(R.id.mapView);
+        Button locChange = findViewById(R.id.locationButton);
+        Button delete = findViewById(R.id.deleteUserButton);
+
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
+        }
+        mapView.onCreate(mapViewBundle);
+        mapView.getMapAsync(this);
+
+        usrnChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ConfigProfileActivity.this, ConfigChangeUsernameActivity.class));
+            }
+        });
+
+        pwdChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ConfigProfileActivity.this, ConfigChangePasswordActivity.class));
+            }
+        });
+
+        imgChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ConfigProfileActivity.this, ConfigChangeImageActivity.class));
+            }
+        });
+
+        locChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ConfigProfileActivity.this, ConfigChangeLocationActivity.class));
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ConfigProfileActivity.this, DeletePerfilActivity.class));
+            }
+        });
 
         final DocumentReference documentReference = firestore.collection("Usuari").document(mAuth.getCurrentUser().getEmail());
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -70,52 +116,19 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
                     pwd.setText("********");
                     getImageFromStorage(usuari.getFoto());
                     showLocation(usuari.getLocationLatitude(), usuari.getLocationLongitude());
-
-                    usrnChange.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(ConfigProfileActivity.this, ConfigChangeUsernameActivity.class));
-                        }
-                    });
-
-                    pwdChange.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(ConfigProfileActivity.this, ConfigChangePasswordActivity.class));
-                        }
-                    });
-
-                    imgChange.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(ConfigProfileActivity.this, ConfigChangeImageActivity.class));
-                        }
-                    });
-
-                    locChange.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(ConfigProfileActivity.this, ConfigChangeLocationActivity.class));
-                        }
-                    });
-
-                    delete.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(ConfigProfileActivity.this, DeletePerfilActivity.class));
-                        }
-                    });
                 }
             }
         });
     }
 
     private void showLocation(Double latitude, Double longitude) {
-        LatLng latLng = new LatLng(latitude, longitude);
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng);
-        map.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
-        map.addMarker(markerOptions);
+        if (latitude != 0.0 && longitude != 0.0) {
+            LatLng latLng = new LatLng(latitude, longitude);
+            MarkerOptions markerOptions = new MarkerOptions().position(latLng);
+            map.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+            map.addMarker(markerOptions);
+        }
     }
 
     private void getImageFromStorage(String uriImage) {
@@ -141,4 +154,41 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
         map = googleMap;
         googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mapView.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
 }

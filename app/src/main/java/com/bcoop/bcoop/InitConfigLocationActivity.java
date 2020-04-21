@@ -116,7 +116,7 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
             url_foto = null;
         if (currentLocation != null)
             usuari = new Usuari(email, usrname, url_foto, currentLocation.getLatitude(), currentLocation.getLongitude());
-        else usuari = new Usuari(email, usrname, url_foto, null, null);
+        else usuari = new Usuari(email, usrname, url_foto, 0.0, 0.0);
 
         DocumentReference documentReference = firestore.collection("Usuari").document(email);
         documentReference.set(usuari);

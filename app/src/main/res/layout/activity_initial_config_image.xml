@@ -26,15 +26,13 @@
             android:textAlignment="center"/>
 
         <ImageView
+            android:id="@+id/user_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:id="@+id/user_image"
-            android:src="@drawable/add"
-            android:scaleType="centerInside"
-            android:tint="@color/lightGrey"
             android:layout_marginTop="30dp"
-            />
+            android:scaleType="centerInside"
+            android:src="@drawable/add" />
 
         <TextView
             android:layout_width="match_parent"

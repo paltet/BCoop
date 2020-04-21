@@ -112,6 +112,7 @@ public class ConfigChangeImageActivity extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
                             documentReference.update("foto", imagePath.toString());
+                            startActivity(new Intent(ConfigChangeImageActivity.this, ConfigProfileActivity.class));
                         }
                     }
                 });
