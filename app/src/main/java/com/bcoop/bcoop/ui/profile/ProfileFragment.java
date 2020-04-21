@@ -3,6 +3,8 @@ package com.bcoop.bcoop.ui.profile;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +37,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -76,16 +79,21 @@ public class ProfileFragment extends Fragment {
                     usuari = documentSnapshot.toObject(Usuari.class);
 
                     username.setText(usuari.getNom());
-                    level.setText(R.string.nivell);
-                    level.setText(level.getText().toString().concat(": ").concat(Integer.toString(usuari.getNivell())));
+                    level.setText(getString(R.string.nivell).concat(": ").concat(Integer.toString(usuari.getNivell())));
 
                     if (mAuth.getCurrentUser().getEmail().equals(email)) {
-                        money.setText(R.string.money);
-                        money.setText(money.getText().toString().concat(": ").concat(Double.toString(usuari.getMonedes())));
+                        money.setText(getString(R.string.money).concat(": ").concat(Integer.toString(usuari.getMonedes())));
+                    }
+                    else {
+                        String name = getLocality(usuari.getLocationLatitude(), usuari.getLocationLongitude());
+                        money.setText(name);
                     }
 
                     uriImage = usuari.getFoto();
                     getImageFromStorage();
+
+                    //Crear comentaris, borrar al acabar visualització perfil
+                    codiPerFerProbes(usuari);
 
                     List<String> habilitatsUsuari = new ArrayList<>();
                     Map<String, HabilitatDetall> detallHabilitatUsuari = usuari.getHabilitats();
@@ -115,6 +123,36 @@ public class ProfileFragment extends Fragment {
         return root;
     }
 
+    private String getLocality(double locationLatitude, double locationLongitude) {
+        String locality = "";
+        Geocoder myLocation = new Geocoder(ProfileFragment.super.getContext(), Locale.getDefault());
+        try {
+            List<Address> addresses = myLocation.getFromLocation(locationLatitude, locationLongitude, 1);
+            Address address = addresses.get(0);
+            locality = address.getLocality();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return locality;
+    }
+
+    private void codiPerFerProbes(Usuari usuari) {
+        Map<String, HabilitatDetall> habs = new HashMap<>();
+
+        List<Comentari> comentaris = new ArrayList<>();
+        comentaris.add(new Comentari("Esto es el comentario más antiguo", usuari));
+        comentaris.add(new Comentari("Esto es el segundo comentario más antiguo", usuari));
+        comentaris.add(new Comentari("Esto es comentario", usuari));
+        comentaris.add(new Comentari("Soy el penultimo comentario", usuari));
+        comentaris.add(new Comentari("Soy el ultimo comentario", usuari));
+
+        habs.put("Proba 1", new HabilitatDetall(4, comentaris));
+        habs.put("Proba 2", new HabilitatDetall());
+
+        usuari.setHabilitats(habs);
+
+    }
+
     private void getImageFromStorage() {
         if (uriImage != null) {
             StorageReference storageReference = storage.getReferenceFromUrl(uriImage);
@@ -132,4 +170,6 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
+
+
 }

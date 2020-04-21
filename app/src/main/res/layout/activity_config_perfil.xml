@@ -174,15 +174,15 @@
                     android:gravity="right">
 
                     <Button
-                        android:button="@+id/imageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="32sp"
-                        android:background="@drawable/button_background"
-                        android:text="@string/change"
-                        android:textSize="16sp"
                         android:layout_gravity="bottom|right"
+                        android:background="@drawable/button_background"
+                        android:button="@+id/locationButton"
                         android:padding="5dp"
-                        android:textColor="@color/white"/>
+                        android:text="@string/change"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
             </LinearLayout>

@@ -3,9 +3,8 @@
     package="com.bcoop.bcoop">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +13,17 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.prize.MyPremi" />
+        <activity android:name=".ui.profile.ConfigChangeLocationActivity" />
+        <activity android:name=".ui.profile.ConfigChangeImageActivity" />
+        <activity android:name=".ui.profile.ConfigChangePasswordActivity" />
+        <activity android:name=".ui.profile.ConfigChangeUsernameActivity" />
+        <activity android:name=".ui.profile.DeletePerfilActivity" />
+        <activity android:name=".ui.profile.ConfigProfileActivity" />
 
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/google_maps_API_key"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_API_key" />
 
         <activity android:name=".InitConfigLocationActivity" />
         <activity android:name=".InitConfigImageActivity" />

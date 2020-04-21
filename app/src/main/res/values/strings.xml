@@ -31,7 +31,6 @@
     <string name="error_register">Error during register, Try Again</string>
 
 
-
     <string name="en" translatable="false">EN</string>
     <string name="es" translatable="false">ES</string>
     <string name="ca" translatable="false">CA</string>
@@ -44,11 +43,19 @@
     <string name="initial_setup_location">Confirm this is your home location</string>
 
     <string name="failed">Failed. Please try again</string>
+
+    <string name="buy">Buy prize</string>
+    <string name="sure">Do you want to buy this item?</string>
+    <string name="cancel">Cancel</string>
     <string name="select_image">Please select an image</string>
     <string name="location_no_available">Please make sure that your location is available</string>
     <string name="nivell" >Level</string>
     <string name="money" >Money</string>
     <string name="mostrar_mes_coment">Show more comments</string>
+    <string name="price">Price</string>
+    <string name="coins">Coins</string>
+    <string name="use">Use</string>
+    <string name="usePrize">Do you want to use this prize?</string>
 
     <string name="change">Change</string>
     <string name="userImage">User Image</string>
@@ -63,6 +70,10 @@
     <string name="confirmNewPassword">Confirm New Password</string>
     <string name="writeDelete">Type \'delete\' to delete your user</string>
     <string name="confirmDelete">Confirm Delete</string>
+    <string name="time_at" />
+    <string name="incorrect_password">Wrong Password</string>
+    <string name="delete_perfil">Delete Profile</string>
+    <string name="perfil_cannot_delete">Failed to delete profile. Please try later</string>
 
     <string name="user_settings">User Settings</string>
 </resources>

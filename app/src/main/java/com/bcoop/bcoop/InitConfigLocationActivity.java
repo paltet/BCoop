@@ -115,8 +115,8 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
         if (url_foto.equals(""))
             url_foto = null;
         if (currentLocation != null)
-            usuari = new Usuari(email, usrname, url_foto, currentLocation.toString());
-        else usuari = new Usuari(email, usrname, url_foto, null);
+            usuari = new Usuari(email, usrname, url_foto, currentLocation.getLatitude(), currentLocation.getLongitude());
+        else usuari = new Usuari(email, usrname, url_foto, null, null);
 
         DocumentReference documentReference = firestore.collection("Usuari").document(email);
         documentReference.set(usuari);
@@ -181,7 +181,7 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
                 intent.putExtra("url_img", getIntent().getStringExtra("url_img"));
                 startActivity(intent);
             }
-             else saveUser();
+            else saveUser();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
