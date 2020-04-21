@@ -62,4 +62,5 @@
     <string name="confirmNewPassword">Confirmar nueva contraseña</string>
     <string name="writeDelete">Escribe \'delete\' para eliminar el usuario</string>
     <string name="confirmDelete">Confirmar Eliminar</string>
+    <string name="user_settings">Configuración de usuario</string>
 </resources>

@@ -63,4 +63,6 @@
     <string name="confirmNewPassword">Confirm New Password</string>
     <string name="writeDelete">Type \'delete\' to delete your user</string>
     <string name="confirmDelete">Confirm Delete</string>
+
+    <string name="user_settings">User Settings</string>
 </resources>
