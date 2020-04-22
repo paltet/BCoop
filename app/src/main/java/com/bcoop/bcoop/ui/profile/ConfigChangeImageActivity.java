@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class ConfigChangeImageActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
 
         img = findViewById(R.id.userImageSelector);
+        img.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.lightGrey)));
         Button confirm = findViewById(R.id.confirmButton);
 
         img.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +93,7 @@ public class ConfigChangeImageActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == RESULT_LOAD_IMAGE) {
             imgUri = data.getData();
+            img.setImageTintList(null);
             img.setImageURI(imgUri);
         }
     }

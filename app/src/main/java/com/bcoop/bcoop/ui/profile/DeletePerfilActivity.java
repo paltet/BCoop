@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +46,8 @@ public class DeletePerfilActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
 
         pwdUser = findViewById(R.id.newUsernameForm);
+        pwdUser.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        pwdUser.setTransformationMethod(PasswordTransformationMethod.getInstance());
         confirm = findViewById(R.id.confirmButton);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override

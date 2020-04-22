@@ -63,6 +63,7 @@ public class ProfileFragment extends Fragment {
         else email = perfil;
 
         imageView = root.findViewById(R.id.userImage);
+        imageView.setImageResource(R.drawable.profile);
         final TextView username = root.findViewById(R.id.usernameText);
         final TextView level = root.findViewById(R.id.levelText);
         final TextView money = root.findViewById(R.id.moneyText);

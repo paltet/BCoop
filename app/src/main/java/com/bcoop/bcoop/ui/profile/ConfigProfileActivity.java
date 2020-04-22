@@ -57,6 +57,7 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
         final TextView pwd = findViewById(R.id.passwordText);
         Button pwdChange = findViewById(R.id.passwordButton);
         img = findViewById(R.id.userImage);
+        img.setImageResource(R.drawable.profile);
         Button imgChange = findViewById(R.id.imageButton);
         mapView = findViewById(R.id.mapView);
         Button locChange = findViewById(R.id.locationButton);

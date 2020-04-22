@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,6 +55,7 @@ public class InitConfigImageActivity extends AppCompatActivity {
         });
 
         img = findViewById(R.id.user_image);
+        img.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.lightGrey)));
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +122,7 @@ public class InitConfigImageActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == RESULT_LOAD_IMAGE) {
             imgUri = data.getData();
+            img.setImageTintList(null);
             img.setImageURI(imgUri);
         }
     }
