@@ -18,7 +18,7 @@
     <string name="abort"> Purchase Canceled </string>
     <string name="level">Level </string>
     <string name="veurePremis">My Gifts </string>
-
+    <string name="configHabilitatsUser">Abilities Configuration </string>
 
     <string name="accept_privacy">By clicking below, you agree to BCoop Terms of Service and Privacy Policy.</string>
     <string name="unvalid_username">Please enter a valid username</string>

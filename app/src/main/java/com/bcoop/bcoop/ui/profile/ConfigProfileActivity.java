@@ -62,6 +62,7 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
         mapView = findViewById(R.id.mapView);
         Button locChange = findViewById(R.id.locationButton);
         Button delete = findViewById(R.id.deleteUserButton);
+        Button configHabilitats = findViewById(R.id.configHabilitatsButton);
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -95,6 +96,13 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ConfigProfileActivity.this, ConfigChangeLocationActivity.class));
+            }
+        });
+        configHabilitats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ConfigProfileActivity.this, configurationHabilitats.class);
+                startActivity(intent);
             }
         });
 

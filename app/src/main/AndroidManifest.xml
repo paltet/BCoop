@@ -20,6 +20,7 @@
         <activity android:name=".ui.profile.ConfigChangeUsernameActivity" />
         <activity android:name=".ui.profile.DeletePerfilActivity" />
         <activity android:name=".ui.profile.ConfigProfileActivity" />
+        <activity android:name=".ui.profile.configurationHabilitats"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
