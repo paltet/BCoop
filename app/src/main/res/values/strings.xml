@@ -18,7 +18,7 @@
     <string name="abort"> Purchase Canceled </string>
     <string name="level">Level </string>
     <string name="veurePremis">My Gifts </string>
-
+    <string name="configHabilitatsUser">Abilities Configuration </string>
 
     <string name="accept_privacy">By clicking below, you agree to BCoop Terms of Service and Privacy Policy.</string>
     <string name="unvalid_username">Please enter a valid username</string>
@@ -49,8 +49,8 @@
     <string name="cancel">Cancel</string>
     <string name="select_image">Please select an image</string>
     <string name="location_no_available">Please make sure that your location is available</string>
-    <string name="nivell">Level</string>
-    <string name="money">Money</string>
+    <string name="nivell" >Level</string>
+    <string name="money" >Money</string>
     <string name="mostrar_mes_coment">Show more comments</string>
     <string name="price">Price</string>
     <string name="coins">Coins</string>
@@ -69,6 +69,12 @@
     <string name="currentPassword">Current Password</string>
     <string name="newPassword">New Password</string>
     <string name="confirmNewPassword">Confirm New Password</string>
-    <string name="writeDelete">Type \'delete\' to delete your user</string>
+    <string name="writeDelete">Type your password to delete your user</string>
     <string name="confirmDelete">Confirm Delete</string>
+    <string name="time_at" />
+    <string name="incorrect_password">Wrong Password</string>
+    <string name="delete_perfil">Delete Profile</string>
+    <string name="perfil_cannot_delete">Failed to delete profile. Please try later</string>
+
+    <string name="user_settings">User Settings</string>
 </resources>

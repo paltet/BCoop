@@ -18,6 +18,7 @@
     <string name="abort"> Compra cancel·lada </string>
     <string name="level">Nivell </string>
     <string name="veurePremis">Els meus premis</string>
+    <string name="configHabilitatsUser">Configuració habilitats </string>
 
 
 
@@ -70,6 +71,11 @@
     <string name="currentPassword">Contrasenya actual</string>
     <string name="newPassword">Nova contrasenya</string>
     <string name="confirmNewPassword">Confirmar nova contrasenya</string>
-    <string name="writeDelete">Escriu \'delete\' per a eliminar l\'usuari</string>
+    <string name="writeDelete">Escriu la teva contrasenya per a eliminar l\'usuari</string>
     <string name="confirmDelete">Confirmar Eliminar</string>
+    <string name="time_at" />
+    <string name="incorrect_password">Wrong Password</string>
+    <string name="delete_perfil">Delete Profile</string>
+    <string name="perfil_cannot_delete">Failed to delete profile. Please try later</string>
+    <string name="user_settings">Configuració d\'usuari</string>
 </resources>

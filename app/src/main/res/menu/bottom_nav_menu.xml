@@ -21,4 +21,8 @@
         android:icon="@drawable/profile"
         android:title="@string/profile" />
 
+    <item
+        android:id="@+id/navigation_settings"
+        android:title="@string/user_settings" />
+
 </menu>

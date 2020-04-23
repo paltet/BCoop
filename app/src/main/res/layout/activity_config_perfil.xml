@@ -86,14 +86,15 @@
                     android:textSize="24sp" />
 
                 <Button
-                    android:button="@+id/passwordButton"
+                    android:id="@+id/passwordButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@drawable/button_background"
-                    android:text="@string/change"
-                    android:textSize="16sp"
+                    android:button="@+id/passwordButton"
                     android:padding="5dp"
-                    android:textColor="@color/white"/>
+                    android:text="@string/change"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -128,15 +129,16 @@
                     android:gravity="right">
 
                     <Button
-                        android:button="@+id/imageButton"
+                        android:id="@+id/imageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="32sp"
-                        android:background="@drawable/button_background"
-                        android:text="@string/change"
-                        android:textSize="16sp"
                         android:layout_gravity="bottom|right"
+                        android:background="@drawable/button_background"
+                        android:button="@+id/imageButton"
                         android:padding="5dp"
-                        android:textColor="@color/white"/>
+                        android:text="@string/change"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -160,12 +162,12 @@
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
-                <MapView
+                <com.google.android.gms.maps.MapView
                     android:id="@+id/mapView"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="left"
-                    android:scaleType="fitCenter"/>
+                    android:apiKey="AIzaSyAxHuYNS3bbcr-r4MkNGkVS9uV_F8FibAw" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -174,19 +176,30 @@
                     android:gravity="right">
 
                     <Button
-                        android:button="@+id/imageButton"
+                        android:id="@+id/locationButton"
                         android:layout_width="wrap_content"
                         android:layout_height="32sp"
-                        android:background="@drawable/button_background"
-                        android:text="@string/change"
-                        android:textSize="16sp"
                         android:layout_gravity="bottom|right"
+                        android:background="@drawable/button_background"
+                        android:button="@+id/locationButton"
                         android:padding="5dp"
-                        android:textColor="@color/white"/>
+                        android:text="@string/change"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
             </LinearLayout>
 
+            <Button
+                android:id="@+id/configHabilitatsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#00BCD4"
+                android:text="@string/configHabilitatsUser"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
             <Button
                 android:id="@+id/deleteUserButton"
                 android:layout_marginTop="20dp"
