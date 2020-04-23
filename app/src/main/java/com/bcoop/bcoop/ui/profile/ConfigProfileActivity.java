@@ -7,10 +7,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bcoop.bcoop.HomeActivity;
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -199,6 +203,16 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            startActivity(new Intent(ConfigProfileActivity.this, HomeActivity.class));
+            return true;
+        }
+        super.onKeyDown(keyCode, event);
+        return false;
     }
 
 }
