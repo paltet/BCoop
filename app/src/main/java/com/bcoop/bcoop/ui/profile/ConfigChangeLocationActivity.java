@@ -38,7 +38,6 @@ public class ConfigChangeLocationActivity extends AppCompatActivity implements O
     private FirebaseAuth mAuth;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int PERMISSION_REQUEST_FINE = 2;
-    private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
     private Location currentLocation;
     private MapView mapView;
 
@@ -51,12 +50,8 @@ public class ConfigChangeLocationActivity extends AppCompatActivity implements O
         firestore = FirebaseFirestore.getInstance();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        Bundle mapViewBundle = null;
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
-        }
         mapView = findViewById(R.id.newLocation);
-        mapView.onCreate(mapViewBundle);
+        mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
         Button confirm = findViewById(R.id.confirmButton);
@@ -115,6 +110,12 @@ public class ConfigChangeLocationActivity extends AppCompatActivity implements O
                 });
             }
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
     }
 
     @Override

@@ -36,7 +36,6 @@ import java.util.Map;
 
 public class InitConfigLocationActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
     private static final int PERMISSION_REQUEST_FINE = 2;
     private MapView mapView;
     private Location currentLocation;
@@ -59,12 +58,8 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        Bundle mapViewBundle = null;
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
-        }
         mapView = findViewById(R.id.setupMapView);
-        mapView.onCreate(mapViewBundle);
+        mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
         Button remindLater = findViewById(R.id.remindMeLaterButton);
@@ -123,6 +118,12 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
         startActivity(new Intent(InitConfigLocationActivity.this, HomeActivity.class));
     }
 
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
 
     @Override
     protected void onResume() {

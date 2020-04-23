@@ -38,7 +38,6 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
     private FirebaseAuth mAuth;
     private FirebaseStorage storage;
     private ImageView img;
-    private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
     private MapView mapView;
     private GoogleMap map;
 
@@ -64,11 +63,7 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
         Button delete = findViewById(R.id.deleteUserButton);
         Button configHabilitats = findViewById(R.id.configHabilitatsButton);
 
-        Bundle mapViewBundle = null;
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
-        }
-        mapView.onCreate(mapViewBundle);
+        mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
         usrnChange.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +133,7 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
             map.addMarker(markerOptions);
         }
+        else map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
 
     private void getImageFromStorage(String uriImage) {
@@ -161,7 +157,12 @@ public class ConfigProfileActivity extends AppCompatActivity implements OnMapRea
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
     }
 
     @Override
