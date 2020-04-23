@@ -57,6 +57,7 @@
     <string name="coins">Monedes</string>
     <string name="use">Utilitzar</string>
     <string name="usePrize">Voleu utilitzar aquest premi?</string>
+    <string name="notEnough">No tens prou monedes</string>
 
     <string name="change">Canviar</string>
     <string name="userImage">Imatge</string>

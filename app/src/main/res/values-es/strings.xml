@@ -55,7 +55,7 @@
     <string name="coins">Monedas</string>
     <string name="use">Utilizar</string>
     <string name="usePrize">¿Quieres utilizar este premio?</string>
-
+    <string name="notEnough">No tienes suficientes monedas</string>
 
     <string name="change">Cambiar</string>
     <string name="userImage">Imagen</string>

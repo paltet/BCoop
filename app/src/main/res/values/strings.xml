@@ -14,7 +14,7 @@
     <string name="profile">Profile</string>
     <string name="gifts"> Gifts </string>
     <string name="accept"> Accept </string>
-    <string name="success"> Seccessful purchase </string>
+    <string name="success"> Successful purchase </string>
     <string name="abort"> Purchase Canceled </string>
     <string name="level">Level </string>
     <string name="veurePremis">My Gifts </string>
@@ -56,6 +56,7 @@
     <string name="coins">Coins</string>
     <string name="use">Use</string>
     <string name="usePrize">Do you want to use this prize?</string>
+    <string name="notEnough">You don\'t have enough coins</string>
 
     <string name="change">Change</string>
     <string name="userImage">User Image</string>

@@ -3,7 +3,7 @@ package com.bcoop.bcoop.ui.prize;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +14,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcoop.bcoop.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import static android.content.ContentValues.TAG;
 
 
 public class PremiAdapter extends ArrayAdapter<Premi> {
@@ -35,6 +41,7 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
     Premi premi;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     boolean isMyPremis = false;
+    Integer monedes;
 
     public PremiAdapter(Context context, int resource, List<Premi> premiList, boolean isMyPremis) {
         super(context, resource, premiList);
@@ -86,20 +93,38 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
             public void onClick(DialogInterface dialog, int which) {
                 String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 db.collection("Usuari").document(email)
-                        .update("monedes", FieldValue.increment(-p.getPreu()),
-                                "premis", FieldValue.arrayUnion(p))
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(getContext(), p.getNom(), Toast.LENGTH_SHORT).show();
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                monedes = (Integer) document.get("monedes");
                             }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "NO", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        } else {
+                            Log.d(TAG, "Cached get failed: ", task.getException());
+                        }
+                    }
+                });
+                if (monedes < p.getPreu()) Toast.makeText(getContext(), R.string.notEnough, Toast.LENGTH_SHORT).show();
+                else {
+                    db.collection("Usuari").document(email)
+                            .update("monedes", FieldValue.increment(-p.getPreu()),
+                                    "premis", FieldValue.arrayUnion(p))
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getContext(), R.string.success, Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getContext(), R.string.abort, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+
             }
         });
         alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
