@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,15 +22,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.type.Date;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import static android.content.ContentValues.TAG;
-
 
 public class PremiAdapter extends ArrayAdapter<Premi> {
 
@@ -41,7 +38,6 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
     Premi premi;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     boolean isMyPremis = false;
-    Integer monedes;
 
     public PremiAdapter(Context context, int resource, List<Premi> premiList, boolean isMyPremis) {
         super(context, resource, premiList);
@@ -65,11 +61,14 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
 
         titol.setText(premi.getNom());
         descripcio.setText(premi.getDescripció());
-        preu.setText(String.valueOf(premi.getPreu()));
+        preu.append(": " + String.valueOf(premi.getPreu()) + " " + context.getResources().getString(R.string.coins));
 
         if (isMyPremis) {
+            preu.append("\n" +premi.getTime().toDate());
             Button btn = view.findViewById(R.id.Comprar);
             btn.setText(R.string.use);
+            btn.setVisibility(View.GONE);
+
         }
         view.findViewById(R.id.Comprar).setOnClickListener(new View.OnClickListener() {
              @Override
@@ -91,7 +90,7 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 db.collection("Usuari").document(email)
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -99,32 +98,33 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                monedes = (Integer) document.get("monedes");
+                                Integer monedes = document.getDouble("monedes").intValue();
+                                if (monedes < p.getPreu()) {
+                                    Toast.makeText(getContext(), R.string.notEnough, Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    db.collection("Usuari").document(email)
+                                            .update("monedes", FieldValue.increment(-p.getPreu()),
+                                                    "premis", FieldValue.arrayUnion(p))
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(getContext(), R.string.success, Toast.LENGTH_SHORT).show();
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(getContext(), R.string.abort, Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
                             }
                         } else {
                             Log.d(TAG, "Cached get failed: ", task.getException());
                         }
                     }
                 });
-                if (monedes < p.getPreu()) Toast.makeText(getContext(), R.string.notEnough, Toast.LENGTH_SHORT).show();
-                else {
-                    db.collection("Usuari").document(email)
-                            .update("monedes", FieldValue.increment(-p.getPreu()),
-                                    "premis", FieldValue.arrayUnion(p))
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(getContext(), R.string.success, Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getContext(), R.string.abort, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                }
-
             }
         });
         alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
