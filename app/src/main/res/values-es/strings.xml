@@ -19,6 +19,7 @@
     <string name="level">Nivel </string>
     <string name="veurePremis">Mis premios</string>
     <string name="configHabilitatsUser">Configuración habilidades </string>
+    <string name="back">Atrás</string>
 
 
     <string name="accept_privacy">Al hacer clic a continuación, acepta los Términos de servicio y la Política de privacidad de BCoop.</string>
