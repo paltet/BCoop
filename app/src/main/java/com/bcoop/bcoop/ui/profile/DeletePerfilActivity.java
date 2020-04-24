@@ -12,7 +12,6 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.bcoop.bcoop.MainActivity;
 import com.bcoop.bcoop.R;
@@ -34,7 +33,6 @@ public class DeletePerfilActivity extends AppCompatActivity {
     private FirebaseStorage storage;
     private String imgUri;
     private EditText pwdUser;
-    private Button confirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,7 @@ public class DeletePerfilActivity extends AppCompatActivity {
         pwdUser = findViewById(R.id.newUsernameForm);
         pwdUser.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         pwdUser.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        confirm = findViewById(R.id.confirmButton);
+        Button confirm = findViewById(R.id.confirmButton);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +106,14 @@ public class DeletePerfilActivity extends AppCompatActivity {
                                                 }
                                             });
                                             alertDialog.show();
+                                        }
+                                    });
+                                }
+                                else {
+                                    mAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            startActivity(new Intent(DeletePerfilActivity.this, MainActivity.class));
                                         }
                                     });
                                 }
