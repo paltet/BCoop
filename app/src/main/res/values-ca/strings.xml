@@ -81,4 +81,6 @@
     <string name="delete_perfil">Delete Profile</string>
     <string name="perfil_cannot_delete">Failed to delete profile. Please try later</string>
     <string name="user_settings">Configuració d\'usuari</string>
+    <string name="EnQuePotsAjudar">En què pots ajudar als teus veïns?</string>
+    <string name="configiguracioHabUser">Configuració Habilitats</string>
 </resources>

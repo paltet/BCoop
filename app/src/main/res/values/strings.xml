@@ -78,4 +78,6 @@
     <string name="perfil_cannot_delete">Failed to delete profile. Please try later</string>
 
     <string name="user_settings">User Settings</string>
+    <string name="EnQuePotsAjudar">How can you help your neighbours?</string>
+    <string name="configiguracioHabUser">Abilities Cinfiguration</string>
 </resources>

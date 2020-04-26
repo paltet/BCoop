@@ -5,6 +5,20 @@
         <item>abilitie1</item>
         <item>abilitie2</item>
         <item>abilitie3</item>
+        <item>abilitie4</item>
+        <item>abilitie5</item>
+        <item>abilitie6</item>
+        <item>abilitie7</item>
+        <item>abilitie8</item>
+        <item>abilitie9</item>
+        <item>abilitie10</item>
+        <item>abilitie11</item>
+        <item>abilitie12</item>
+        <item>abilitie13</item>
+    </string-array>
+    <string-array name="abilitiesUser">
+        <item>abilitie1</item>
+        <item>abilitie2</item>
         <item>abilitie3</item>
         <item>abilitie4</item>
         <item>abilitie5</item>
