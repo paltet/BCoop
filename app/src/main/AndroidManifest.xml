@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.profile.HabilitatsConfiguration"></activity>
         <activity android:name=".ui.prize.MyPremi" />
         <activity android:name=".ui.profile.ConfigChangeLocationActivity" />
         <activity android:name=".ui.profile.ConfigChangeImageActivity" />
@@ -20,7 +21,7 @@
         <activity android:name=".ui.profile.ConfigChangeUsernameActivity" />
         <activity android:name=".ui.profile.DeletePerfilActivity" />
         <activity android:name=".ui.profile.ConfigProfileActivity" />
-        <activity android:name=".ui.profile.configurationHabilitats"></activity>
+        <activity android:name=".ui.profile.configurationHabilitats" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
