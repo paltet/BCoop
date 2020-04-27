@@ -1,10 +1,18 @@
-package com.bcoop.bcoop.registerTest;
+package com.bcoop.bcoop.configurarPerfil;
+
+
+
+
+import android.content.Context;
 
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.rule.GrantPermissionRule;
+
 
 import com.bcoop.bcoop.MainActivity;
 import com.bcoop.bcoop.R;
@@ -16,8 +24,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 
-
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -25,16 +35,19 @@ import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
-public class registerCorrect {
+public class canviarUsername {
 
     private String user;
     private String mail;
     private String password;
 
+    @Rule
+    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule
@@ -43,23 +56,24 @@ public class registerCorrect {
     @Before
     public void initializeData(){
         Intents.init();
-        user = "user4";
-        mail = "user4@mail.com";
+        user = "newUserName";
+        mail = "delete@mail.com";
         password = "12345678";
 
     }
 
     @Test
     public void executeTest() throws InterruptedException {
+        
 
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
+        onView(withText(R.string.user_settings)).perform(click());
+        onView(withId(R.id.usernameButton)).perform(click());
+        onView(withId(R.id.newUsernameForm)).perform(typeText(user), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.confirmButton)).perform(click());
+        onView(withText(user)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.register)).perform(click());
-        onView(withId(R.id.register_username)).perform(typeText(user), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.register_email)).perform(typeText(mail), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.register_password)).perform(typeText(password), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.register_confirm_password)).perform(typeText(password), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.register)).perform(click());
-        onView(withText("Register successful!")).inRoot(new ToastMatcher())
-                .check(matches(isDisplayed()));
     }
+
+
 }

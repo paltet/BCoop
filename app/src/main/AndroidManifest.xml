@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.profile.HabilitatsConfiguration"></activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ui.profile.HabilitatsConfiguration" />
         <activity android:name=".ui.prize.MyPremi" />
         <activity android:name=".ui.profile.ConfigChangeLocationActivity" />
         <activity android:name=".ui.profile.ConfigChangeImageActivity" />

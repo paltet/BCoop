@@ -38,6 +38,8 @@ public class InitConfigImageActivity extends AppCompatActivity {
     private Uri imgUri;
     private StorageReference imagePath;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
