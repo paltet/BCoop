@@ -1,35 +1,23 @@
 package com.bcoop.bcoop;
 
-import java.util.ArrayList;
+import com.bcoop.bcoop.Model.HabilitatDetall;
+
+import java.util.Map;
 
 public class UserSearch {
 
+    private static Map<String, HabilitatDetall> habilitats;
     public String name;
-    public String description;
+    public String distance;
     public String imageURL;
-    public ArrayList<String> habilitats;
+    public Double lat;
+    public Double lon;
+    public int rating;
+    public String email;
+
     private boolean expanded;
 
-    public static ArrayList<UserSearch> initUsers(){
 
-        ArrayList<UserSearch> list = new ArrayList<>();
-
-        ArrayList<String> habilitats_edu = new ArrayList<>();
-
-        habilitats_edu.add("option1");
-        habilitats_edu.add("option5");
-
-        list.add(new UserSearch("edu", "estic bé", "https://bit.ly/CBImageCinque", habilitats_edu));
-        list.add(new UserSearch("edu22", "hola", "https://bit.ly/CBImageCinque", habilitats_edu));
-        list.add(new UserSearch("joan", "hola", "https://bit.ly/CBImageCinque", habilitats_edu));
-        list.add(new UserSearch("natalia", "hola", "https://bit.ly/CBImageCinque", habilitats_edu));
-        list.add(new UserSearch("carles", "hola", "https://bit.ly/CBImageCinque", habilitats_edu));
-        list.add(new UserSearch("toni", "hola", "https://bit.ly/CBImageCinque", habilitats_edu));
-        list.add(new UserSearch("sergi", "hola", "https://bit.ly/CBImageCinque", habilitats_edu));
-        list.add(new UserSearch("maria", "hola", "https://bit.ly/CBImageCinque", habilitats_edu));
-
-        return list;
-    }
 
     public boolean isExpanded() {
         return expanded;
@@ -39,12 +27,16 @@ public class UserSearch {
         this.expanded = expanded;
     }
 
-    public UserSearch(String name, String description, String imageURL, ArrayList<String> habilitats) {
+    public UserSearch(String name, String distance, String imageURL, Map<String, HabilitatDetall> habilitats, Double lat, Double lon, int rating, String email) {
         this.name = name;
-        this.description = description;
+        this.distance = distance;
         this.imageURL = imageURL;
         this.habilitats = habilitats;
         this.expanded = false;
+        this.lat = lat;
+        this.lon = lon;
+        this.rating = rating;
+        this.email = email;
     }
 
     public String getName() {
@@ -55,12 +47,12 @@ public class UserSearch {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDistance() {
+        return distance;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 
     public String getImageURL() {
@@ -71,8 +63,25 @@ public class UserSearch {
         this.imageURL = imageURL;
     }
 
-    public ArrayList<String> getHabilitats() {
+    public static Map<String, HabilitatDetall> getHabilitats() {
         return habilitats;
     }
-    public void setHabilitats(ArrayList<String> habilitats){this.habilitats = habilitats;}
+
+    public static void setHabilitats(Map<String, HabilitatDetall> hab){habilitats = hab;}
+
+    public Double getLat() {
+        return this.lat;
+    }
+
+    public Double getLon() {
+        return this.lon;
+    }
+
+    public int getRating() {
+        return this.rating;
+    }
+
+    public String getMail() {
+        return this.email;
+    }
 }
