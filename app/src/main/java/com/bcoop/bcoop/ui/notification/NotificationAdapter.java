@@ -1,4 +1,4 @@
-package com.bcoop.bcoop.ui.prize;
+package com.bcoop.bcoop.ui.notification;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.Model.Premi;
 import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,57 +27,41 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import static android.content.ContentValues.TAG;
 
-public class PremiAdapter extends ArrayAdapter<Premi> {
+public class NotificationAdapter extends ArrayAdapter<Notification> {
 
     Context context;
     int resource;
-    List<Premi> premiList;
-    Premi premi;
+    List<Notification> notificationList;
+    Notification notification;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    boolean isMyPremis = false;
 
-    public PremiAdapter(Context context, int resource, List<Premi> premiList, boolean isMyPremis) {
-        super(context, resource, premiList);
+    public NotificationAdapter(Context context, int resource, List<Notification> notificationList) {
+        super(context, resource, notificationList);
 
         this.context = context;
         this.resource = resource;
-        this.premiList = premiList;
-        this.isMyPremis = isMyPremis;
+        this.notificationList = notificationList;
     }
 
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        premi = getItem(position);
+        notification = getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(resource, parent, false);
 
-        ImageView imageView = view.findViewById(R.id.imageView3);
         TextView titol = view.findViewById(R.id.Titol);
+        TextView time = view.findViewById(R.id.time);
         TextView descripcio = view.findViewById(R.id.Descripció);
-        TextView preu = view.findViewById(R.id.Preu);
 
-        titol.setText(premi.getNom());
-        descripcio.setText(premi.getDescripció());
-        preu.append(": " + String.valueOf(premi.getPreu()) + " " + context.getResources().getString(R.string.coins));
-
-        if (isMyPremis) {
-            preu.append("\n" +premi.getTime().toDate());
-            Button btn = view.findViewById(R.id.Comprar);
-            btn.setText(R.string.use);
-            btn.setVisibility(View.GONE);
-
-        }
-        view.findViewById(R.id.Comprar).setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 if (!isMyPremis) showAlertDialogBuy(view, premiList.get(position));
-                 else showAlertDialogUse(view, premiList.get(position));
-             }
-        });
+        titol.setText(notification.getTitle());
+        time.setText(notification.getTime().toDate().toString());
+        descripcio.setText(notification.getContent());
 
      return view;
     }

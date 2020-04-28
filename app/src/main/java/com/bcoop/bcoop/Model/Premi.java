@@ -1,4 +1,4 @@
-package com.bcoop.bcoop.ui.prize;
+package com.bcoop.bcoop.Model;
 
 
 import com.google.firebase.Timestamp;

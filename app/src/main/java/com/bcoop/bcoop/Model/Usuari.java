@@ -1,7 +1,5 @@
 package com.bcoop.bcoop.Model;
 
-import com.bcoop.bcoop.ui.prize.Premi;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +21,7 @@ public class Usuari {
     private int nivell;
     private int valoracio;
     private List<Premi> premis;
+    private List<Notification> notificaciones;
 
     public Usuari() {}
 
@@ -162,5 +161,13 @@ public class Usuari {
 
     public void setLocationLongitude(double locationLongitude) {
         this.locationLongitude = locationLongitude;
+    }
+
+    public List<Notification> getNotificaciones() {
+        return notificaciones;
+    }
+
+    public void setNotificaciones(List<Notification> notificaciones) {
+        this.notificaciones = notificaciones;
     }
 }

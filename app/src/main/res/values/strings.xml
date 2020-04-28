@@ -9,7 +9,7 @@
     <string name="email">Email</string>
     <string name="logout">Logout</string>
     <string name="search">Search</string>
-    <string name="prize">Prize</string>
+    <string name="prize">Gift</string>
     <string name="chat">Chat</string>
     <string name="profile">Profile</string>
     <string name="gifts"> Gifts </string>
@@ -45,8 +45,8 @@
 
     <string name="failed">Failed. Please try again</string>
 
-    <string name="buy">Buy prize</string>
-    <string name="sure">Do you want to buy this item?</string>
+    <string name="buy">Acquire gift</string>
+    <string name="sure">Do you want to acquire this gift?</string>
     <string name="cancel">Cancel</string>
     <string name="select_image">Please select an image</string>
     <string name="location_no_available">Please make sure that your location is available</string>
@@ -80,4 +80,6 @@
     <string name="user_settings">User Settings</string>
     <string name="EnQuePotsAjudar">How can you help your neighbours?</string>
     <string name="configiguracioHabUser">Abilities Cinfiguration</string>
+
+    <string name="notification">Notification</string>
 </resources>

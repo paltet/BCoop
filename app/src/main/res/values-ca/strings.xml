@@ -9,7 +9,7 @@
     <string name="email">Correu electrònic</string>
     <string name="logout">Tancar sessió</string>
     <string name="search">Cercar</string>
-    <string name="prize">Premi</string>
+    <string name="prize">Regals</string>
     <string name="chat">Xat</string>
     <string name="profile">Perfil</string>
     <string name="gifts"> Premis </string>
@@ -49,8 +49,8 @@
 
     <string name="failed">Ha fallat. Si us plau torna-ho a provar</string>
 
-    <string name="buy">Compra premi</string>
-    <string name="sure">Voleu comprar aquest article?</string>
+    <string name="buy">Adquirir regal</string>
+    <string name="sure">Voleu aquirir aquest regal?</string>
     <string name="cancel">Cancelar</string>
     <string name="select_image">Seleccioneu una imatge</string>
     <string name="location_no_available">Assegureu-vos que la vostra ubicació estigui disponible</string>
@@ -83,4 +83,6 @@
     <string name="user_settings">Configuració d\'usuari</string>
     <string name="EnQuePotsAjudar">En què pots ajudar als teus veïns?</string>
     <string name="configiguracioHabUser">Configuració Habilitats</string>
+
+    <string name="notification">Notificació</string>
 </resources>

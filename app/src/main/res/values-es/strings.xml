@@ -9,7 +9,7 @@
     <string name="email">Correo electrónico</string>
     <string name="logout">Cerrar sesión</string>
     <string name="search">Buscar</string>
-    <string name="prize">Premio</string>
+    <string name="prize">Regalos</string>
     <string name="chat">Charla</string>
     <string name="profile">Perfil</string>
     <string name="gifts"> Premios </string>
@@ -46,8 +46,8 @@
 
     <string name="failed">Ha fallado. Inténtalo de nuevo</string>
 
-    <string name="buy">Comprar premio</string>
-    <string name="sure">¿Quieres comprar este artículo?</string>
+    <string name="buy">Adquiere regalo</string>
+    <string name="sure">¿Quieres adquiere este regalo?</string>
     <string name="cancel">Cancel · lar</string>
     <string name="select_image">Seleccione una imagen</string>
     <string name="location_no_available">Asegúrate de que tu ubicación esté disponible</string>
@@ -80,4 +80,6 @@
     <string name="user_settings">Configuración de usuario</string>
     <string name="EnQuePotsAjudar">En qué puedes ayudar a tus vecinos?</string>
     <string name="configiguracioHabUser">Configuración Habilidades</string>
+
+    <string name="notification">Notificación</string>
 </resources>

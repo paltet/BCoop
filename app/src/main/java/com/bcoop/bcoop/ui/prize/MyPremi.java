@@ -1,12 +1,14 @@
 package com.bcoop.bcoop.ui.prize;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.bcoop.bcoop.Model.Premi;
 import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -15,9 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +33,9 @@ public class MyPremi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_premi);
+        ActionBar actionBar = this.getSupportActionBar();
+        actionBar.setTitle(getString(R.string.veurePremis));
+        actionBar.setDisplayHomeAsUpEnabled(true);
         premiList = new ArrayList<>();
         listView = (ListView) findViewById(R.id.listView);
 

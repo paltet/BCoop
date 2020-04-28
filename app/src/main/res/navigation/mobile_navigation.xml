@@ -29,8 +29,14 @@
         tools:layout="@layout/fragment_chat" />
 
     <fragment
-        android:id="@+id/navigation_prize"
-        android:name="com.bcoop.bcoop.ui.prize.PrizeFragment"
-        android:label="@string/prize"
-        tools:layout="@layout/fragment_prize" />
+    android:id="@+id/navigation_prize"
+    android:name="com.bcoop.bcoop.ui.prize.PrizeFragment"
+    android:label="@string/prize"
+    tools:layout="@layout/fragment_prize" />
+
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.bcoop.bcoop.ui.notification.NotificationFragment"
+        android:label="@string/notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>

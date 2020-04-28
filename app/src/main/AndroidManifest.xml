@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ProfileActivity"></activity>
         <activity android:name=".ui.profile.HabilitatsConfiguration" />
-        <activity android:name=".ui.prize.MyPremi" />
+        <activity android:name=".ui.prize.MyPremi"
+            android:theme="@style/AppThemeWithActionBar"/>
         <activity android:name=".ui.profile.ConfigChangeLocationActivity" />
         <activity android:name=".ui.profile.ConfigChangeImageActivity" />
         <activity android:name=".ui.profile.ConfigChangePasswordActivity" />
