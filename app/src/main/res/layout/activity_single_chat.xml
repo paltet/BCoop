@@ -27,16 +27,20 @@
                 android:layout_weight="2"
                 android:id="@+id/usernameText"
                 app:autoSizeTextType="uniform"
-                android:layout_gravity="center_vertical" />
+                android:gravity="center_vertical" />
 
         </LinearLayout>
 
-        <ListView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/messagesList"
-            android:layout_weight="2"
-            android:divider="@color/white" />
+            android:layout_height="match_parent"
+            android:layout_weight="2" >
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/messagesList"
+                android:divider="@color/white" />
+        </ScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,6 +66,5 @@
                 android:padding="20dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/ic_send_black_24dp" />
-
         </LinearLayout>
 </LinearLayout>
