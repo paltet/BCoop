@@ -85,4 +85,6 @@
     <string name="configiguracioHabUser">Configuració Habilitats</string>
 
     <string name="notification">Notificació</string>
+
+    <string name="write_a_message">Escriu un missatge</string>
 </resources>

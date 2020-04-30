@@ -82,4 +82,6 @@
     <string name="configiguracioHabUser">Abilities Cinfiguration</string>
 
     <string name="notification">Notification</string>
+
+    <string name="write_a_message">Write a message</string>
 </resources>
