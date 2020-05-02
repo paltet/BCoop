@@ -1,19 +1,20 @@
 package com.bcoop.bcoop.Model;
 
+import com.google.firebase.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Comentari {
     private String contingut;
     private Usuari autor;
-    private Date temps;
+    private Timestamp temps;
 
     public Comentari() {}
 
     public Comentari(String contingut, Usuari autor) {
         this.contingut = contingut;
         this.autor = autor;
-        temps = Calendar.getInstance().getTime();
+        temps = Timestamp.now();
     }
 
     public String getContingut() {
@@ -32,11 +33,11 @@ public class Comentari {
         this.autor = autor;
     }
 
-    public Date getTemps() {
+    public Timestamp getTemps() {
         return temps;
     }
 
-    public void setTemps(Date temps) {
+    public void setTemps(Timestamp temps) {
         this.temps = temps;
     }
 }

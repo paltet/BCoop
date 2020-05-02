@@ -16,20 +16,13 @@ import com.bcoop.bcoop.R;
 
 public class ChatFragment extends Fragment {
 
-    private ChatViewModel chatViewModel;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        chatViewModel =
-                ViewModelProviders.of(this).get(ChatViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_chat, container, false);
         final TextView textView = root.findViewById(R.id.text_chat);
-        chatViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }

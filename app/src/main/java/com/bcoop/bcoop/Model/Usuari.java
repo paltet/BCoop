@@ -1,5 +1,6 @@
 package com.bcoop.bcoop.Model;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,13 +16,12 @@ public class Usuari {
     private double locationLongitude;
     private boolean esAdministrador;
     private Map<String, HabilitatDetall> habilitats;
-    private List<Xat> xats;
+    private List<String> xats;
     private List<String> idiomas;
     private List<Servei> serveis;
     private int nivell;
     private int valoracio;
     private List<Premi> premis;
-    private List<Notification> notificaciones;
 
     public Usuari() {}
 
@@ -115,12 +115,16 @@ public class Usuari {
         this.habilitats = habilitats;
     }
 
-    public List<Xat> getXats() {
+    public List<String> getXats() {
         return xats;
     }
 
-    public void setXats(List<Xat> xats) {
+    public void setXats(List<String> xats) {
         this.xats = xats;
+    }
+
+    public void addXats(String xat) {
+        this.xats.add(xat);
     }
 
     public List<String> getIdiomas() {
@@ -161,13 +165,5 @@ public class Usuari {
 
     public void setLocationLongitude(double locationLongitude) {
         this.locationLongitude = locationLongitude;
-    }
-
-    public List<Notification> getNotificaciones() {
-        return notificaciones;
-    }
-
-    public void setNotificaciones(List<Notification> notificaciones) {
-        this.notificaciones = notificaciones;
     }
 }
