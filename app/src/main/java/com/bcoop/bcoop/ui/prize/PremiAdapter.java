@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.Model.Premi;
 import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -105,7 +106,10 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
                                 else {
                                     db.collection("Usuari").document(email)
                                             .update("monedes", FieldValue.increment(-p.getPreu()),
-                                                    "premis", FieldValue.arrayUnion(p))
+                                                    "premis", FieldValue.arrayUnion(p),
+                                                    "notificacions", FieldValue.arrayUnion(new Notification("You spent "
+                                                            + p.getPreu().toString() +" coins to acquire gift: <<" + p.getNom()
+                                                            + ">> \nYou have " + (monedes - p.getPreu()) + " coins")))
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {

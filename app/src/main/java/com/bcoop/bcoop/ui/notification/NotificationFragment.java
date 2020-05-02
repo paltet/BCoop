@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.Model.Premi;
@@ -16,13 +18,20 @@ import com.bcoop.bcoop.ui.chat.ChatViewModel;
 import com.bcoop.bcoop.ui.prize.MyPremi;
 import com.bcoop.bcoop.ui.prize.PremiAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,29 +53,41 @@ public class NotificationFragment extends Fragment {
 
         notificationsList = new ArrayList<>();
         listView = (ListView) root.findViewById(R.id.listView);
-        /*db.collection("Premi")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String nom = document.getString("nom");
-                                String descripció = document.getString("descripció");
-                                String imatge = document.getString("imatge");
-                                Integer preu = document.getDouble("preu").intValue();
-                                notificationsList.add(new Notification());
+        final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        db.collection("Usuari").document(email)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        List<Map<String, Object>> list = (List<Map<String, Object>>) document.get("notificacions");
+                        for (Map<String, Object> hm : list) {
+                            String type = (String) hm.get("type");
+                            Timestamp time = (Timestamp) hm.get("time");
+                            if(type.equals("Trading Information")) {
+                                String content = (String) hm.get("content");
+                                Notification notification = new Notification(content);
+                                notification.setTime(time);
+                                notificationsList.add(notification);
                             }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
                         }
-                        NotificationAdapter adapter = new NotificationAdapter(getContext(), R.layout.notification_list_item, notificationsList);
-                        listView.setAdapter(adapter);
                     }
 
-                });*/
-        NotificationAdapter adapter = new NotificationAdapter(getContext(), R.layout.notification_list_item, notificationsList);
-        listView.setAdapter(adapter);
+                } else {
+                    Log.d(TAG, "Cached get failed: ", task.getException());
+                }
+                NotificationAdapter adapter = new NotificationAdapter(getContext(), R.layout.notification_list_item, notificationsList);
+                listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        Notification notification = notificationsList.get(position);
+                    }
+                });
+            }
+
+        });
 
         return root;
     }

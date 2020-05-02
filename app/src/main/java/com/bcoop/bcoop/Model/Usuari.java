@@ -21,7 +21,7 @@ public class Usuari {
     private int nivell;
     private int valoracio;
     private List<Premi> premis;
-    private List<Notification> notificaciones;
+    private List<Notification> notificacions;
 
     public Usuari() {}
 
@@ -41,6 +41,7 @@ public class Usuari {
         nivell = 1;
         valoracio = 0;
         premis = new ArrayList<>();
+        notificacions = new ArrayList<>();
     }
 
     public String getEmail() {
@@ -163,11 +164,11 @@ public class Usuari {
         this.locationLongitude = locationLongitude;
     }
 
-    public List<Notification> getNotificaciones() {
-        return notificaciones;
+    public List<Notification> getNotificacions() {
+        return notificacions;
     }
 
-    public void setNotificaciones(List<Notification> notificaciones) {
-        this.notificaciones = notificaciones;
+    public void setNotificaciones(List<Notification> notificacions) {
+        this.notificacions = notificacions;
     }
 }

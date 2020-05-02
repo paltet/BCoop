@@ -1,36 +1,65 @@
 package com.bcoop.bcoop.Model;
 
 import com.google.firebase.Timestamp;
+import com.google.type.Date;
 
 public class Notification {
-    private String title;
     private String content;
-    private Timestamp time;
+    private String type; // "service request", "service response", "service valoration" or "trading information"
+    private String userEmail; // user, who send this notification
+    private String serviceName;
+    private int price;
+    private int duration;
+    private Date dataIni;
+    private Date dateFi;
+    private boolean response;
+    private int valor;
+    private String comment;
     private boolean isRead = false;
+    private Timestamp time;
+
 
     public Notification(){
     }
 
-    public Notification(String title, String content) {
-        this.title = title;
+    // service request
+    public Notification(String userEmail, String serviceName, int price, int duration, Date dateIni, Date dateFi) {
+        this.type = "Service Request";
+        this.userEmail = userEmail;
+        this.serviceName = serviceName;
+        this.price = price;
+        this.duration = duration;
+        this.dataIni = dateIni;
+        this.dateFi = dateFi;
+        this.time = Timestamp.now();
+    }
+
+    // service response
+    public Notification(String userEmail, boolean response) {
+        this.type = "Service Response";
+        this.userEmail = userEmail;
+        this.response = response;
+        this.time = Timestamp.now();
+    }
+
+    // service valoration
+    public Notification(String userEmail, String serviceName, Date dataFi, int valor, String comment) {
+        this.type = "Service Valoration";
+        this.userEmail = userEmail;
+        this.serviceName = serviceName;
+        this.dateFi = dataFi;
+        this.valor = valor;
+        this.comment = comment;
+        this.time = Timestamp.now();
+    }
+
+    // "trading information"
+    public Notification(String content) {
+        this.type = "Trading Information";
         this.content = content;
+        this.time = Timestamp.now();
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 
     public boolean isRead() {
         return isRead;
@@ -46,5 +75,13 @@ public class Notification {
 
     public void setTime(Timestamp time) {
         this.time = time;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getContent() {
+        return content;
     }
 }

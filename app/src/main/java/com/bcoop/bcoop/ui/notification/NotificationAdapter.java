@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -59,8 +60,11 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
         TextView time = view.findViewById(R.id.time);
         TextView descripcio = view.findViewById(R.id.Descripció);
 
-        titol.setText(notification.getTitle());
-        time.setText(notification.getTime().toDate().toString());
+        titol.setText(notification.getType());
+        String pattern = "dd/MM/yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(notification.getTime().toDate());
+        time.setText(date);
         descripcio.setText(notification.getContent());
 
      return view;
