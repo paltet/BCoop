@@ -2,6 +2,7 @@ package com.bcoop.bcoop.Model;
 
 import org.w3c.dom.Text;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Missatge {
@@ -13,12 +14,12 @@ public class Missatge {
     private Date temps;
 
     public Missatge() {}
-    public Missatge(String remitent, String receptor, String text, String fitxer, Date temps) {
+    public Missatge(String remitent, String receptor, String text, String fitxer) {
         this.remitent = remitent;
         this.receptor = receptor;
         this.text = text;
         this.fitxer = fitxer;
-        this.temps = temps;
+        this.temps = Calendar.getInstance().getTime();
     }
 
     public String getRemitent() {

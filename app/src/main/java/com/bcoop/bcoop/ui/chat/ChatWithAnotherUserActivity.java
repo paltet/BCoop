@@ -173,7 +173,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
     private void sendMessage() {
         String text = message.getText().toString();
         if (text.length() > 0) {
-            Missatge missatge = new Missatge(currentUser.getEmail(), chatWith, text, null, Calendar.getInstance().getTime());
+            Missatge missatge = new Missatge(currentUser.getEmail(), chatWith, text, null);
             xat.addMissatge(missatge);
             final DocumentReference documentReference = firestore.collection("Xat").document(id);
             documentReference.update("missatges", xat.getMissatges());
