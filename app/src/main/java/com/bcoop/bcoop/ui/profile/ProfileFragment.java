@@ -23,6 +23,7 @@ import com.bcoop.bcoop.Model.Habilitat;
 import com.bcoop.bcoop.Model.HabilitatDetall;
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
+import com.bcoop.bcoop.ui.chat.ChatWithAnotherUserActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -117,7 +118,19 @@ public class ProfileFragment extends Fragment {
                 }
             });
         }
-        else logout.setVisibility(View.GONE);
+        //else logout.setVisibility(View.GONE);
+        else {
+            logout.setText("Chat");
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("otherUserEmail", email);
+                    intent.setClass(Objects.requireNonNull(ProfileFragment.super.getActivity()), ChatWithAnotherUserActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
         return root;
     }
 

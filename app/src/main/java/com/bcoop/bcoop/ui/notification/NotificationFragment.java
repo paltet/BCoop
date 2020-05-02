@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.Model.Premi;
 import com.bcoop.bcoop.R;
-import com.bcoop.bcoop.ui.chat.ChatViewModel;
 import com.bcoop.bcoop.ui.prize.MyPremi;
 import com.bcoop.bcoop.ui.prize.PremiAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
