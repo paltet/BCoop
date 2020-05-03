@@ -13,11 +13,13 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.profile.AskServiceActivity"></activity>
         <activity android:name=".ui.chat.ChatWithAnotherUserActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ui.profile.HabilitatsConfiguration" />
-        <activity android:name=".ui.prize.MyPremi"
-            android:theme="@style/AppThemeWithActionBar"/>
+        <activity
+            android:name=".ui.prize.MyPremi"
+            android:theme="@style/AppThemeWithActionBar" />
         <activity android:name=".ui.profile.ConfigChangeLocationActivity" />
         <activity android:name=".ui.profile.ConfigChangeImageActivity" />
         <activity android:name=".ui.profile.ConfigChangePasswordActivity" />
@@ -57,7 +59,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

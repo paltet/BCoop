@@ -50,6 +50,7 @@ public class ProfileFragment extends Fragment {
     private ImageView imageView;
     private Button logout;
     private String uriImage;
+    private Button askService;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -106,7 +107,9 @@ public class ProfileFragment extends Fragment {
         });
 
         logout = root.findViewById(R.id.logout);
+        askService = root.findViewById(R.id.askService);
         if (email.equals(mAuth.getCurrentUser().getEmail())) {
+            askService.setVisibility(View.INVISIBLE);
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -120,6 +123,7 @@ public class ProfileFragment extends Fragment {
         }
         //else logout.setVisibility(View.GONE);
         else {
+
             logout.setText("Chat");
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -130,7 +134,18 @@ public class ProfileFragment extends Fragment {
                     startActivity(intent);
                 }
             });
+
+            askService.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(Objects.requireNonNull(ProfileFragment.super.getActivity()), AskServiceActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
+
+
         return root;
     }
 

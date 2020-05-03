@@ -87,4 +87,12 @@
     <string name="notification">Notificació</string>
 
     <string name="write_a_message">Escriu un missatge</string>
+
+    <string name="ask_service">Demanar servei</string>
+    <string name="service">Servei</string>
+    <string name="service_date">Data</string>
+    <string name="selectDate">Seleccionar data</string>
+    <string name="coinsPay">Monedes a pagar</string>
+    <string name="service_message">Missatge</string>
+    <string name="askButton">Demanar servei</string>
 </resources>

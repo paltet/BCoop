@@ -32,7 +32,7 @@ public class ChatFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_chat, container, false);
-        final TextView textView = root.findViewById(R.id.text_chat);
+        //final TextView textView = root.findViewById(R.id.text_chat);
 
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         final DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Usuari").document(email);
