@@ -19,6 +19,11 @@ import com.bcoop.bcoop.Model.Missatge;
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.Model.Xat;
 import com.bcoop.bcoop.R;
+import com.bcoop.bcoop.ui.chat.chatnotification.APIService;
+import com.bcoop.bcoop.ui.chat.chatnotification.Client;
+import com.bcoop.bcoop.ui.chat.chatnotification.Data;
+import com.bcoop.bcoop.ui.chat.chatnotification.MyResponse;
+import com.bcoop.bcoop.ui.chat.chatnotification.Sender;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +33,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -36,6 +42,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChatWithAnotherUserActivity extends AppCompatActivity {
 
@@ -53,6 +63,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
     private TextView username;
     private EditText message;
     private ImageView send;
+    private APIService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +86,8 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
         username = findViewById(R.id.usernameText);
         message = findViewById(R.id.messageForm);
         send = findViewById(R.id.sendMessage);
+
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
         final DocumentReference documentReference = firestore.collection("Usuari").document(currentUser.getEmail());
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -178,7 +191,31 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
             final DocumentReference documentReference = firestore.collection("Xat").document(id);
             documentReference.update("missatges", xat.getMissatges());
             message.setText(null);
+            sendNotification(chatWith, currentUser.getEmail(), text);
         }
+    }
+
+    private void sendNotification(final String chatWith, final String email, final String text) {
+        final DocumentReference documentReferenceUsuari = firestore.collection("Usuari").document(chatWith);
+        documentReferenceUsuari.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String token = (String) documentSnapshot.get("token");
+                Data data = new Data(email, R.mipmap.ic_launcher, text, "New message", chatWith);
+                Sender sender = new Sender(data, token);
+                apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
+                    @Override
+                    public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
     }
 
     private void getImageFromStorage(String uriImage) {

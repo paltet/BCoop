@@ -22,6 +22,7 @@ public class Usuari {
     private int nivell;
     private int valoracio;
     private List<Premi> premis;
+    private String token;
 
     public Usuari() {}
 
@@ -165,5 +166,13 @@ public class Usuari {
 
     public void setLocationLongitude(double locationLongitude) {
         this.locationLongitude = locationLongitude;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
