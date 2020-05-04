@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bcoop.bcoop.HomeActivity;
 import com.bcoop.bcoop.Model.Missatge;
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.Model.Xat;
@@ -24,6 +27,7 @@ import com.bcoop.bcoop.ui.chat.chatnotification.Client;
 import com.bcoop.bcoop.ui.chat.chatnotification.Data;
 import com.bcoop.bcoop.ui.chat.chatnotification.MyResponse;
 import com.bcoop.bcoop.ui.chat.chatnotification.Sender;
+import com.bcoop.bcoop.ui.profile.ConfigProfileActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -206,12 +210,9 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
                 apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
                     @Override
                     public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-
                     }
-
                     @Override
                     public void onFailure(Call<MyResponse> call, Throwable t) {
-
                     }
                 });
             }
@@ -234,5 +235,15 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            finish();
+            return true;
+        }
+        super.onKeyDown(keyCode, event);
+        return false;
     }
 }

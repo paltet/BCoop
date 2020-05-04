@@ -40,6 +40,9 @@ public class MyChatsAdapter extends BaseAdapter {
         this.context = context;
         this.myXats = xats;
         currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        firestore = FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance();
     }
 
     @Override
@@ -74,21 +77,22 @@ public class MyChatsAdapter extends BaseAdapter {
                 else otherUser = xat.getUsuari1();
                 Date lastMessage = xat.getMissatges().get(xat.getMissatges().size() - 1).getTemps();
                 lastMessageTime.setText(changeTimeFormat(lastMessage));
-            }
-        });
-        final DocumentReference documentReferenceUsuari = firestore.collection("Usuari").document(otherUser);
-        documentReferenceUsuari.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                String fotoUrl = (String) documentSnapshot.get("foto");
-                if (fotoUrl == null)
-                    img.setImageResource(R.drawable.profile);
-                else {
-                    getImageFromStorage(fotoUrl);
-                    img.setImageBitmap(bitmap);
-                }
-                String usrn = (String) documentSnapshot.get("nom");
-                username.setText(usrn);
+
+                final DocumentReference documentReferenceUsuari = firestore.collection("Usuari").document(otherUser);
+                documentReferenceUsuari.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String fotoUrl = (String) documentSnapshot.get("foto");
+                        if (fotoUrl != null)
+                            getImageFromStorage(fotoUrl);
+                        if (bitmap == null)
+                            img.setImageResource(R.drawable.profile);
+                        else img.setImageBitmap(bitmap);
+
+                        String usrn = (String) documentSnapshot.get("nom");
+                        username.setText(usrn);
+                    }
+                });
             }
         });
         return convertView;
