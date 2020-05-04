@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.Model.Xat;
 import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,7 +32,6 @@ public class MyChatsAdapter extends BaseAdapter {
     private List<String> myXats;
     private String currentUser;
     private String otherUser;
-    private Bitmap bitmap;
 
     private FirebaseFirestore firestore;
     private FirebaseStorage storage;
@@ -66,6 +66,7 @@ public class MyChatsAdapter extends BaseAdapter {
         convertView = LayoutInflater.from(context).inflate(R.layout.layout_current_chat, null);
         final TextView lastMessageTime = convertView.findViewById(R.id.lastMessageTimeText);
         final ImageView img = convertView.findViewById(R.id.userImage);
+        img.setImageResource(R.drawable.profile);
         final TextView username = convertView.findViewById(R.id.usernameText);
         final DocumentReference documentReference = firestore.collection("Xat").document(id);
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -77,41 +78,35 @@ public class MyChatsAdapter extends BaseAdapter {
                 else otherUser = xat.getUsuari1();
                 Date lastMessage = xat.getMissatges().get(xat.getMissatges().size() - 1).getTemps();
                 lastMessageTime.setText(changeTimeFormat(lastMessage));
-
                 final DocumentReference documentReferenceUsuari = firestore.collection("Usuari").document(otherUser);
                 documentReferenceUsuari.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        String fotoUrl = (String) documentSnapshot.get("foto");
-                        if (fotoUrl != null)
-                            getImageFromStorage(fotoUrl);
-                        if (bitmap == null)
-                            img.setImageResource(R.drawable.profile);
-                        else img.setImageBitmap(bitmap);
-
-                        String usrn = (String) documentSnapshot.get("nom");
-                        username.setText(usrn);
+                        if (documentSnapshot.exists()) {
+                            String usrn = (String) documentSnapshot.get("nom");
+                            username.setText(usrn);
+                            String uriImage = (String) documentSnapshot.get("foto");
+                            if (uriImage != null) {
+                                StorageReference storageReference = storage.getReferenceFromUrl(uriImage);
+                                try {
+                                    final File file = File.createTempFile("image", uriImage.substring(uriImage.lastIndexOf('.')));
+                                    storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                                            img.setImageBitmap(bitmap);
+                                        }
+                                    });
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
                     }
                 });
             }
         });
         return convertView;
-    }
-
-    private void getImageFromStorage(String uriImage) {
-        bitmap = null;
-        StorageReference storageReference = storage.getReferenceFromUrl(uriImage);
-        try {
-            final File file = File.createTempFile("image", uriImage.substring(uriImage.lastIndexOf('.')));
-            storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private String changeTimeFormat(Date lastMessage) {

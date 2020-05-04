@@ -39,7 +39,6 @@ class ChatAdapter extends BaseAdapter {
     private FirebaseStorage storage;
     private FirebaseFirestore firestore;
 
-    private Boolean firstMe;
 
     public ChatAdapter() {}
 
@@ -53,6 +52,7 @@ class ChatAdapter extends BaseAdapter {
             currentUser = xat.getUsuari2();
             otherUser = xat.getUsuari1();
         }
+        storage = FirebaseStorage.getInstance();
     }
 
     @Override
@@ -74,14 +74,60 @@ class ChatAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Missatge missatge = (Missatge) getItem(position);
         if (missatge.getRemitent().equals(currentUser)) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.layout_message_mine, null);
-            TextView message = convertView.findViewById(R.id.message_body);
-            message.setText(missatge.getText());
+            if (missatge.getText() != null) {
+                convertView = LayoutInflater.from(context).inflate(R.layout.layout_message_mine, null);
+                TextView message = convertView.findViewById(R.id.message_body);
+                message.setText(missatge.getText());
+            }
+            else {
+                convertView = LayoutInflater.from(context).inflate(R.layout.layout_message_mine_image, null);
+                final ImageView img = convertView.findViewById(R.id.message_body);
+                String uriImage = missatge.getFitxer();
+                if (uriImage != null) {
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(uriImage);
+                    try {
+                        final File file = File.createTempFile("image", uriImage.substring(uriImage.lastIndexOf('.')));
+                        storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                                img.setImageBitmap(bitmap);
+                            }
+                        });
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else img.setImageResource(R.drawable.profile);
+            }
         }
         else {
-            convertView = LayoutInflater.from(context).inflate(R.layout.layout_message_other, null);
-            TextView message = convertView.findViewById(R.id.message_body);
-            message.setText(missatge.getText());
+            if (missatge.getText() != null) {
+                convertView = LayoutInflater.from(context).inflate(R.layout.layout_message_other, null);
+                TextView message = convertView.findViewById(R.id.message_body);
+                message.setText(missatge.getText());
+            }
+            else {
+                convertView = LayoutInflater.from(context).inflate(R.layout.layout_message_other_image, null);
+                final ImageView img = convertView.findViewById(R.id.message_body);
+                String uriImage = missatge.getFitxer();
+                if (uriImage != null) {
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(uriImage);
+                    try {
+                        final File file = File.createTempFile("image", uriImage.substring(uriImage.lastIndexOf('.')));
+                        storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                                img.setImageBitmap(bitmap);
+                            }
+                        });
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else img.setImageResource(R.drawable.profile);
+            }
         }
 
         return convertView;
