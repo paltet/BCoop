@@ -84,6 +84,14 @@
     <string name="notification">Notification</string>
 
     <string name="write_a_message">Write a message</string>
+
+    <string name="ask_service">Ask service</string>
+    <string name="service">Service</string>
+    <string name="service_date">Date</string>
+    <string name="selectDate">Select date</string>
+    <string name="coinsPay">Coins to pay</string>
+    <string name="service_message">Message</string>
+    <string name="askButton">Ask service</string>
     <string name="refuse">Refuse</string>
     <string name="chat_with">Chat with him/her</string>
     <string name="applicant">Applicant</string>

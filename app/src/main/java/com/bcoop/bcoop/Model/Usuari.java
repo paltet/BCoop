@@ -22,7 +22,7 @@ public class Usuari {
     private int nivell;
     private int valoracio;
     private List<Premi> premis;
-    private List<Notification> notificacions;
+    private String token;
 
     public Usuari() {}
 
@@ -168,11 +168,11 @@ public class Usuari {
         this.locationLongitude = locationLongitude;
     }
 
-    public List<Notification> getNotificacions() {
-        return notificacions;
+    public String getToken() {
+        return token;
     }
 
-    public void setNotificaciones(List<Notification> notificacions) {
-        this.notificacions = notificacions;
+    public void setToken(String token) {
+        this.token = token;
     }
 }

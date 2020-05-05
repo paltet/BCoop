@@ -19,7 +19,13 @@ import com.bcoop.bcoop.ui.prize.PrizeFragment;
 import com.bcoop.bcoop.ui.profile.ConfigProfileActivity;
 import com.bcoop.bcoop.ui.profile.ProfileFragment;
 import com.bcoop.bcoop.ui.search.SearchFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -29,6 +35,16 @@ public class HomeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_home);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String newToken = instanceIdResult.getToken();
+                final DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Usuari").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                documentReference.update("token", newToken);
+                Toast.makeText(HomeActivity.this, newToken, Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         // Passing each menu ID as a set of Ids because each

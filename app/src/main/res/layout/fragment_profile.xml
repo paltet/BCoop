@@ -79,6 +79,12 @@
                 android:text="@string/initial_setup_photo" />
 
             <Button
+                android:id="@+id/askService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ask_service" />
+
+            <Button
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

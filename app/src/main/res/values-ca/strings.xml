@@ -94,4 +94,12 @@
     <string name="start_date">Data d\'inici</string>
     <string name="end_date">Data de finalització</string>
     <string name="duration">Durada</string>
+
+    <string name="ask_service">Demanar servei</string>
+    <string name="service">Servei</string>
+    <string name="service_date">Data</string>
+    <string name="selectDate">Seleccionar data</string>
+    <string name="coinsPay">Monedes a pagar</string>
+    <string name="service_message">Missatge</string>
+    <string name="askButton">Demanar servei</string>
 </resources>

@@ -31,18 +31,19 @@
 
         </LinearLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2" >
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/messagesList"
-                android:divider="@color/white" />
-        </ScrollView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
 
-        <LinearLayout
+        <ListView
+            android:id="@+id/messagesList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/white" />
+    </ScrollView>
+
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -57,6 +58,15 @@
                 android:ems="10"
                 android:inputType="text"
                 android:paddingHorizontal="10dp" />
+
+            <ImageView
+                android:id="@+id/attachMessage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/attach"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="10dp"/>
 
             <ImageView
                 android:id="@+id/sendMessage"
