@@ -106,16 +106,25 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
                                 else {
                                     db.collection("Usuari").document(email)
                                             .update("monedes", FieldValue.increment(-p.getPreu()),
-                                                    "premis", FieldValue.arrayUnion(p),
-                                                    "notificacions", FieldValue.arrayUnion(new Notification("You spent "
-                                                            + p.getPreu().toString() +" coins to acquire gift: <<" + p.getNom()
-                                                            + ">> \nYou have " + (monedes - p.getPreu()) + " coins")))
+                                                    "premis", FieldValue.arrayUnion(p))
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
                                                     Toast.makeText(getContext(), R.string.success, Toast.LENGTH_SHORT).show();
                                                 }
                                             })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(getContext(), R.string.abort, Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+                                    Notification notification = new Notification("You spent "
+                                            + p.getPreu().toString() +" coins to acquire gift: <<" + p.getNom()
+                                            + ">> \nYou have " + (monedes - p.getPreu()) + " coins");
+                                    db.collection("Usuari").document(email)
+                                            .collection("notificacions").document(notification.getTime().toString()).set(notification)
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {

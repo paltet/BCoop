@@ -87,4 +87,11 @@
     <string name="notification">Notificació</string>
 
     <string name="write_a_message">Escriu un missatge</string>
+    <string name="refuse">Rebuig</string>
+    <string name="chat_with">Xateja amb ell/ella</string>
+    <string name="applicant">Sol·licitant</string>
+    <string name="ability">Habilitat</string>
+    <string name="start_date">Data d\'inici</string>
+    <string name="end_date">Data de finalització</string>
+    <string name="duration">Durada</string>
 </resources>

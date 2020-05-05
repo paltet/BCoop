@@ -3,6 +3,7 @@ package com.bcoop.bcoop.ui.notification;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,81 +68,11 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
         time.setText(date);
         descripcio.setText(notification.getContent());
 
+        if (notification.isRead()) {
+            titol.setTextColor(Color.GRAY);
+            time.setTextColor(Color.GRAY);
+        }
+
      return view;
-    }
-
-    public void showAlertDialogBuy(View v, final Premi p){
-        p.setTime(Timestamp.now());
-        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-        alert.setTitle(R.string.buy);
-        alert.setMessage(R.string.sure);
-        alert.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                db.collection("Usuari").document(email)
-                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                Integer monedes = document.getDouble("monedes").intValue();
-                                if (monedes < p.getPreu()) {
-                                    Toast.makeText(getContext(), R.string.notEnough, Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    db.collection("Usuari").document(email)
-                                            .update("monedes", FieldValue.increment(-p.getPreu()),
-                                                    "premis", FieldValue.arrayUnion(p))
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Toast.makeText(getContext(), R.string.success, Toast.LENGTH_SHORT).show();
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getContext(), R.string.abort, Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                                }
-                            }
-                        } else {
-                            Log.d(TAG, "Cached get failed: ", task.getException());
-                        }
-                    }
-                });
-            }
-        });
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getContext(), R.string.abort, Toast.LENGTH_SHORT).show();
-            }
-        });
-        alert.create().show();
-    }
-
-    public void showAlertDialogUse(View v, final Premi p){
-        p.setTime(Timestamp.now());
-        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-        alert.setTitle(R.string.use);
-        alert.setMessage(R.string.usePrize);
-        alert.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getContext(), p.getNom(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getContext(), R.string.abort, Toast.LENGTH_SHORT).show();
-            }
-        });
-        alert.create().show();
     }
 }

@@ -121,7 +121,7 @@ public class SearchFragment extends Fragment {
         final ArrayList<Usuari> list = new ArrayList<>();
 
         String dbQueryHab = "habilitats." + hability;
-        /*db.collection("Usuari")
+        db.collection("Usuari")
                 .orderBy(dbQueryHab)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -144,7 +144,7 @@ public class SearchFragment extends Fragment {
                             Log.d("TAG", "Error getting documents: ", task.getException());
                         }
                     }
-                });*/
+                });
 
 
 

@@ -84,4 +84,11 @@
     <string name="notification">Notification</string>
 
     <string name="write_a_message">Write a message</string>
+    <string name="refuse">Refuse</string>
+    <string name="chat_with">Chat with him/her</string>
+    <string name="applicant">Applicant</string>
+    <string name="ability">Ability</string>
+    <string name="start_date">Start date</string>
+    <string name="end_date">End date</string>
+    <string name="duration">Duration</string>
 </resources>
