@@ -61,11 +61,21 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
         TextView time = view.findViewById(R.id.time);
         TextView descripcio = view.findViewById(R.id.Descripció);
 
-        titol.setText(notification.getType());
-        String pattern = "dd/MM/yyyy";
+        titol.setText(notification.getTitle());
+        String pattern = "dd/MM/yyyy HH:mm";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(notification.getTime().toDate());
         time.setText(date);
+        if (notification.getType() == 4 && notification.getPrice() < 0) {
+            notification.setContent(context.getResources().getString(R.string.you_spent)
+                    +" "+ (-notification.getPrice()) +" "+ context.getResources().getString(R.string.to_acquire_gift));
+        } else if (notification.getType() == 2) {
+            if (notification.isResponse())
+                notification.setContent(notification.getUserEmail()
+                    +" "+ context.getResources().getString(R.string.request_agreed));
+            else notification.setContent(notification.getUserEmail()
+                    +" "+ context.getResources().getString(R.string.request_rejected));
+        }
         descripcio.setText(notification.getContent());
 
         if (notification.isRead()) {

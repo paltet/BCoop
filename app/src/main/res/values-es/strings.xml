@@ -91,6 +91,9 @@
     <string name="start_date">Fecha de inicio</string>
     <string name="end_date">Fecha de finalización</string>
     <string name="duration">Duración</string>
+    <string name="service_request">Petición de Servicio</string>
+    <string name="service_response">Respuesta del Servicio</string>
+    <string name="trading_information">Información de la Transacción</string>
 
     <string name="ask_service">Pedir servicio</string>
     <string name="service">Servicio</string>
@@ -99,4 +102,10 @@
     <string name="coinsPay">Monedas a pagar</string>
     <string name="service_message">Mensaje</string>
     <string name="askButton">Pedir servicio</string>
+    <string name="you_spent">Gastaste</string>
+    <string name="to_acquire_gift"> monedas para adquirir un regalo</string>
+    <string name="delete_notification">¿Quieres eliminar esta notificación?</string>
+    <string name="service_valoration"> Valoración de Servicio</string>
+    <string name="request_agreed">aceptó tu petición de servicio. Puedes comprobar el detalle del servicio en tu lista de servicio.</string>
+    <string name="request_rejected">rechazó tu petición del servicio.</string>
 </resources>

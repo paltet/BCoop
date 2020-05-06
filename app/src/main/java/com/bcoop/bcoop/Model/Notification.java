@@ -1,11 +1,11 @@
 package com.bcoop.bcoop.Model;
 
 import com.google.firebase.Timestamp;
-import com.google.type.Date;
 
 public class Notification {
     private String content;
-    private String type; // "service request", "service response", "service valoration" or "trading information"
+    private int type; // "1 = service request", "2 = service response", "3 = service valoration" or "4 = trading information"
+    private String title;
     private String userEmail; // user, who send this notification
     private String serviceName;
     private int price;
@@ -24,7 +24,7 @@ public class Notification {
 
     // service request
     public Notification(String userEmail, String serviceName, int price, int duration, Timestamp dateIni, Timestamp dateFi) {
-        this.type = "Service Request";
+        this.type = 1;
         this.userEmail = userEmail;
         this.serviceName = serviceName;
         this.price = price;
@@ -36,7 +36,7 @@ public class Notification {
 
     // service response
     public Notification(String userEmail, boolean response) {
-        this.type = "Service Response";
+        this.type = 2;
         this.userEmail = userEmail;
         this.response = response;
         this.time = Timestamp.now();
@@ -44,7 +44,7 @@ public class Notification {
 
     // service valoration
     public Notification(String userEmail, String serviceName, Timestamp dataFi, int valor, String comment) {
-        this.type = "Service Valoration";
+        this.type = 3;
         this.userEmail = userEmail;
         this.serviceName = serviceName;
         this.dateFi = dataFi;
@@ -54,9 +54,9 @@ public class Notification {
     }
 
     // "trading information"
-    public Notification(String content) {
-        this.type = "Trading Information";
-        this.content = content;
+    public Notification(int price) {
+        this.type = 4;
+        this.price = price;
         this.time = Timestamp.now();
     }
 
@@ -77,7 +77,7 @@ public class Notification {
         this.time = time;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
@@ -89,7 +89,7 @@ public class Notification {
         this.content = content;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
@@ -163,5 +163,13 @@ public class Notification {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

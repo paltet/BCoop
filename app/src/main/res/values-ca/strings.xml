@@ -94,6 +94,9 @@
     <string name="start_date">Data d\'inici</string>
     <string name="end_date">Data de finalització</string>
     <string name="duration">Durada</string>
+    <string name="service_request">Sol·licitud de Servei</string>
+    <string name="service_response">Resposta del servei</string>
+    <string name="trading_information">Informació sobre Transaccions</string>
 
     <string name="ask_service">Demanar servei</string>
     <string name="service">Servei</string>
@@ -102,4 +105,10 @@
     <string name="coinsPay">Monedes a pagar</string>
     <string name="service_message">Missatge</string>
     <string name="askButton">Demanar servei</string>
+    <string name="you_spent">Has gastat</string>
+    <string name="to_acquire_gift"> monedes per adquirir un regal.</string>
+    <string name="delete_notification"> Vols suprimir aquesta notificació?</string>
+    <string name="service_valoration">Valoració del Servei</string>
+    <string name="request_agreed">va acceptar la teva petició de servei. Puedes comprobar el detall del servei en la teva llista de servei.</string>
+    <string name="request_rejected">va rebutjar la teva petició del servei.</string>
 </resources>

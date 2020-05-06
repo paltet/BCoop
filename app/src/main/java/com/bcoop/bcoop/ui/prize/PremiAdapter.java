@@ -120,9 +120,7 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
                                                 }
                                             });
 
-                                    Notification notification = new Notification("You spent "
-                                            + p.getPreu().toString() +" coins to acquire gift: <<" + p.getNom()
-                                            + ">> \nYou have " + (monedes - p.getPreu()) + " coins");
+                                    Notification notification = new Notification(-p.getPreu());
                                     db.collection("Usuari").document(email)
                                             .collection("notificacions").document(notification.getTime().toString()).set(notification)
                                             .addOnFailureListener(new OnFailureListener() {
