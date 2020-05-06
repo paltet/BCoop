@@ -18,12 +18,14 @@ import java.util.Calendar;
 public class AskServiceActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private Button dateButton;
+    private String otherUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_service);
 
+        otherUser = getIntent().getStringExtra("otherUserEmail");
         dateButton = findViewById(R.id.selectDate);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override

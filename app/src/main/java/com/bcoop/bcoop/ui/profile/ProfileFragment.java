@@ -139,6 +139,7 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
+                    intent.putExtra("otherUserEmail", email);
                     intent.setClass(Objects.requireNonNull(ProfileFragment.super.getActivity()), AskServiceActivity.class);
                     startActivity(intent);
                 }
