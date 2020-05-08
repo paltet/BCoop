@@ -11,7 +11,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_gravity="center">
 
             <ImageView
                 android:layout_width="75dp"
@@ -23,11 +24,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginVertical="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_weight="2"
                 android:id="@+id/usernameText"
                 app:autoSizeTextType="uniform"
                 android:gravity="center_vertical" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:id="@+id/serviceRequestButton"
+                android:src="@drawable/service"
+                android:scaleType="fitCenter"
+                android:padding="5dp"
+                android:background="@drawable/background_message_mine"
+                android:tint="@color/white"
+                />
 
         </LinearLayout>
 
