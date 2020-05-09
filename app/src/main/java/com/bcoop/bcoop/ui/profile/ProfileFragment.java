@@ -3,6 +3,7 @@ package com.bcoop.bcoop.ui.profile;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -18,8 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.bcoop.bcoop.MainActivity;
-import com.bcoop.bcoop.Model.Comentari;
-import com.bcoop.bcoop.Model.Habilitat;
 import com.bcoop.bcoop.Model.HabilitatDetall;
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
@@ -36,7 +35,6 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -45,7 +43,7 @@ import java.util.Objects;
 public class ProfileFragment extends Fragment {
 
     private FirebaseAuth mAuth;
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private FirebaseStorage storage;
     private FirebaseFirestore firestore;
     private ImageView imageView;
     private Button logout;
@@ -57,6 +55,7 @@ public class ProfileFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
         mAuth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
 
         final String perfil = getArguments().getString("email");
         final String email;
@@ -107,9 +106,7 @@ public class ProfileFragment extends Fragment {
         });
 
         logout = root.findViewById(R.id.logout);
-        askService = root.findViewById(R.id.askService);
         if (email.equals(mAuth.getCurrentUser().getEmail())) {
-            askService.setVisibility(View.INVISIBLE);
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -121,10 +118,10 @@ public class ProfileFragment extends Fragment {
                 }
             });
         }
-        //else logout.setVisibility(View.GONE);
         else {
-
-            logout.setText("Chat");
+            //if not my user, then chat option
+            logout.setText(R.string.chat);
+            logout.setTextColor(Color.DKGRAY);
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -134,24 +131,14 @@ public class ProfileFragment extends Fragment {
                     startActivity(intent);
                 }
             });
-
-            askService.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.putExtra("otherUserEmail", email);
-                    intent.setClass(Objects.requireNonNull(ProfileFragment.super.getActivity()), AskServiceActivity.class);
-                    startActivity(intent);
-                }
-            });
         }
-
-
         return root;
     }
 
     private String getLocality(double locationLatitude, double locationLongitude) {
         String locality = "";
+        if (locationLatitude == 0 && locationLongitude == 0)
+            return locality;
         Geocoder myLocation = new Geocoder(ProfileFragment.super.getContext(), Locale.getDefault());
         try {
             List<Address> addresses = myLocation.getFromLocation(locationLatitude, locationLongitude, 1);
