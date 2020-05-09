@@ -1,31 +1,16 @@
 package com.bcoop.bcoop.ui.notification;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bcoop.bcoop.Model.Notification;
-import com.bcoop.bcoop.Model.Premi;
-import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -35,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import static android.content.ContentValues.TAG;
+
 
 public class NotificationAdapter extends ArrayAdapter<Notification> {
 
@@ -72,6 +58,7 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
             notification.setContent(context.getResources().getString(R.string.you_spent)
                     +" "+ (-notification.getPrice()) +" "+ context.getResources().getString(R.string.to_acquire_gift));
         } else if (notification.getType() == 2) {
+            Log.d(TAG, notification.getUserName());
             if (notification.isResponse()) {
                 notification.setContent(notification.getUserName()
                                 +" "+ context.getResources().getString(R.string.request_agreed));
