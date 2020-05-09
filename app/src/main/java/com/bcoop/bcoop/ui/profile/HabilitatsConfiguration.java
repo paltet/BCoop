@@ -1,18 +1,14 @@
 package com.bcoop.bcoop.ui.profile;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,10 +16,29 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.bcoop.bcoop.Model.HabilitatDetall;
+import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 public class HabilitatsConfiguration extends AppCompatActivity {
 
@@ -120,6 +135,10 @@ public class HabilitatsConfiguration extends AppCompatActivity {
     List<Item> items;
     ListView listView;
     ItemsListAdapter myItemsListAdapter;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore firestore;
+    final List<String> habilitatsUsuari = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,8 +148,7 @@ public class HabilitatsConfiguration extends AppCompatActivity {
         btnLookup = (Button) findViewById(R.id.okButton);
 
         initItems();//amb firebase i posar els de per defecte
-        myItemsListAdapter = new ItemsListAdapter(this, items);
-        listView.setAdapter(myItemsListAdapter);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -149,14 +167,51 @@ public class HabilitatsConfiguration extends AppCompatActivity {
                 String str = "Check items:\n";
 
                 for (int i = 0; i < items.size(); i++) {
+                    final String nomHab = items.get(i).ItemString;
                     if (items.get(i).isChecked()) {
+
                         str += i + "\n";
+
+
+                        Map<String, Object> habilitat = new HashMap<>();
+                        Map<String, Object> habilitatDetall = new HashMap<>();
+                        habilitatDetall.put("nom", nomHab);
+                        habilitatDetall.put("valoracio", 0);
+                        habilitat.put("habilitats." + nomHab, habilitatDetall);
+                        final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                        if (email != null) {
+                            final DocumentReference ref = db.collection("Usuari").document(email);
+                            ref.update(habilitat);
+
+                        }
+
+                    }
+                    else {
+                        for (int j = 0 ; j < habilitatsUsuari.size() ; j++) {
+                            if (habilitatsUsuari.get(j).equals(items.get(i).ItemString)){
+                                final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                                if (email != null) {
+                                    final DocumentReference ref = db.collection("Usuari").document(email);
+                                    Map<String,Object> updates = new HashMap<>();
+                                    updates.put("habilitats." + nomHab, FieldValue.delete());
+                                    ref.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "Updated successfully");
+                                            }
+                                            else Log.d(TAG, "Cached get failed: ", task.getException());
+                                        }
+                                    });
+
+                                }
+                            }
+                        }
+
+
                     }
                 }
-                Toast.makeText(HabilitatsConfiguration.this,
-                        str,
-                        Toast.LENGTH_LONG).show();
-
+                Toast.makeText(HabilitatsConfiguration.this, str, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(HabilitatsConfiguration.this, ConfigProfileActivity.class);
                 startActivity(intent);
             }
@@ -165,17 +220,57 @@ public class HabilitatsConfiguration extends AppCompatActivity {
 
     //amb firestore i posarlos a checeked els que tingui ja el user
     private void initItems(){
-        items = new ArrayList<Item>();
-        TypedArray arrayText = getResources().obtainTypedArray(R.array.abilitiesUser);
 
-        for(int i=0; i<arrayText.length(); i++){
-            String s = arrayText.getString(i);
-            boolean b = false;
-            if(i == 5)b = true;
-            Item item = new Item(s, b);
-            items.add(item);
-        }
-        arrayText.recycle();
+
+
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        firestore = FirebaseFirestore.getInstance();
+        final DocumentReference documentReference = firestore.collection("Usuari").document(email);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    Usuari usuari = new Usuari();
+                    usuari = documentSnapshot.toObject(Usuari.class);
+
+                    Map<String, HabilitatDetall> detallHabilitatUsuari = usuari.getHabilitats();
+                    for (Map.Entry<String, HabilitatDetall> entry : detallHabilitatUsuari.entrySet()) {
+                        habilitatsUsuari.add(entry.getKey());
+                        Log.d(TAG, "DocumentSnapshot data: " + entry.getKey());
+                    }
+                    for (int i = 0 ; i < habilitatsUsuari.size() ; i++) {
+                        Log.d("value is", habilitatsUsuari.get(i));
+                    }
+                    items = new ArrayList<Item>();
+
+                    db.collection("Habilitat")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            boolean b = false;
+                                            int i = 0;
+                                            while(i < habilitatsUsuari.size() && !b) {
+                                                if (habilitatsUsuari.get(i).equals(document.getString("nom"))){
+                                                    b = true;
+                                                }
+                                                ++i;
+                                            }
+                                            Item item = new Item(document.getString("nom"), b);
+                                            items.add(item);
+                                        }
+                                    } else {
+                                        Log.w(TAG, "Error getting documents.", task.getException());
+                                    }
+                                    myItemsListAdapter = new ItemsListAdapter(HabilitatsConfiguration.this, items);
+                                    listView.setAdapter(myItemsListAdapter);
+                                }
+                            });
+                }
+            }
+        });
     }
 
 }
