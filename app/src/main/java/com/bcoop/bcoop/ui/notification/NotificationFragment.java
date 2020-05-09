@@ -2,6 +2,7 @@ package com.bcoop.bcoop.ui.notification;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,29 +14,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bcoop.bcoop.Model.Habilitat;
-import com.bcoop.bcoop.Model.HabilitatDetall;
 import com.bcoop.bcoop.Model.Notification;
-import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
-import com.bcoop.bcoop.ui.profile.HabilitatAdaptar;
+import com.bcoop.bcoop.ui.chat.ChatWithAnotherUserActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.type.Date;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -47,6 +42,7 @@ public class NotificationFragment extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<Notification> notificationsList;
     ListView listView;
+    ConectFirebase conectFirebase = new ConectFirebase();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +51,9 @@ public class NotificationFragment extends Fragment {
 
         notificationsList = new ArrayList<>();
         // service request
-        //notificationsList.add(new Notification("sheng.liu0516@gmail.com", "Mates", 200, 20, Timestamp.now(), Timestamp.now()));
+        // notificationsList.add(new Notification("sheng.liu0516@gmail.com","sl", "Mates","wciGnL2ZUimqUwbPFTNu" ,200, 20, Timestamp.now(), Timestamp.now()));
+        // service valoration
+        //notificationsList.add(new Notification("sheng.liu0516@gmail.com", "sll","Mates", Timestamp.now(), 4, "very good!!"));
         listView = (ListView) root.findViewById(R.id.listView);
         final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         db.collection("Usuari").document(email).collection("notificacions").orderBy("time", DESCENDING)
@@ -86,6 +84,7 @@ public class NotificationFragment extends Fragment {
                     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                         Notification notification = notificationsList.get(position);
                         if (notification.getType() == 1) requestDialog(notification);
+                        else if (notification.getType() == 3) valorDialog(notification);
                         else tradingDialog(notification);
                     }
                 });
@@ -110,11 +109,7 @@ public class NotificationFragment extends Fragment {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        notification.setRead(true);
-                        final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                        db.collection("Usuari").document(email)
-                                .collection("notificacions").document(notification.getTime().toString())
-                                .delete();
+                        conectFirebase.deleteNotification(notification);
                         dialog.cancel();
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new NotificationFragment()).commit();
                     }
@@ -138,10 +133,7 @@ public class NotificationFragment extends Fragment {
         normalDialog.setTitle(notification.getTitle());
         normalDialog.setMessage(date + "\n" + notification.getContent());
         notification.setRead(true);
-        final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        db.collection("Usuari").document(email)
-                .collection("notificacions").document(notification.getTime().toString())
-                .set(notification);
+        conectFirebase.pushNotification(notification, FirebaseAuth.getInstance().getCurrentUser().getEmail());
         normalDialog.setPositiveButton(R.string.accept,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -154,8 +146,10 @@ public class NotificationFragment extends Fragment {
             normalDialog.setNegativeButton(R.string.chat_with, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new NotificationFragment()).commit();
+                    Intent intent = new Intent();
+                    intent.putExtra("otherUserEmail", notification.getUserEmail());
+                    intent.setClass(Objects.requireNonNull(NotificationFragment.super.getActivity()), ChatWithAnotherUserActivity.class);
+                    startActivity(intent);
                 }
             });
         }
@@ -168,14 +162,14 @@ public class NotificationFragment extends Fragment {
         Button dialogBtnChat = (Button) dialogView.findViewById(R.id.chat);
         Button dialogBtnAccept = (Button) dialogView.findViewById(R.id.accept);
 
-        TextView applicantName = dialogView.findViewById(R.id.applicantName);
+        final TextView applicantName = dialogView.findViewById(R.id.applicantName);
         TextView habilitatName = dialogView.findViewById(R.id.habilitatName);
         TextView dateIni1 = dialogView.findViewById(R.id.dateIni1);
         TextView dateFi1 = dialogView.findViewById(R.id.dateFi1);
         TextView duration1 = dialogView.findViewById(R.id.duration1);
         TextView price1 = dialogView.findViewById(R.id.price1);
+        applicantName.setText(notification.getUserName());
 
-        applicantName.setText(notification.getUserEmail());
         habilitatName.setText(notification.getServiceName());
         String pattern = "dd/MM/yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -183,8 +177,85 @@ public class NotificationFragment extends Fragment {
         dateIni1.setText(date);
         date = simpleDateFormat.format(notification.getDateFi().toDate());
         dateFi1.setText(date);
-        duration1.setText(notification.getDuration() + " horas");
+        duration1.setText(notification.getDuration() +" "+getString(R.string.hour));
         price1.setText(notification.getPrice() +" "+ getString(R.string.coins));
+
+        final AlertDialog.Builder layoutDialog = new AlertDialog.Builder(getContext());
+
+        layoutDialog.setTitle(notification.getTitle());
+        layoutDialog.setCancelable(true);
+        pattern = "dd/MM/yyyy HH:mm";
+        simpleDateFormat = new SimpleDateFormat(pattern);
+        date = simpleDateFormat.format(notification.getTime().toDate());
+        layoutDialog.setMessage(date + "\n" + notification.getContent());
+
+        layoutDialog.setView(dialogView);
+        notification.setRead(true);
+        conectFirebase.pushNotification(notification, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        final AlertDialog show = layoutDialog.show();
+        if (notification.isResponse()) {
+            dialogBtnAccept.setVisibility(View.GONE);
+            dialogBtnRefuse.setVisibility(View.GONE);
+        }
+        dialogBtnAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Notification notification1 = new Notification(FirebaseAuth.getInstance().getCurrentUser().getEmail(), FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), true);
+                conectFirebase.pushNotification(notification1, notification.getUserEmail());
+                notification.setResponse(true);
+                conectFirebase.pushNotification(notification, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                //set service is confirmed
+                conectFirebase.confimatService(notification);
+                Toast.makeText(getActivity(),R.string.sent_seccessfully,Toast.LENGTH_SHORT).show();
+                show.dismiss();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new NotificationFragment()).commit();
+            }
+        });
+        dialogBtnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("otherUserEmail", notification.getUserEmail());
+                intent.setClass(Objects.requireNonNull(NotificationFragment.super.getActivity()), ChatWithAnotherUserActivity.class);
+                startActivity(intent);
+            }
+        });
+        dialogBtnRefuse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Notification notification1 = new Notification(FirebaseAuth.getInstance().getCurrentUser().getEmail(), FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), false);
+                conectFirebase.pushNotification(notification1, notification.getUserEmail());
+                notification.setResponse(true);
+                conectFirebase.pushNotification(notification, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                //delete service
+                conectFirebase.deleteService(notification);
+                Toast.makeText(getActivity(),R.string.sent_seccessfully,Toast.LENGTH_SHORT).show();
+                show.dismiss();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new NotificationFragment()).commit();
+            }
+        });
+        //layoutDialog.create().show();
+    }
+
+    private void valorDialog(final Notification notification) {
+        final View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_valor,null);
+        Button dialogBtnChat = (Button) dialogView.findViewById(R.id.chat);
+        Button dialogBtnAccept = (Button) dialogView.findViewById(R.id.accept);
+
+        final TextView applicantName = dialogView.findViewById(R.id.applicantName);
+        TextView habilitatName = dialogView.findViewById(R.id.habilitatName);
+        TextView dateFi1 = dialogView.findViewById(R.id.dateFi1);
+        TextView valor1 = dialogView.findViewById(R.id.valor1);
+        TextView comment1 = dialogView.findViewById(R.id.comment1);
+        applicantName.setText(notification.getUserName());
+
+        habilitatName.setText(notification.getServiceName());
+        String pattern = "dd/MM/yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(notification.getDateFi().toDate());
+        dateFi1.setText(date);
+        valor1.setText(Integer.toString(notification.getValor()));
+        comment1.setText(notification.getComment());
 
         final AlertDialog.Builder layoutDialog = new AlertDialog.Builder(getContext());
         layoutDialog.setTitle(notification.getTitle());
@@ -195,56 +266,25 @@ public class NotificationFragment extends Fragment {
         layoutDialog.setMessage(date);
 
         layoutDialog.setView(dialogView);
-
         notification.setRead(true);
-        final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        db.collection("Usuari").document(email)
-                .collection("notificacions").document(notification.getTime().toString())
-                .set(notification);
-
+        conectFirebase.pushNotification(notification, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        final AlertDialog show = layoutDialog.show();
         dialogBtnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Notification notification1 = new Notification(FirebaseAuth.getInstance().getCurrentUser().getEmail(), true);
-                db.collection("Usuari").document(notification.getUserEmail())
-                        .collection("notificacions").document(notification1.getTime().toString()).set(notification1)
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), R.string.abort, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                Toast.makeText(getActivity(),R.string.success,Toast.LENGTH_SHORT).show();
+                show.dismiss();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new NotificationFragment()).commit();
             }
         });
         dialogBtnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        dialog.dismiss();
-                    }
-                });
+                Intent intent = new Intent();
+                intent.putExtra("otherUserEmail", notification.getUserEmail());
+                intent.setClass(Objects.requireNonNull(NotificationFragment.super.getActivity()), ChatWithAnotherUserActivity.class);
+                startActivity(intent);
             }
         });
-        dialogBtnRefuse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Notification n = new Notification(FirebaseAuth.getInstance().getCurrentUser().getEmail(), false);
-                db.collection("Usuari").document(notification.getUserEmail())
-                        .collection("notificacions").document(n.getTime().toString()).set(n)
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), R.string.abort, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new NotificationFragment()).commit();
-            }
-        });
-
-        layoutDialog.create().show();
+        //layoutDialog.create().show();
     }
 }

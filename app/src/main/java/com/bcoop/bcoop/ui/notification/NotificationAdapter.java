@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.Model.Premi;
+import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -42,6 +43,7 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
     List<Notification> notificationList;
     Notification notification;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ConectFirebase conectFirebase = new ConectFirebase();
 
     public NotificationAdapter(Context context, int resource, List<Notification> notificationList) {
         super(context, resource, notificationList);
@@ -70,11 +72,16 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
             notification.setContent(context.getResources().getString(R.string.you_spent)
                     +" "+ (-notification.getPrice()) +" "+ context.getResources().getString(R.string.to_acquire_gift));
         } else if (notification.getType() == 2) {
-            if (notification.isResponse())
-                notification.setContent(notification.getUserEmail()
-                    +" "+ context.getResources().getString(R.string.request_agreed));
-            else notification.setContent(notification.getUserEmail()
-                    +" "+ context.getResources().getString(R.string.request_rejected));
+            if (notification.isResponse()) {
+                notification.setContent(notification.getUserName()
+                                +" "+ context.getResources().getString(R.string.request_agreed));
+            }
+            else {
+                notification.setContent(notification.getUserName()
+                                +" "+ context.getResources().getString(R.string.request_rejected));
+            }
+        } else if (notification.getType() == 3) {
+            notification.setContent(notification.getUserName() + " " + context.getResources().getString(R.string.servei_commented));
         }
         descripcio.setText(notification.getContent());
 

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.Model.Premi;
 import com.bcoop.bcoop.R;
+import com.bcoop.bcoop.ui.notification.ConectFirebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,6 +40,7 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
     Premi premi;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     boolean isMyPremis = false;
+    ConectFirebase conectFirebase = new ConectFirebase();
 
     public PremiAdapter(Context context, int resource, List<Premi> premiList, boolean isMyPremis) {
         super(context, resource, premiList);
@@ -121,14 +123,8 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
                                             });
 
                                     Notification notification = new Notification(-p.getPreu());
-                                    db.collection("Usuari").document(email)
-                                            .collection("notificacions").document(notification.getTime().toString()).set(notification)
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getContext(), R.string.abort, Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
+
+                                    conectFirebase.pushNotification(notification, FirebaseAuth.getInstance().getCurrentUser().getEmail());
                                 }
                             }
                         } else {

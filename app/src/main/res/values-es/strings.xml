@@ -108,4 +108,9 @@
     <string name="service_valoration"> Valoración de Servicio</string>
     <string name="request_agreed">aceptó tu petición de servicio. Puedes comprobar el detalle del servicio en tu lista de servicio.</string>
     <string name="request_rejected">rechazó tu petición del servicio.</string>
+    <string name="hour">Horas</string>
+    <string name="sent_seccessfully">Enviado con éxito</string>
+    <string name="comment">Comentario</string>
+    <string name="valoration">Valoracion</string>
+    <string name="servei_commented">comentó sobre su servicio.</string>
 </resources>

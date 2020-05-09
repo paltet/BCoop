@@ -108,4 +108,10 @@
     <string name="service_valoration">Service Valoration</string>
     <string name="request_agreed">accepted your request for service. You can check the service detail in your service list.</string>
     <string name="request_rejected">rejected your service request.</string>
+    <string name="hour">Hour</string>
+    <string name="sent_seccessfully">Sent successfully</string>
+    <string name="comment">Comment</string>
+    <string name="valoration">Valoration</string>
+    <string name="servei_commented">commented on your service.</string>
+
 </resources>

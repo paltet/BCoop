@@ -6,8 +6,10 @@ public class Notification {
     private String content;
     private int type; // "1 = service request", "2 = service response", "3 = service valoration" or "4 = trading information"
     private String title;
+    private String userName;
     private String userEmail; // user, who send this notification
     private String serviceName;
+    private String serviceId;
     private int price;
     private int duration;
     private Timestamp dataIni;
@@ -23,10 +25,12 @@ public class Notification {
     }
 
     // service request
-    public Notification(String userEmail, String serviceName, int price, int duration, Timestamp dateIni, Timestamp dateFi) {
+    public Notification(String userEmail, String userName, String serviceName, String serviceId, int price, int duration, Timestamp dateIni, Timestamp dateFi) {
         this.type = 1;
         this.userEmail = userEmail;
+        this.userName = userName;
         this.serviceName = serviceName;
+        this.serviceId = serviceId;
         this.price = price;
         this.duration = duration;
         this.dataIni = dateIni;
@@ -35,17 +39,19 @@ public class Notification {
     }
 
     // service response
-    public Notification(String userEmail, boolean response) {
+    public Notification(String userEmail, String userName, boolean response) {
         this.type = 2;
         this.userEmail = userEmail;
+        this.userName = userName;
         this.response = response;
         this.time = Timestamp.now();
     }
 
     // service valoration
-    public Notification(String userEmail, String serviceName, Timestamp dataFi, int valor, String comment) {
+    public Notification(String userEmail, String userName,String serviceName, Timestamp dataFi, int valor, String comment) {
         this.type = 3;
         this.userEmail = userEmail;
+        this.userName = userName;
         this.serviceName = serviceName;
         this.dateFi = dataFi;
         this.valor = valor;
@@ -171,5 +177,21 @@ public class Notification {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 }

@@ -111,4 +111,9 @@
     <string name="service_valoration">Valoració del Servei</string>
     <string name="request_agreed">va acceptar la teva petició de servei. Puedes comprobar el detall del servei en la teva llista de servei.</string>
     <string name="request_rejected">va rebutjar la teva petició del servei.</string>
+    <string name="hour">Hores</string>
+    <string name="sent_seccessfully">S\'ha enviat correctament</string>
+    <string name="comment">Comentari</string>
+    <string name="valoration">Valoració</string>
+    <string name="servei_commented">va comentar el teu servei.</string>
 </resources>
