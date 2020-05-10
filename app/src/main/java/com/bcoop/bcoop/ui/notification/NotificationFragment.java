@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bcoop.bcoop.Model.CurrentUser;
 import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.R;
 import com.bcoop.bcoop.ui.chat.ChatWithAnotherUserActivity;
@@ -51,7 +52,8 @@ public class NotificationFragment extends Fragment {
 
         notificationsList = new ArrayList<>();
         // service request
-        // notificationsList.add(new Notification("sheng.liu0516@gmail.com","sl", "Mates","wciGnL2ZUimqUwbPFTNu" ,200, 20, Timestamp.now(), Timestamp.now()));
+        //notificationsList.add(new Notification(CurrentUser.getInstance().getCurrentUser().getEmail(), CurrentUser.getInstance().getCurrentUser().getNom(), "Mates","wciGnL2ZUimqUwbPFTNu" ,200, 20, Timestamp.now(), Timestamp.now()));
+
         // service valoration
         //notificationsList.add(new Notification("sheng.liu0516@gmail.com", "sll","Mates", Timestamp.now(), 4, "very good!!"));
         listView = (ListView) root.findViewById(R.id.listView);
@@ -191,7 +193,7 @@ public class NotificationFragment extends Fragment {
 
         layoutDialog.setView(dialogView);
         notification.setRead(true);
-        conectFirebase.pushNotification(notification, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        conectFirebase.pushNotification(notification, CurrentUser.getInstance().getCurrentUser().getEmail());
         final AlertDialog show = layoutDialog.show();
         if (notification.isResponse()) {
             dialogBtnAccept.setVisibility(View.GONE);
@@ -200,10 +202,10 @@ public class NotificationFragment extends Fragment {
         dialogBtnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Notification notification1 = new Notification(FirebaseAuth.getInstance().getCurrentUser().getEmail(), FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), true);
+                Notification notification1 = new Notification(CurrentUser.getInstance().getCurrentUser().getEmail(), CurrentUser.getInstance().getCurrentUser().getNom(), true);
                 conectFirebase.pushNotification(notification1, notification.getUserEmail());
                 notification.setResponse(true);
-                conectFirebase.pushNotification(notification, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                conectFirebase.pushNotification(notification, CurrentUser.getInstance().getCurrentUser().getEmail());
                 //set service is confirmed
                 conectFirebase.confimatService(notification);
                 Toast.makeText(getActivity(),R.string.sent_seccessfully,Toast.LENGTH_SHORT).show();
@@ -223,10 +225,10 @@ public class NotificationFragment extends Fragment {
         dialogBtnRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Notification notification1 = new Notification(FirebaseAuth.getInstance().getCurrentUser().getEmail(), FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), false);
+                Notification notification1 = new Notification(CurrentUser.getInstance().getCurrentUser().getEmail(), CurrentUser.getInstance().getCurrentUser().getNom(), false);
                 conectFirebase.pushNotification(notification1, notification.getUserEmail());
                 notification.setResponse(true);
-                conectFirebase.pushNotification(notification, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                conectFirebase.pushNotification(notification, CurrentUser.getInstance().getCurrentUser().getEmail());
                 //delete service
                 conectFirebase.deleteService(notification);
                 Toast.makeText(getActivity(),R.string.sent_seccessfully,Toast.LENGTH_SHORT).show();
@@ -267,7 +269,7 @@ public class NotificationFragment extends Fragment {
 
         layoutDialog.setView(dialogView);
         notification.setRead(true);
-        conectFirebase.pushNotification(notification, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        conectFirebase.pushNotification(notification, CurrentUser.getInstance().getCurrentUser().getEmail());
         final AlertDialog show = layoutDialog.show();
         dialogBtnAccept.setOnClickListener(new View.OnClickListener() {
             @Override

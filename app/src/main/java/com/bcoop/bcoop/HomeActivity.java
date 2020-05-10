@@ -14,20 +14,32 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bcoop.bcoop.Model.CurrentUser;
+import com.bcoop.bcoop.Model.HabilitatDetall;
+import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.ui.chat.ChatFragment;
 import com.bcoop.bcoop.ui.prize.PrizeFragment;
 import com.bcoop.bcoop.ui.profile.ConfigProfileActivity;
+import com.bcoop.bcoop.ui.profile.HabilitatAdaptar;
 import com.bcoop.bcoop.ui.profile.ProfileFragment;
 import com.bcoop.bcoop.ui.search.SearchFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class HomeActivity extends AppCompatActivity {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private  String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +55,15 @@ public class HomeActivity extends AppCompatActivity {
                 final DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Usuari").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                 documentReference.update("token", newToken);
                 Toast.makeText(HomeActivity.this, newToken, Toast.LENGTH_SHORT).show();
+                documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            CurrentUser.getInstance().setCurrentUser(documentSnapshot.toObject(Usuari.class));
+                        }
+                    }
+                });
+
             }
         });
 
@@ -106,5 +127,7 @@ public class HomeActivity extends AppCompatActivity {
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
         return false;
+
+
     }
 }
