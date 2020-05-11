@@ -72,17 +72,11 @@
             <ExpandableListView
                 android:id="@+id/listHabilitats"
                 android:layout_width="match_parent"
-                android:layout_height="378dp"
+                android:layout_height="430dp"
                 android:layout_marginTop="10dp"
                 android:divider="@android:color/darker_gray"
                 android:dividerHeight="0.5dp"
                 android:text="@string/initial_setup_photo" />
-
-            <Button
-                android:id="@+id/askService"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/ask_service" />
 
             <Button
                 android:id="@+id/logout"
@@ -93,6 +87,14 @@
                 android:backgroundTint="@color/red"
                 android:text="@string/logout"
                 android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/proves"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="proves"
+                android:textColor="@color/red" />
 
         </LinearLayout>
     </ScrollView>

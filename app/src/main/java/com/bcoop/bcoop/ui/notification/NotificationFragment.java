@@ -55,6 +55,7 @@ public class NotificationFragment extends Fragment {
     ConectFirebase conectFirebase = new ConectFirebase();
     private  String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

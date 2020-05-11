@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.Model.Xat;
 import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -63,49 +62,55 @@ public class MyChatsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         String id = (String) getItem(position);
+
         convertView = LayoutInflater.from(context).inflate(R.layout.layout_current_chat, null);
         final TextView lastMessageTime = convertView.findViewById(R.id.lastMessageTimeText);
         final ImageView img = convertView.findViewById(R.id.userImage);
         img.setImageResource(R.drawable.profile);
         final TextView username = convertView.findViewById(R.id.usernameText);
+        String[] users = id.split(",");
+        if (users[0].equals(currentUser))
+            otherUser = users[1];
+        else otherUser = users[0];
+
+        final DocumentReference documentReferenceUsuari = firestore.collection("Usuari").document(otherUser);
+        documentReferenceUsuari.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    String usrn = (String) documentSnapshot.get("nom");
+                    username.setText(usrn);
+
+                    String uriImage = (String) documentSnapshot.get("foto");
+                    if (uriImage != null) {
+                        StorageReference storageReference = storage.getReferenceFromUrl(uriImage);
+                        try {
+                            final File file = File.createTempFile("image", uriImage.substring(uriImage.lastIndexOf('.')));
+                            storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                                    img.setImageBitmap(bitmap);
+                                }
+                            });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
         final DocumentReference documentReference = firestore.collection("Xat").document(id);
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Xat xat = documentSnapshot.toObject(Xat.class);
-                if (xat.getUsuari1().equals(currentUser))
-                    otherUser = xat.getUsuari2();
-                else otherUser = xat.getUsuari1();
                 Date lastMessage = xat.getMissatges().get(xat.getMissatges().size() - 1).getTemps();
                 lastMessageTime.setText(changeTimeFormat(lastMessage));
-                final DocumentReference documentReferenceUsuari = firestore.collection("Usuari").document(otherUser);
-                documentReferenceUsuari.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            String usrn = (String) documentSnapshot.get("nom");
-                            username.setText(usrn);
-                            String uriImage = (String) documentSnapshot.get("foto");
-                            if (uriImage != null) {
-                                StorageReference storageReference = storage.getReferenceFromUrl(uriImage);
-                                try {
-                                    final File file = File.createTempFile("image", uriImage.substring(uriImage.lastIndexOf('.')));
-                                    storageReference.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-                                            img.setImageBitmap(bitmap);
-                                        }
-                                    });
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-                });
             }
         });
+
         return convertView;
     }
 

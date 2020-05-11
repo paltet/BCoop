@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="425dp"
+    android:layout_gravity="center"
+    >
+
+    <TextView
+        android:id="@+id/usernameServicePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="username"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"
+        android:layout_marginTop="23dp"
+        />
+
+    <TextView
+        android:id="@+id/habilityTextServicePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Habilitat:"
+        android:layout_marginLeft="18dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
+        android:layout_below="@id/usernameServicePopup"
+        />
+
+    <TextView
+        android:id="@+id/habilityElementServicePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="habilitatText"
+        android:layout_marginLeft="50dp"
+        android:textSize="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@id/usernameServicePopup"
+        android:layout_toRightOf="@id/habilityTextServicePopup"
+        />
+
+
+    <TextView
+        android:id="@+id/dateTextServicePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date:"
+        android:layout_marginLeft="18dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
+        android:layout_below="@id/habilityTextServicePopup"
+        />
+
+    <TextView
+        android:id="@+id/dateElementServicePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dateText"
+        android:layout_marginLeft="50dp"
+        android:textSize="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@id/habilityElementServicePopup"
+        android:layout_toRightOf="@id/dateTextServicePopup"
+        />
+
+    <TextView
+        android:id="@+id/coinsTextServicePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coins:"
+        android:layout_marginLeft="18dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
+        android:layout_below="@id/dateTextServicePopup"
+        />
+
+    <TextView
+        android:id="@+id/coinsElementServicePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="coinsText"
+        android:layout_marginLeft="50dp"
+        android:textSize="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@id/dateElementServicePopup"
+        android:layout_toRightOf="@id/coinsTextServicePopup"
+        />
+
+    <TextView
+        android:id="@+id/messageTextServicePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message:"
+        android:layout_marginLeft="18dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
+        android:layout_below="@id/coinsTextServicePopup"
+        />
+
+
+    <EditText
+        android:id="@+id/messageElementServicePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message"
+        android:layout_marginLeft="18dp"
+        android:textSize="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@id/messageTextServicePopup"
+        />
+
+    <Button
+        android:id="@+id/acceptServiceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accept"
+        android:layout_below="@+id/messageElementServicePopup"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginBottom="18dp"
+        android:background="@color/Green"
+        />
+
+    <Button
+        android:id="@+id/denegateServiceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/messageElementServicePopup"
+        android:text="Denegate"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="18dp"
+        android:background="@color/Green"
+        />
+
+
+
+
+</RelativeLayout>

@@ -12,8 +12,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Message;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,9 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bcoop.bcoop.HomeActivity;
-import com.bcoop.bcoop.InitConfigImageActivity;
-import com.bcoop.bcoop.InitConfigLocationActivity;
 import com.bcoop.bcoop.Model.Missatge;
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.Model.Xat;
@@ -33,7 +28,7 @@ import com.bcoop.bcoop.ui.chat.chatnotification.Client;
 import com.bcoop.bcoop.ui.chat.chatnotification.Data;
 import com.bcoop.bcoop.ui.chat.chatnotification.MyResponse;
 import com.bcoop.bcoop.ui.chat.chatnotification.Sender;
-import com.bcoop.bcoop.ui.profile.ConfigProfileActivity;
+import com.bcoop.bcoop.ui.profile.AskServiceActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,7 +38,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -52,7 +46,6 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -105,6 +98,15 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
         message = findViewById(R.id.messageForm);
         adjunt = findViewById(R.id.attachMessage);
         send = findViewById(R.id.sendMessage);
+        ImageView serviceRequest = findViewById(R.id.serviceRequestButton);
+        serviceRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatWithAnotherUserActivity.this, AskServiceActivity.class);
+                intent.putExtra("otherUserEmail", chatWith);
+                startActivity(intent);
+            }
+        });
 
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
@@ -180,12 +182,15 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
         documentReferenceUsuari.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                String fotoUrl = (String) documentSnapshot.get("foto");
-                getImageFromStorage(fotoUrl);
-                String usrn = (String) documentSnapshot.get("nom");
-                username.setText(usrn);
+                if (documentSnapshot.exists()) {
+                    String fotoUrl = (String) documentSnapshot.get("foto");
+                    getImageFromStorage(fotoUrl);
+                    String usrn = (String) documentSnapshot.get("nom");
+                    username.setText(usrn);
+                }
             }
         });
+        //if first message
         if (first) {
             if (currentUser.getEmail().compareTo(chatWith) > 0)
                 xat = new Xat(chatWith, currentUser.getEmail());
@@ -325,7 +330,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
             saveImage();
         }
     }
-
+/*
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
@@ -334,5 +339,5 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
         }
         super.onKeyDown(keyCode, event);
         return false;
-    }
+    }*/
 }
