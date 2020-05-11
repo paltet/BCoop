@@ -152,16 +152,6 @@ public class ProfileFragment extends Fragment {
                     startActivity(intent);
                 }
             });
-
-            askService.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.putExtra("otherUserEmail", email);
-                    intent.setClass(ProfileFragment.super.requireActivity(), AskServiceActivity.class);
-                    startActivity(intent);
-                }
-            });
         }
         return root;
     }
