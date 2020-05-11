@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="350dp"
     android:layout_height="425dp"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:
+    >
 
     <TextView
         android:id="@+id/usernameServicePopup"
@@ -20,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Habilitat:"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="18dp"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginTop="18dp"
@@ -45,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date:"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="18dp"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginTop="18dp"
@@ -69,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Coins:"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="18dp"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginTop="18dp"
@@ -93,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Message:"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="18dp"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginTop="18dp"
@@ -106,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Message"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="18dp"
         android:textSize="18dp"
         android:layout_marginTop="18dp"
         android:layout_below="@id/messageTextServicePopup"
@@ -119,6 +121,8 @@
         android:text="Accept"
         android:layout_below="@+id/messageElementServicePopup"
         android:layout_marginTop="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginBottom="18dp"
         android:background="@color/Green"
         />
 
@@ -130,6 +134,8 @@
         android:text="Denegate"
         android:layout_alignParentRight="true"
         android:layout_marginTop="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="18dp"
         android:background="@color/Green"
         />
 
