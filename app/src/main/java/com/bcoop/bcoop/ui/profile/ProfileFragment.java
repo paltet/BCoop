@@ -1,9 +1,12 @@
 package com.bcoop.bcoop.ui.profile;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -48,7 +51,7 @@ public class ProfileFragment extends Fragment {
     private ImageView imageView;
     private Button logout;
     private String uriImage;
-    private Button askService;
+    private Button proves;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -104,6 +107,24 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+
+
+        //inici codi de proves
+        proves = root.findViewById(R.id.proves);
+        View mView = getLayoutInflater().inflate(R.layout.popup_servei, null);
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setView(mView);
+        final AlertDialog alertDialog = alert.create();
+        alertDialog.setCanceledOnTouchOutside(true);
+        proves.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.show();
+            }
+        });
+
+        //fi codi de proves
 
         logout = root.findViewById(R.id.logout);
         if (email.equals(mAuth.getCurrentUser().getEmail())) {

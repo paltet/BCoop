@@ -45,6 +45,7 @@ public class NotificationFragment extends Fragment {
     ListView listView;
     ConectFirebase conectFirebase = new ConectFirebase();
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

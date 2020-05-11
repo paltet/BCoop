@@ -87,6 +87,14 @@
                 android:text="@string/logout"
                 android:textColor="@color/red" />
 
+            <Button
+                android:id="@+id/proves"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="proves"
+                android:textColor="@color/red" />
+
         </LinearLayout>
     </ScrollView>
 
