@@ -1,8 +1,9 @@
 package com.bcoop.bcoop.ui.notification;
 
-import android.app.AlertDialog;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,13 +15,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bcoop.bcoop.HomeActivity;
 import com.bcoop.bcoop.Model.CurrentUser;
 import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.R;
+import com.bcoop.bcoop.databinding.ActivityHomeBinding;
 import com.bcoop.bcoop.ui.chat.ChatWithAnotherUserActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -34,6 +42,7 @@ import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import static android.content.ContentValues.TAG;
@@ -44,6 +53,7 @@ public class NotificationFragment extends Fragment {
     List<Notification> notificationsList;
     ListView listView;
     ConectFirebase conectFirebase = new ConectFirebase();
+    private  String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +61,8 @@ public class NotificationFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_notification, container, false);
 
         notificationsList = new ArrayList<>();
+
+
         // service request
         //notificationsList.add(new Notification(CurrentUser.getInstance().getCurrentUser().getEmail(), CurrentUser.getInstance().getCurrentUser().getNom(), "Mates","wciGnL2ZUimqUwbPFTNu" ,200, 20, Timestamp.now(), Timestamp.now()));
 
@@ -105,7 +117,7 @@ public class NotificationFragment extends Fragment {
     }
 
     private void deleteDialog(final Notification notification){
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+        final MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(getContext());
         dialog.setTitle(getString(R.string.delete_notification));
         dialog.setPositiveButton(R.string.accept,
                 new DialogInterface.OnClickListener() {
@@ -127,7 +139,7 @@ public class NotificationFragment extends Fragment {
     }
 
     private void tradingDialog(final Notification notification){
-        final AlertDialog.Builder normalDialog = new AlertDialog.Builder(getContext());
+        final MaterialAlertDialogBuilder normalDialog = new MaterialAlertDialogBuilder(getContext());
         String pattern = "dd/MM/yyyy HH:mm";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(notification.getTime().toDate());
@@ -150,7 +162,7 @@ public class NotificationFragment extends Fragment {
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent();
                     intent.putExtra("otherUserEmail", notification.getUserEmail());
-                    intent.setClass(Objects.requireNonNull(NotificationFragment.super.getActivity()), ChatWithAnotherUserActivity.class);
+                    intent.setClass(NotificationFragment.super.requireActivity(), ChatWithAnotherUserActivity.class);
                     startActivity(intent);
                 }
             });
@@ -182,7 +194,7 @@ public class NotificationFragment extends Fragment {
         duration1.setText(notification.getDuration() +" "+getString(R.string.hour));
         price1.setText(notification.getPrice() +" "+ getString(R.string.coins));
 
-        final AlertDialog.Builder layoutDialog = new AlertDialog.Builder(getContext());
+        final MaterialAlertDialogBuilder layoutDialog = new MaterialAlertDialogBuilder(getContext());
 
         layoutDialog.setTitle(notification.getTitle());
         layoutDialog.setCancelable(true);
@@ -194,7 +206,7 @@ public class NotificationFragment extends Fragment {
         layoutDialog.setView(dialogView);
         notification.setRead(true);
         conectFirebase.pushNotification(notification, CurrentUser.getInstance().getCurrentUser().getEmail());
-        final AlertDialog show = layoutDialog.show();
+        final androidx.appcompat.app.AlertDialog show = layoutDialog.show();
         if (notification.isResponse()) {
             dialogBtnAccept.setVisibility(View.GONE);
             dialogBtnRefuse.setVisibility(View.GONE);
@@ -218,7 +230,7 @@ public class NotificationFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("otherUserEmail", notification.getUserEmail());
-                intent.setClass(Objects.requireNonNull(NotificationFragment.super.getActivity()), ChatWithAnotherUserActivity.class);
+                intent.setClass(NotificationFragment.super.requireActivity(), ChatWithAnotherUserActivity.class);
                 startActivity(intent);
             }
         });
@@ -259,7 +271,7 @@ public class NotificationFragment extends Fragment {
         valor1.setText(Integer.toString(notification.getValor()));
         comment1.setText(notification.getComment());
 
-        final AlertDialog.Builder layoutDialog = new AlertDialog.Builder(getContext());
+        final MaterialAlertDialogBuilder layoutDialog = new MaterialAlertDialogBuilder(getContext());
         layoutDialog.setTitle(notification.getTitle());
         layoutDialog.setCancelable(true);
         pattern = "dd/MM/yyyy HH:mm";
@@ -283,7 +295,7 @@ public class NotificationFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("otherUserEmail", notification.getUserEmail());
-                intent.setClass(Objects.requireNonNull(NotificationFragment.super.getActivity()), ChatWithAnotherUserActivity.class);
+                intent.setClass(NotificationFragment.super.requireActivity(), ChatWithAnotherUserActivity.class);
                 startActivity(intent);
             }
         });

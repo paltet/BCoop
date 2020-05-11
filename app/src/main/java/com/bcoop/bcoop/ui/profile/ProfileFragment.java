@@ -114,7 +114,7 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent();
-                    intent.setClass(Objects.requireNonNull(ProfileFragment.super.getActivity()), MainActivity.class);
+                    intent.setClass(ProfileFragment.super.requireActivity(), MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     mAuth.signOut();
                     startActivity(intent);
@@ -130,7 +130,7 @@ public class ProfileFragment extends Fragment {
                 public void onClick(View v) {
                     Intent intent = new Intent();
                     intent.putExtra("otherUserEmail", email);
-                    intent.setClass(Objects.requireNonNull(ProfileFragment.super.getActivity()), ChatWithAnotherUserActivity.class);
+                    intent.setClass(ProfileFragment.super.requireActivity(), ChatWithAnotherUserActivity.class);
                     startActivity(intent);
                 }
             });
@@ -140,7 +140,7 @@ public class ProfileFragment extends Fragment {
                 public void onClick(View v) {
                     Intent intent = new Intent();
                     intent.putExtra("otherUserEmail", email);
-                    intent.setClass(Objects.requireNonNull(ProfileFragment.super.getActivity()), AskServiceActivity.class);
+                    intent.setClass(ProfileFragment.super.requireActivity(), AskServiceActivity.class);
                     startActivity(intent);
                 }
             });

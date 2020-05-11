@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bcoop.bcoop.HomeActivity;
 import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.Model.Premi;
 import com.bcoop.bcoop.R;
@@ -59,7 +60,7 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
 
         ImageView imageView = view.findViewById(R.id.imageView3);
         TextView titol = view.findViewById(R.id.Titol);
-        TextView descripcio = view.findViewById(R.id.Descripció);
+        TextView descripcio = view.findViewById(R.id.Descripcio);
         TextView preu = view.findViewById(R.id.Preu);
 
         titol.setText(premi.getNom());
@@ -123,7 +124,6 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
                                             });
 
                                     Notification notification = new Notification(-p.getPreu());
-
                                     conectFirebase.pushNotification(notification, FirebaseAuth.getInstance().getCurrentUser().getEmail());
                                 }
                             }
