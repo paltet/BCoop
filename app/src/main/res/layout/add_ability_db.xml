@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    android:layout_gravity="center"
+    >
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/addAbilityDBText"
+        android:layout_width="wrap_content"
+        android:textSize="24dp"
+        android:layout_marginTop="18dp"
+        android:layout_height="wrap_content"
+        android:text="Ability"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/addAbilityDB"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="18dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/addAbilityDBText"
+        />
+
+    <Button
+        android:id="@+id/addAbilityDBItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addAbilityDB"
+        android:text="Add"
+        android:layout_marginTop="18dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        />
+</RelativeLayout>

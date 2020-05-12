@@ -65,7 +65,7 @@ public class NotificationFragment extends Fragment {
 
 
         // service request
-        //notificationsList.add(new Notification(CurrentUser.getInstance().getCurrentUser().getEmail(), CurrentUser.getInstance().getCurrentUser().getNom(), "Mates","wciGnL2ZUimqUwbPFTNu" ,200, 20, Timestamp.now(), Timestamp.now()));
+        notificationsList.add(new Notification(CurrentUser.getInstance().getCurrentUser().getEmail(), CurrentUser.getInstance().getCurrentUser().getNom(), "Mates","wciGnL2ZUimqUwbPFTNu" ,200, 20, Timestamp.now(), Timestamp.now()));
 
         // service valoration
         //notificationsList.add(new Notification("sheng.liu0516@gmail.com", "sll","Mates", Timestamp.now(), 4, "very good!!"));

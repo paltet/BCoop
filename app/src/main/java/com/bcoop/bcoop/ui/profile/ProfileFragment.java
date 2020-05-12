@@ -53,13 +53,13 @@ public class ProfileFragment extends Fragment {
     private String uriImage;
     private Button proves;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
-
         final String perfil = getArguments().getString("email");
         final String email;
         if (perfil.equals("myPerfil"))
@@ -127,6 +127,8 @@ public class ProfileFragment extends Fragment {
         //fi codi de proves
 
         logout = root.findViewById(R.id.logout);
+
+
         if (email.equals(mAuth.getCurrentUser().getEmail())) {
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -138,6 +140,7 @@ public class ProfileFragment extends Fragment {
                     startActivity(intent);
                 }
             });
+
         }
         else {
             //if not my user, then chat option
