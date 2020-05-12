@@ -158,11 +158,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         //actualitzem date amb el nou pick
         date = c.getTime();
-        System.out.println("Date in in the format CHANGEEEEEEEED: dd-MM-yyyy");
-        System.out.println(new SimpleDateFormat("dd-MM-yyyy").format(date));
-        if(date.compareTo(currentDate) > 0){
-            System.out.println("date ES MÉS GRAN QUE currentDate");
-        }
+
     }
 
     //agafar el current user
@@ -176,7 +172,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
                     currentUser = new Usuari();
                     currentUser = documentSnapshot.toObject(Usuari.class);
                     Integer coins_currentUser = currentUser.getMonedes();
-                    Log.d("MONEDESSSSSSSSSSSSSSS:", String.valueOf(coins_currentUser));
+
                 }
             }
         });
@@ -210,9 +206,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
         Calendar calendar = Calendar.getInstance();
         currentDate = calendar.getTime();
         date = currentDate;
-        Log.d("DATA INICIAL:", String.valueOf(currentDate));
-        System.out.println("Date in in the format: dd-MM-yyyy");
-        System.out.println(new SimpleDateFormat("dd-MM-yyyy").format(date));
+
     }
 
 
@@ -251,9 +245,8 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
     private void confirmarServei(){
         //fer update de monedes del proveidor
         //fer update monedes del demander
-        /*OPTIONAL => VALORACIÓ --- anar al proveidor, a la habilitat habilitatescollida per el servei i fer update de la valoracio
-        en estrelles (fer mitja o yo k se) i afegir un comentari*/
-        //posar l'estat del servei a "finalitzat" => ja no haurà de sortir a la llista dels MEUS SEERVEIS del perfil
+        /*OPTIONAL => VALORACIÓ 
+        //posar l'estat del servei a "finalitzat" => 
     }
 }
 
