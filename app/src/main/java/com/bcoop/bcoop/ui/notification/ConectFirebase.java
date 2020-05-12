@@ -45,7 +45,8 @@ public class ConectFirebase {
     }
 
     public void confimatService(Notification notification) {
-        db.collection("Servei").document(notification.getServiceId()).update("confirmat", true);
+        db.collection("Servei").document(notification.getServiceId()).update("estat", "en curs");
+        //db.collection("Servei").document(notification.getServiceId()).update("confirmat", true);
     }
 
     public String getUserName(final String email) throws InterruptedException {

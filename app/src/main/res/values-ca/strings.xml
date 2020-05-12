@@ -116,4 +116,6 @@
     <string name="comment">Comentari</string>
     <string name="valoration">Valoració</string>
     <string name="servei_commented">va comentar el teu servei.</string>
+    <string name="NotEnoughCoins">no disposes de prous monedes</string>
+    <string name="InvalidServiceDate">data escollida no valida</string>
 </resources>
