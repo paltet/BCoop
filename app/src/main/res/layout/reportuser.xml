@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    android:layout_gravity="center"
+    >
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reporttext"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/ReportUser"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:labelFor="@id/sendReport" />
+
+    <TextView
+        android:id="@+id/reporttext"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:text="@string/Report"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/sendReport"
+        android:layout_width="85dp"
+        android:layout_height="38dp"
+        android:layout_below="@id/editText5"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="108dp"
+        android:text="@string/Send" />
+</RelativeLayout>

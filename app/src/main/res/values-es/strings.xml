@@ -113,4 +113,11 @@
     <string name="comment">Comentario</string>
     <string name="valoration">Valoracion</string>
     <string name="servei_commented">comentó sobre su servicio.</string>
+    <string name="NotEnoughCoins">no dispones de suficientes monedas</string>
+    <string name="InvalidServiceDate">data escogida no valida</string>
+    <string name="ReportUser">Explica que ha pasado aquí.</string>
+    <string name="Report">Informe</string>
+    <string name="Send">Envia</string>
+    <string name="ReportEnviat"> Enviado satisfactoriamente</string>
+
 </resources>

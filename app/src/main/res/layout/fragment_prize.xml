@@ -35,11 +35,10 @@
         <Button
             android:id="@+id/button"
             android:layout_width="0dp"
-            android:layout_height="37dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="#FFFFFF"
             android:text="@string/accept"
-            android:textColor="#FF44B654" />
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
@@ -66,12 +65,10 @@
 
     <Button
         android:id="@+id/VeurePremis"
-        android:layout_width="165dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
         android:layout_weight="1"
-        android:background="#8AFFF176"
         android:text="@string/veurePremis"
-        android:textColor="#FF44B654"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.934"

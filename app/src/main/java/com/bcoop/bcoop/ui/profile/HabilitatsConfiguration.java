@@ -1,6 +1,7 @@
 package com.bcoop.bcoop.ui.profile;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -138,7 +140,9 @@ public class HabilitatsConfiguration extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseFirestore firestore;
     final List<String> habilitatsUsuari = new ArrayList<>();
-
+    private Button dbAdd;
+    private Button dbAddItem;
+    private EditText dbItemText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,8 +150,49 @@ public class HabilitatsConfiguration extends AppCompatActivity {
         setContentView(R.layout.activity_habilitats_configuration);
         listView = (ListView) findViewById(R.id.checkeable_list);
         btnLookup = (Button) findViewById(R.id.okButton);
-
+        isAdmin();
         initItems();//amb firebase i posar els de per defecte
+
+        dbAdd = findViewById(R.id.addDB);
+
+
+
+        dbAdd.setVisibility(View.VISIBLE);
+        dbAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View mViewDB = getLayoutInflater().inflate(R.layout.add_ability_db, null);
+
+                final AlertDialog.Builder alertDB = new AlertDialog.Builder(HabilitatsConfiguration.this);
+                alertDB.setView(mViewDB);
+                final AlertDialog alertDialogDB = alertDB.create();
+                alertDialogDB.setCanceledOnTouchOutside(true);
+
+                alertDialogDB.show();
+                dbItemText = mViewDB.findViewById(R.id.addAbilityDB);
+                dbAddItem = mViewDB.findViewById(R.id.addAbilityDBItem);
+                dbAddItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String item = dbItemText.getText().toString();
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("nom", item);
+                        db.collection("Habilitat").document(item).set(data);
+                        alertDialogDB.dismiss();
+                        initItems();
+                    }
+                });
+
+
+            }
+        });
+
+
+
+
+
+
+
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -218,10 +263,28 @@ public class HabilitatsConfiguration extends AppCompatActivity {
         });
     }
 
+    private void isAdmin() {
+
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        firestore = FirebaseFirestore.getInstance();
+        final boolean[] adminlocal = {true};
+        final DocumentReference documentReference = firestore.collection("Usuari").document(email);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    Usuari usuari = new Usuari();
+                    usuari = documentSnapshot.toObject(Usuari.class);
+                    adminlocal[0] = usuari.isEsAdministrador();
+                    if(adminlocal[0])dbAdd.setVisibility(View.VISIBLE);
+                    else dbAdd.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+    }
+
     //amb firestore i posarlos a checeked els que tingui ja el user
     private void initItems(){
-
-
 
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         firestore = FirebaseFirestore.getInstance();
@@ -232,7 +295,6 @@ public class HabilitatsConfiguration extends AppCompatActivity {
                 if (documentSnapshot.exists()) {
                     Usuari usuari = new Usuari();
                     usuari = documentSnapshot.toObject(Usuari.class);
-
                     Map<String, HabilitatDetall> detallHabilitatUsuari = usuari.getHabilitats();
                     for (Map.Entry<String, HabilitatDetall> entry : detallHabilitatUsuari.entrySet()) {
                         habilitatsUsuari.add(entry.getKey());

@@ -47,7 +47,7 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
 
         TextView titol = view.findViewById(R.id.Titol);
         TextView time = view.findViewById(R.id.time);
-        TextView descripcio = view.findViewById(R.id.Descripció);
+        TextView descripcio = view.findViewById(R.id.Descripcio);
 
         titol.setText(notification.getTitle());
         String pattern = "dd/MM/yyyy HH:mm";

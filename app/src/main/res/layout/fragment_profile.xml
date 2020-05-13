@@ -9,7 +9,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-146dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,9 +85,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="60dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="@color/red"
                 android:text="@string/logout"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/proves"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="proves"
                 android:textColor="@color/red" />
+
+            <Button
+                android:id="@+id/Report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/Report" />
 
         </LinearLayout>
     </ScrollView>
