@@ -11,6 +11,8 @@ public class Servei {
     private String message;
     private String estat;
     public String idServei;
+    public String comentariValoracio;  //opcional
+    public Integer estrellesValoracio; // del 1 al 5
 
     public Servei() {}
 
@@ -74,5 +76,17 @@ public class Servei {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public String getComentariValoracio() {
+        return comentariValoracio;
+    }
+
+    public void setComentariValoracio(String comentariValoracio) { this.comentariValoracio = comentariValoracio;   }
+
+    public Integer getEstrellesValoracio() {
+        return estrellesValoracio;
+    }
+
+    public void setEstrellesValoracio(Integer estrellesValoracio) { this.estrellesValoracio = estrellesValoracio;   }
 
 }

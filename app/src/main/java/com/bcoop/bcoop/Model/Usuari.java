@@ -18,7 +18,7 @@ public class Usuari {
     private Map<String, HabilitatDetall> habilitats;
     private List<String> xats;
     private List<String> idiomas;
-    private List<Servei> serveis;
+    private List<String> serveis; //llista amb els idServei de tots els seus serveis
     private int nivell;
     private int valoracio;
     private List<Premi> premis;
@@ -136,11 +136,11 @@ public class Usuari {
         this.idiomas = idiomas;
     }
 
-    public List<Servei> getServeis() {
+    public List<String> getServeis() {
         return serveis;
     }
 
-    public void setServeis(List<Servei> serveis) {
+    public void setServeis(List<String> serveis) {
         this.serveis = serveis;
     }
 

@@ -25,7 +25,7 @@ public class Notification {
     }
 
     // service request
-    public Notification(String userEmail, String userName, String serviceName, String serviceId, int price, int duration, Timestamp dateIni, Timestamp dateFi) {
+    public Notification(String userEmail, String userName, String serviceName, String serviceId, int price, int duration, Timestamp dateIni, Timestamp dateFi, String content) {
         this.type = 1;
         this.userEmail = userEmail;
         this.userName = userName;
@@ -36,6 +36,7 @@ public class Notification {
         this.dataIni = dateIni;
         this.dateFi = dateFi;
         this.time = Timestamp.now();
+        this.content = content;
     }
 
     // service response
@@ -65,7 +66,6 @@ public class Notification {
         this.price = price;
         this.time = Timestamp.now();
     }
-
 
     public boolean isRead() {
         return isRead;
