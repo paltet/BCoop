@@ -2,14 +2,12 @@ package com.bcoop.bcoop.ui.chat.chatnotification;
 
 public class Data {
     private String user;
-    private int icon;
     private String title;
     private String body;
     private String sented;
 
-    public Data(String user, int icon, String title, String body, String sented) {
+    public Data(String user, String title, String body, String sented) {
         this.user = user;
-        this.icon = icon;
         this.title = title;
         this.body = body;
         this.sented = sented;
@@ -21,14 +19,6 @@ public class Data {
 
     public void setUser(String user) {
         this.user = user;
-    }
-
-    public int getIcon() {
-        return icon;
-    }
-
-    public void setIcon(int icon) {
-        this.icon = icon;
     }
 
     public String getTitle() {

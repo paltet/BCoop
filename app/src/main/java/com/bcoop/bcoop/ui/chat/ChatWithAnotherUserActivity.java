@@ -245,7 +245,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String token = (String) documentSnapshot.get("token");
-                Data data = new Data(email, R.mipmap.ic_launcher, text, "New message", chatWith);
+                Data data = new Data(email, username.getText().toString(), text, chatWith);
                 Sender sender = new Sender(data, token);
                 apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
                     @Override
