@@ -122,6 +122,7 @@ public class SearchFragment extends Fragment {
         adapter = new ResultListAdapter(users);
         mResultList.setAdapter(adapter);
         final ArrayList<Usuari> list = new ArrayList<>();
+        String currentuser = mAuth.getCurrentUser().getEmail();
 
         String dbQueryHab = "habilitats." + hability;
         db.collection("Usuari")
@@ -134,13 +135,17 @@ public class SearchFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Usuari user = document.toObject(Usuari.class);
-                                list.add(user);
-                                users.add(new UserSearch(user.getNom(), calculateDistance(user.getLocationLatitude(), user.getLocationLongitude()), getPhoto(user.getFoto()), user.getHabilitats(), user.getLocationLatitude(), user.getLocationLongitude(), user.getValoracio(), user.getEmail()));
-                                Log.d("distance", String.valueOf(users));
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                    users.sort(Comparator.comparing(UserSearch::getDistance));
-                                }
+                                Double loc = user.getLocationLatitude();
+                                if(loc != null && (!currentuser.equals(user.getEmail()))){
 
+                                    list.add(user);
+                                    users.add(new UserSearch(user.getNom(), calculateDistance(user.getLocationLatitude(), user.getLocationLongitude()), getPhoto(user.getFoto()), user.getHabilitats(), user.getLocationLatitude(), user.getLocationLongitude(), user.getValoracio(), user.getEmail()));
+                                    Log.d("distance", String.valueOf(users));
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                        users.sort(Comparator.comparing(UserSearch::getDistance));
+                                    }
+                                    
+                                }
                             }
 
                             adapter = new ResultListAdapter(users);
