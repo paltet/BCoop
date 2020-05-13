@@ -1,5 +1,6 @@
 package com.bcoop.bcoop.ui.search;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class SearchFragment extends Fragment {
 
@@ -125,6 +128,7 @@ public class SearchFragment extends Fragment {
                 .orderBy(dbQueryHab)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
@@ -133,11 +137,14 @@ public class SearchFragment extends Fragment {
                                 list.add(user);
                                 users.add(new UserSearch(user.getNom(), calculateDistance(user.getLocationLatitude(), user.getLocationLongitude()), getPhoto(user.getFoto()), user.getHabilitats(), user.getLocationLatitude(), user.getLocationLongitude(), user.getValoracio(), user.getEmail()));
                                 Log.d("distance", String.valueOf(users));
-                                adapter = new ResultListAdapter(users);
-                                mResultList.setAdapter(adapter);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    users.sort(Comparator.comparing(UserSearch::getDistance));
+                                }
 
                             }
 
+                            adapter = new ResultListAdapter(users);
+                            mResultList.setAdapter(adapter);
 
 
                         } else {

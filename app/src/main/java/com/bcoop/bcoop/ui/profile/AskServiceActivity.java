@@ -245,7 +245,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
     private void confirmarServei(){
         //fer update de monedes del proveidor
         //fer update monedes del demander
-        /*OPTIONAL => VALORACIÓ 
+        //OPTIONAL => VALORACIÓ
         //posar l'estat del servei a "finalitzat" => 
     }
 }
