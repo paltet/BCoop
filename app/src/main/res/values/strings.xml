@@ -115,5 +115,10 @@
     <string name="servei_commented">commented on your service.</string>
     <string name="NotEnoughCoins">not enough coins</string>
     <string name="InvalidServiceDate">chosen date not valid</string>
+    <string name="ReportUser">Explain what happened here.</string>
+    <string name="Report">Report</string>
+    <string name="Send">Send</string>
+    <string name="ReportEnviat"> Successfully sended</string>
+
 
 </resources>

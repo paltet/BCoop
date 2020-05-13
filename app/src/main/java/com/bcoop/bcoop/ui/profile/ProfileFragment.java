@@ -1,12 +1,10 @@
 package com.bcoop.bcoop.ui.profile;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -14,9 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -38,10 +38,10 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
@@ -50,8 +50,11 @@ public class ProfileFragment extends Fragment {
     private FirebaseFirestore firestore;
     private ImageView imageView;
     private Button logout;
+    private Button report;
     private String uriImage;
     private Button proves;
+    private Button ReportSendButton;
+    private EditText EditReport;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -127,6 +130,7 @@ public class ProfileFragment extends Fragment {
         //fi codi de proves
 
         logout = root.findViewById(R.id.logout);
+        report = root.findViewById(R.id.Report);
 
 
         if (email.equals(mAuth.getCurrentUser().getEmail())) {
@@ -153,6 +157,34 @@ public class ProfileFragment extends Fragment {
                     intent.putExtra("otherUserEmail", email);
                     intent.setClass(ProfileFragment.super.requireActivity(), ChatWithAnotherUserActivity.class);
                     startActivity(intent);
+                }
+            });
+
+            report.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    View viewReport = getLayoutInflater().inflate(R.layout.reportuser, null);
+                    final AlertDialog.Builder alertReport = new AlertDialog.Builder(getContext());
+                    alertReport.setView(viewReport);
+                    final AlertDialog alertDialogReport = alertReport.create();
+                    alertDialogReport.setCanceledOnTouchOutside(true);
+
+                    alertDialogReport.show();
+                    EditReport = viewReport.findViewById(R.id.editText5);
+                    ReportSendButton = viewReport.findViewById(R.id.sendReport);
+                    ReportSendButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String item = EditReport.getText().toString();
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("Informe", item);
+                            data.put("user", email);
+                            firestore.collection("Reports").add(data);
+                            alertDialogReport.dismiss();
+                            Toast.makeText(getContext(), R.string.ReportEnviat, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }
             });
         }
