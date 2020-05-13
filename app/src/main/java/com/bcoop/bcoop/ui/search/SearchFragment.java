@@ -112,8 +112,6 @@ public class SearchFragment extends Fragment {
         };
         searchSpinner.setOnItemSelectedListener(mListener); // Register this spinner for a mListener
 
-
-
     }
 
     private void searchUsers(String hability) {
@@ -144,7 +142,7 @@ public class SearchFragment extends Fragment {
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                         users.sort(Comparator.comparing(UserSearch::getDistance));
                                     }
-                                    
+
                                 }
                             }
 

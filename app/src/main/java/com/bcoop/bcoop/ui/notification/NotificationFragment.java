@@ -174,14 +174,11 @@ public class NotificationFragment extends Fragment {
     private void requestDialog(final Notification notification) {
         final View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_layout,null);
         Button dialogBtnRefuse = (Button) dialogView.findViewById(R.id.refuse);
-        Button dialogBtnChat = (Button) dialogView.findViewById(R.id.chat);
         Button dialogBtnAccept = (Button) dialogView.findViewById(R.id.accept);
 
         final TextView applicantName = dialogView.findViewById(R.id.applicantName);
         TextView habilitatName = dialogView.findViewById(R.id.habilitatName);
         TextView dateIni1 = dialogView.findViewById(R.id.dateIni1);
-        TextView dateFi1 = dialogView.findViewById(R.id.dateFi1);
-        TextView duration1 = dialogView.findViewById(R.id.duration1);
         TextView price1 = dialogView.findViewById(R.id.price1);
         applicantName.setText(notification.getUserName());
 
@@ -191,8 +188,6 @@ public class NotificationFragment extends Fragment {
         String date = simpleDateFormat.format(notification.getDataIni().toDate());
         dateIni1.setText(date);
         date = simpleDateFormat.format(notification.getDateFi().toDate());
-        dateFi1.setText(date);
-        duration1.setText(notification.getDuration() +" "+getString(R.string.hour));
         price1.setText(notification.getPrice() +" "+ getString(R.string.coins));
 
         final MaterialAlertDialogBuilder layoutDialog = new MaterialAlertDialogBuilder(getContext());
@@ -226,15 +221,7 @@ public class NotificationFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new NotificationFragment()).commit();
             }
         });
-        dialogBtnChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("otherUserEmail", notification.getUserEmail());
-                intent.setClass(NotificationFragment.super.requireActivity(), ChatWithAnotherUserActivity.class);
-                startActivity(intent);
-            }
-        });
+
         dialogBtnRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
