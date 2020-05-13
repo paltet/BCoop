@@ -286,8 +286,6 @@ public class HabilitatsConfiguration extends AppCompatActivity {
     //amb firestore i posarlos a checeked els que tingui ja el user
     private void initItems(){
 
-
-
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         firestore = FirebaseFirestore.getInstance();
         final DocumentReference documentReference = firestore.collection("Usuari").document(email);

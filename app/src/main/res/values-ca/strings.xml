@@ -21,6 +21,11 @@
     <string name="configHabilitatsUser">Configuració habilitats </string>
     <string name="back">Enrrere</string>
     <string name="MyPrizes">Els Meus Premis</string>
+    <string name="ReportUser">Explica que ha passat aquí.</string>
+    <string name="Report">Informe</string>
+    <string name="Send">Envia</string>
+    <string name="ReportEnviat"> Enviat satisfactòriament</string>
+
 
 
 
