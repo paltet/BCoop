@@ -106,8 +106,10 @@ public class MyChatsAdapter extends BaseAdapter {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Xat xat = documentSnapshot.toObject(Xat.class);
-                Date lastMessage = xat.getMissatges().get(xat.getMissatges().size() - 1).getTemps();
-                lastMessageTime.setText(changeTimeFormat(lastMessage));
+                String lastMessage = xat.getMissatges().get(xat.getMissatges().size() - 1).getText();
+                if (lastMessage != null)
+                    lastMessageTime.setText(lastMessage);
+                else lastMessageTime.setText(R.string.image);
             }
         });
 

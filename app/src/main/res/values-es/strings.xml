@@ -119,5 +119,6 @@
     <string name="Report">Informe</string>
     <string name="Send">Envia</string>
     <string name="ReportEnviat"> Enviado satisfactoriamente</string>
+    <string name="image">Imagen</string>
 
 </resources>
