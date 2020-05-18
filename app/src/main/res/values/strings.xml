@@ -121,6 +121,7 @@
     <string name="ReportEnviat"> Successfully sended</string>
     <string name="image">Image</string>
     <string name="view_profile">View profile</string>
-
-
+    <string name="aquire_Service"> for a finished service </string>
+    <string name="ayou_recieved"> you have recieved </string>
+    <string name="you_sent"> you have sent</string>
 </resources>

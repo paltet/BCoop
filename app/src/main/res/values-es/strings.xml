@@ -121,5 +121,7 @@
     <string name="ReportEnviat"> Enviado satisfactoriamente</string>
     <string name="image">Imagen</string>
     <string name="view_profile">Ver perfil</string>
-
+    <string name="aquire_Service"> por un servicio finalizado </string>
+    <string name="ayou_recieved"> has recibido </string>
+    <string name="you_sent"> has enviado</string>
 </resources>

@@ -87,6 +87,9 @@ public class NotificationFragment extends Fragment {
                         }else if (notification.getType() == 4) {
                             notification.setTitle(getString(R.string.trading_information));
                         }
+                        else if(notification.getType() == 5){
+                            notification.setTitle(getString(R.string.trading_information));
+                        }
                         notificationsList.add(notification);
                     }
                 } else {
