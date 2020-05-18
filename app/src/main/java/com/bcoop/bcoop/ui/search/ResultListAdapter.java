@@ -73,7 +73,7 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
         TextView nameTextView = holder.nameTextView;
         nameTextView.setText(user.getName());
         Button button = holder.xatButton;
-        button.setText("Veure perfil");
+        button.setText(R.string.view_profile);
         Picasso.get().load("https://images.pexels.com/photos/248771/pexels-photo-248771.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=346&w=640").into(holder.profileImageView);
         //falta agafar la distancia i el rating
 
