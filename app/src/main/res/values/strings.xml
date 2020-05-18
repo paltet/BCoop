@@ -120,6 +120,7 @@
     <string name="Send">Send</string>
     <string name="ReportEnviat"> Successfully sended</string>
     <string name="image">Image</string>
+    <string name="view_profile">View profile</string>
 
 
 </resources>

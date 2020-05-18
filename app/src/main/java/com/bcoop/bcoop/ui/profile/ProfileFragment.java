@@ -2,6 +2,7 @@ package com.bcoop.bcoop.ui.profile;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -112,23 +113,6 @@ public class ProfileFragment extends Fragment {
         });
 
 
-        //inici codi de proves
-        proves = root.findViewById(R.id.proves);
-        View mView = getLayoutInflater().inflate(R.layout.popup_servei, null);
-
-        final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-        alert.setView(mView);
-        final AlertDialog alertDialog = alert.create();
-        alertDialog.setCanceledOnTouchOutside(true);
-        proves.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.show();
-            }
-        });
-
-        //fi codi de proves
-
         logout = root.findViewById(R.id.logout);
         report = root.findViewById(R.id.Report);
 
@@ -144,12 +128,13 @@ public class ProfileFragment extends Fragment {
                     startActivity(intent);
                 }
             });
+            report.setVisibility(View.GONE);
 
         }
         else {
-            //if not my user, then chat option
             logout.setText(R.string.chat);
-            logout.setTextColor(Color.DKGRAY);
+            logout.setTextColor(Color.BLACK);
+            logout.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
