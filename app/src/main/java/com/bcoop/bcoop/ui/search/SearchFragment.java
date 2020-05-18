@@ -69,7 +69,7 @@ public class SearchFragment extends Fragment {
         mResultList = root.findViewById(R.id.ResultList);
 
 
-        adapter = new ResultListAdapter(users);
+        adapter = new ResultListAdapter(users, habilitat_seleccionada);
         mResultList.setAdapter(adapter);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -117,7 +117,7 @@ public class SearchFragment extends Fragment {
     private void searchUsers(String hability) {
         Log.d("habilitatSeleccionada", hability);
         users = new ArrayList<>();
-        adapter = new ResultListAdapter(users);
+        adapter = new ResultListAdapter(users, habilitat_seleccionada);
         mResultList.setAdapter(adapter);
         final ArrayList<Usuari> list = new ArrayList<>();
         String currentuser = mAuth.getCurrentUser().getEmail();
@@ -146,7 +146,7 @@ public class SearchFragment extends Fragment {
                                 }
                             }
 
-                            adapter = new ResultListAdapter(users);
+                            adapter = new ResultListAdapter(users, habilitat_seleccionada);
                             mResultList.setAdapter(adapter);
 
 
