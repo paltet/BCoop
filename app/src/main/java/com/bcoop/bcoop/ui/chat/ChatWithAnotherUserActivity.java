@@ -73,7 +73,6 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
     private ImageView adjunt;
     private APIService apiService;
     private boolean first = false;
-    private boolean wait = true;
 
     private static final int PERMISSION_REQUEST = 0;
     private static final int RESULT_LOAD_IMAGE = 1;
@@ -211,9 +210,6 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     xat = documentSnapshot.toObject(Xat.class);
-                    while (wait) {
-                        wait = true;
-                    };
                     chatAdapter = new ChatAdapter(ChatWithAnotherUserActivity.this, xat, previousMessages);
                     messagesList.setAdapter(chatAdapter);
                     messagesList.setSelection(messagesList.getCount() - 1);
@@ -237,14 +233,11 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
         for (int id = 0; id < ids.size() - 1; ++id) {
             String pk = ids.get(id);
             final DocumentReference documentReference = firestore.collection("Xat").document(pk);
-            int finalId = id;
             documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     if (documentSnapshot.exists()) {
                         previousMessages.addAll(documentSnapshot.toObject(Xat.class).getMissatges());
-                        if (finalId == ids.size()-2)
-                            wait = false;
                     }
                 }
             });

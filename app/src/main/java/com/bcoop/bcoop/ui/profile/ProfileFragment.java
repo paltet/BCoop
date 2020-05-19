@@ -130,7 +130,18 @@ public class ProfileFragment extends Fragment {
                     startActivity(intent);
                 }
             });
-            report.setVisibility(View.GONE);
+            //report.setVisibility(View.GONE);
+            //Proba Veure reportar usuaris
+            report.setText("Veure reports");
+            report.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("otherUser", email);
+                    intent.setClass(ProfileFragment.super.requireActivity(), ReportActivity.class);
+                    startActivity(intent);
+                }
+            });
 
         }
         else {
