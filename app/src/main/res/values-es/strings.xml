@@ -126,4 +126,5 @@
     <string name="you_sent"> has enviado</string>
 
     <string name="reports">Informes</string>
+    <string name="no_reports">No hay informe para usuario</string>
 </resources>
