@@ -128,4 +128,6 @@
     <string name="aquire_Service"> per un servei finalitzat </string>
     <string name="ayou_recieved"> has rebut </string>
     <string name="you_sent"> has enviat</string>
+
+    <string name="reports">Informes</string>
 </resources>

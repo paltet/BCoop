@@ -124,4 +124,6 @@
     <string name="aquire_Service"> for a finished service </string>
     <string name="ayou_recieved"> you have recieved </string>
     <string name="you_sent"> you have sent</string>
+
+    <string name="reports">Reports</string>
 </resources>
