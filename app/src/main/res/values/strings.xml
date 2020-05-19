@@ -127,4 +127,5 @@
 
     <string name="reports">Reports</string>
     <string name="no_reports">No reports for user</string>
+    <string name="view_reports">Look At All Reports</string>
 </resources>
