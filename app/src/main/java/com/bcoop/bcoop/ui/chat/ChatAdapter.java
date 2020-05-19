@@ -34,16 +34,19 @@ class ChatAdapter extends BaseAdapter {
 
     public ChatAdapter() {}
 
-    public ChatAdapter(Context context, Xat xat) {
+    public ChatAdapter(Context context, Xat xat, List<Missatge> previousMessages) {
         this.context = context;
-        this.missatges = xat.getMissatges();
+        this.missatges = previousMessages;
+        this.missatges.addAll(xat.getMissatges());
+
         currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         storage = FirebaseStorage.getInstance();
     }
 
     @Override
     public int getCount() {
-        return missatges.size();
+        int n = missatges.size();
+        return n;
     }
 
     @Override

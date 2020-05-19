@@ -16,7 +16,7 @@ public class Usuari {
     private double locationLongitude;
     private boolean esAdministrador;
     private Map<String, HabilitatDetall> habilitats;
-    private List<String> xats;
+    private Map<String, List<String>> xats;
     private List<String> idiomas;
     private List<String> serveis; //llista amb els idServei de tots els seus serveis
     private int nivell;
@@ -36,7 +36,7 @@ public class Usuari {
         monedes = 0;
         esAdministrador = false;
         habilitats = new HashMap<>();
-        xats = new ArrayList<>();
+        xats = new HashMap<>();
         idiomas = new ArrayList<>();
         serveis = new ArrayList<>();
         nivell = 1;
@@ -116,16 +116,27 @@ public class Usuari {
         this.habilitats = habilitats;
     }
 
-    public List<String> getXats() {
+    public Map<String, List<String>> getXats() {
         return xats;
     }
 
-    public void setXats(List<String> xats) {
+    public void setXats(Map<String, List<String>> xats) {
         this.xats = xats;
     }
 
-    public void addXats(String xat) {
-        this.xats.add(xat);
+    public void addXatWithUser(String with, String xat) {
+        if (this.xats.containsKey(with)) {
+            this.xats.get(with).add(xat);
+        }
+        else {
+            List<String> xats = new ArrayList<>();
+            xats.add(xat);
+            this.xats.put(with, xats);
+        }
+    }
+
+    public void deleteXatWithUser(String with) {
+        this.xats.remove(with);
     }
 
     public List<String> getIdiomas() {

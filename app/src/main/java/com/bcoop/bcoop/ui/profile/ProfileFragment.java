@@ -39,6 +39,8 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -164,6 +166,8 @@ public class ProfileFragment extends Fragment {
                             Map<String, Object> data = new HashMap<>();
                             data.put("Informe", item);
                             data.put("user", email);
+                            String date = changeTimeFormat(Calendar.getInstance().getTime());
+                            data.put("data", date);
                             firestore.collection("Reports").add(data);
                             alertDialogReport.dismiss();
                             Toast.makeText(getContext(), R.string.ReportEnviat, Toast.LENGTH_SHORT).show();
@@ -209,5 +213,61 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    private String changeTimeFormat(Date temps) {
+        String timeDate = temps.toString();
+        String date = timeDate.substring(8, 10);
+        date = date.concat("/");
+        String mes = timeDate.substring(4, 7);
+        int num = convertMonth(mes);
+        if (num < 10)
+            date = date.concat("0");
+        date = date.concat(Integer.toString(num));
+        date = date.concat("/");
+        date = date.concat(timeDate.substring(timeDate.length()-4));
+        return date;
+    }
+
+    private int convertMonth(String mes) {
+        int month = 1;
+        switch (mes) {
+            case "Jan":
+                month = 1;
+                break;
+            case "Feb":
+                month = 2;
+                break;
+            case "Mar":
+                month = 3;
+                break;
+            case "Apr":
+                month = 4;
+                break;
+            case "May":
+                month = 5;
+                break;
+            case "Jun":
+                month = 6;
+                break;
+            case "Jul":
+                month = 7;
+                break;
+            case "Aug":
+                month = 8;
+                break;
+            case "Sep":
+                month = 9;
+                break;
+            case "Oct":
+                month = 10;
+                break;
+            case "Nov":
+                month = 11;
+                break;
+            case "Dec":
+                month = 12;
+                break;
+        }
+        return month;
+    }
 
 }

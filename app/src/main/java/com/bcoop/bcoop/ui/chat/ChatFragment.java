@@ -24,6 +24,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class ChatFragment extends Fragment {
     private ListView myChatList;
     private MyChatsAdapter myChatsAdapter;
@@ -43,17 +47,23 @@ public class ChatFragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Usuari currentUsuari = documentSnapshot.toObject(Usuari.class);
-                myChatsAdapter = new MyChatsAdapter(getContext(), currentUsuari.getXats());
+                Map<String, List<String>> xats = currentUsuari.getXats();
+                List<String> chatsWith = new ArrayList<>();
+                List<String> lastChat = new ArrayList<>();
+
+                for (Map.Entry<String, List<String>> entry : xats.entrySet()) {
+                    chatsWith.add(entry.getKey());
+                    lastChat.add(entry.getValue().get(entry.getValue().size()-1));
+                }
+
+                myChatsAdapter = new MyChatsAdapter(getContext(), chatsWith, lastChat);
                 myChatList.setAdapter(myChatsAdapter);
                 myChatList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(ChatFragment.super.getActivity(), ChatWithAnotherUserActivity.class);
                         String pk = (String) parent.getAdapter().getItem(position);
-                        String[] usuaris = pk.split(",");
-                        if (usuaris[0].equals(email))
-                            intent.putExtra("otherUserEmail", usuaris[1]);
-                        else intent.putExtra("otherUserEmail", usuaris[0]);
+                        intent.putExtra("otherUserEmail", pk);
                         startActivityForResult(intent, 123);
                     }
                 });

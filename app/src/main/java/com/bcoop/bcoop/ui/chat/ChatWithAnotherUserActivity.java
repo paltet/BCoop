@@ -45,7 +45,10 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,7 +62,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
     private String chatWith;
     private Usuari currentUsuari;
     private Usuari usuariChatWith;
-    private String id;
+    private String xatID;
     private Xat xat;
     private ChatAdapter chatAdapter;
     private ListView messagesList;
@@ -70,6 +73,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
     private ImageView adjunt;
     private APIService apiService;
     private boolean first = false;
+    private boolean wait = true;
 
     private static final int PERMISSION_REQUEST = 0;
     private static final int RESULT_LOAD_IMAGE = 1;
@@ -86,10 +90,6 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
 
         chatWith = getIntent().getStringExtra("otherUserEmail");
-
-        if (currentUser.getEmail().compareTo(chatWith) > 0)
-            id = chatWith.concat(",").concat(currentUser.getEmail());
-        else id = currentUser.getEmail().concat(",").concat(chatWith);
 
         messagesList = findViewById(R.id.messagesList);
         userImage = findViewById(R.id.userImage);
@@ -115,7 +115,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 currentUsuari = documentSnapshot.toObject(Usuari.class);
-                if (!currentUsuari.getXats().contains(id))
+                if (!currentUsuari.getXats().containsKey(chatWith))
                     first = true;
                 openChat();
             }
@@ -142,7 +142,8 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
     }
 
     private void createNewChat() {
-        final DocumentReference documentReferenceXat = firestore.collection("Xat").document(id);
+        final DocumentReference documentReferenceXat = firestore.collection("Xat").document();
+        xatID = documentReferenceXat.getId();
         documentReferenceXat.set(xat);
         final DocumentReference documentReferenceMyUsuari = firestore.collection("Usuari").document(currentUser.getEmail());
         documentReferenceMyUsuari.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -150,7 +151,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     currentUsuari = documentSnapshot.toObject(Usuari.class);
-                    currentUsuari.addXats(id);
+                    currentUsuari.addXatWithUser(chatWith, xatID);
                     documentReferenceMyUsuari.update("xats", currentUsuari.getXats()).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -159,7 +160,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     usuariChatWith = documentSnapshot.toObject(Usuari.class);
-                                    usuariChatWith.addXats(id);
+                                    usuariChatWith.addXatWithUser(currentUser.getEmail(), xatID);
                                     documentReferenceUsuari.update("xats", usuariChatWith.getXats()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
@@ -183,44 +184,72 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
-                    String fotoUrl = (String) documentSnapshot.get("foto");
-                    getImageFromStorage(fotoUrl);
-                    String usrn = (String) documentSnapshot.get("nom");
-                    username.setText(usrn);
+                    usuariChatWith = documentSnapshot.toObject(Usuari.class);
+                    getImageFromStorage(usuariChatWith.getFoto());
+                    username.setText(usuariChatWith.getNom());
                 }
             }
         });
-        //if first message
         if (first) {
             if (currentUser.getEmail().compareTo(chatWith) > 0)
                 xat = new Xat(chatWith, currentUser.getEmail());
             else xat = new Xat(currentUser.getEmail(), chatWith);
-            chatAdapter = new ChatAdapter(ChatWithAnotherUserActivity.this, xat);
+            chatAdapter = new ChatAdapter(ChatWithAnotherUserActivity.this, xat, new ArrayList<>());
             messagesList.setAdapter(chatAdapter);
             return;
         }
-        final DocumentReference documentReference = firestore.collection("Xat").document(id);
+        List<String> ids = currentUsuari.getXats().get(chatWith);
+        List<Missatge> previousMessages = getPrev(ids);
+
+        //previousMessages.add(new Missatge("u@gmail.com", "sk@gmail.com", "Previous messages", null));
+        //previousMessages.add(new Missatge("sk@gmail.com", "u@gmail.com", "Previous messages 1", null));
+        //previousMessages.add(new Missatge("sk@gmail.com", "u@gmail.com", "Previous messages 2", null));
+        xatID = currentUsuari.getXats().get(chatWith).get(currentUsuari.getXats().get(chatWith).size()-1);
+        final DocumentReference documentReference = firestore.collection("Xat").document(xatID);
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     xat = documentSnapshot.toObject(Xat.class);
-                    chatAdapter = new ChatAdapter(ChatWithAnotherUserActivity.this, xat);
+                    while (wait) {
+                        wait = true;
+                    };
+                    chatAdapter = new ChatAdapter(ChatWithAnotherUserActivity.this, xat, previousMessages);
                     messagesList.setAdapter(chatAdapter);
-                    messagesList.setSelection(messagesList.getCount() -1);
+                    messagesList.setSelection(messagesList.getCount() - 1);
                     documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                         @Override
                         public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                             if (documentSnapshot.exists()) {
                                 xat = documentSnapshot.toObject(Xat.class);
                                 chatAdapter.addedMessages(xat.getMissatges());
-                                messagesList.setSelection(messagesList.getCount() -1);
+                                messagesList.setSelection(messagesList.getCount() - 1);
                             }
                         }
                     });
                 }
             }
         });
+    }
+
+    private List<Missatge> getPrev(List<String> ids) {
+        List<Missatge> previousMessages = new ArrayList<>();
+        for (int id = 0; id < ids.size() - 1; ++id) {
+            String pk = ids.get(id);
+            final DocumentReference documentReference = firestore.collection("Xat").document(pk);
+            int finalId = id;
+            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        previousMessages.addAll(documentSnapshot.toObject(Xat.class).getMissatges());
+                        if (finalId == ids.size()-2)
+                            wait = false;
+                    }
+                }
+            });
+        }
+        return  previousMessages;
     }
 
     private void sendMessage(boolean isText, String text) {
@@ -232,7 +261,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
                 missatge = new Missatge(currentUser.getEmail(), chatWith, text, null);
             else missatge = new Missatge(currentUser.getEmail(), chatWith, null, text);
             xat.addMissatge(missatge);
-            final DocumentReference documentReference = firestore.collection("Xat").document(id);
+            final DocumentReference documentReference = firestore.collection("Xat").document(xatID);
             documentReference.update("missatges", xat.getMissatges());
             message.setText(null);
             sendNotification(chatWith, currentUser.getEmail(), text);
@@ -287,10 +316,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
         for (int i = 1; i < time.length; ++i)
             name = name.concat(time[i]);
 
-        String[] mails = id.split("@");
-        name = mails[0].concat(name);
-        mails = mails[1].split(",");
-        name = mails[1].concat(name);
+        name = xatID.concat(name);
 
         String extension = imgUri.getLastPathSegment();
         extension = extension.substring(extension.lastIndexOf('.'));
