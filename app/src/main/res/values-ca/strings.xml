@@ -132,4 +132,8 @@
     <string name="reports">Informes</string>
     <string name="no_reports">No hi ha informe per a usuari</string>
     <string name="view_reports">Veure tos els Informes</string>
+
+    <string name="my_services">Els Meus Serveis</string>
+    <string name="proveidor">Proveïdor: </string>
+    <string name="estat">Estat: </string>
 </resources>

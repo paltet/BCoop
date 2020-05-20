@@ -95,7 +95,7 @@
     <string name="refuse">Refuse</string>
     <string name="chat_with">Chat with him/her</string>
     <string name="applicant">Applicant</string>
-    <string name="ability">Ability</string>
+    <string name="ability">Ability: </string>
     <string name="start_date">Start date</string>
     <string name="end_date">End date</string>
     <string name="duration">Duration</string>
@@ -128,4 +128,8 @@
     <string name="reports">Reports</string>
     <string name="no_reports">No reports for user</string>
     <string name="view_reports">Look At All Reports</string>
+
+    <string name="my_services">My Services</string>
+    <string name="proveidor">Provider: </string>
+    <string name="estat">State: </string>
 </resources>
