@@ -54,10 +54,12 @@ public class ProfileFragment extends Fragment {
     private ImageView imageView;
     private Button logout;
     private Button report;
+    private Button viewReport;
     private String uriImage;
     private Button proves;
     private Button ReportSendButton;
     private EditText EditReport;
+    private boolean admin = false;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -114,10 +116,34 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        final DocumentReference documentReferenceAdmin = firestore.collection("Usuari").document(mAuth.getCurrentUser().getEmail());
+        documentReferenceAdmin.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    admin = documentSnapshot.getBoolean("esAdministrador");
+                    if (admin) {
+                        viewReport.setVisibility(View.VISIBLE);
+                        viewReport.setTextColor(Color.BLACK);
+                        viewReport.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
+                        viewReport.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent();
+                                intent.putExtra("otherUser", email);
+                                intent.setClass(ProfileFragment.super.requireActivity(), ReportActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                }
+            }
+        });
 
         logout = root.findViewById(R.id.logout);
         report = root.findViewById(R.id.Report);
-
+        viewReport = root.findViewById(R.id.viewReportsButton);
+        viewReport.setVisibility(View.GONE);
 
         if (email.equals(mAuth.getCurrentUser().getEmail())) {
             logout.setOnClickListener(new View.OnClickListener() {
@@ -130,19 +156,7 @@ public class ProfileFragment extends Fragment {
                     startActivity(intent);
                 }
             });
-            //report.setVisibility(View.GONE);
-            //Proba Veure reportar usuaris
-            report.setText("Veure reports");
-            report.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.putExtra("otherUser", email);
-                    intent.setClass(ProfileFragment.super.requireActivity(), ReportActivity.class);
-                    startActivity(intent);
-                }
-            });
-
+            report.setVisibility(View.GONE);
         }
         else {
             logout.setText(R.string.chat);
