@@ -1,5 +1,6 @@
 package com.bcoop.bcoop.ui.search;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -87,6 +89,16 @@ public class SearchFragment extends Fragment {
 
             }
         });*/
+
+        Button myServeces = root.findViewById(R.id.button2);
+        myServeces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MyServicesActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return root;
     }
 

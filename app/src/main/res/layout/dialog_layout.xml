@@ -6,7 +6,7 @@
     android:padding="15dp">
 
     <TextView
-        android:id="@+id/applicant"
+        android:id="@+id/proveidor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -30,7 +30,7 @@
         android:padding="12dp"
         android:text="@string/ability"
         android:textSize="14sp"
-        android:layout_below="@+id/applicant"/>
+        android:layout_below="@+id/proveidor"/>
     <TextView
         android:id="@+id/habilitatName"
         android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
         android:padding="12dp"
         android:text="@string/ability"
         android:textSize="14sp"
-        android:layout_below="@+id/applicant"
+        android:layout_below="@+id/proveidor"
         android:layout_alignParentRight="true"/>
     <TextView
         android:id="@+id/dateIni"

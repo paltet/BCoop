@@ -128,4 +128,8 @@
     <string name="reports">Informes</string>
     <string name="no_reports">No hay informe para usuario</string>
     <string name="view_reports">Ver todos los informes</string>
+
+    <string name="my_services">Mis servicios</string>
+    <string name="proveidor">Proveedor: </string>
+    <string name="estat">Estato: </string>
 </resources>
