@@ -3,6 +3,7 @@ package com.bcoop.bcoop.ui.chat;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,10 +104,14 @@ public class MyChatsAdapter extends BaseAdapter {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Xat xat = documentSnapshot.toObject(Xat.class);
-                String lastMessage = xat.getMissatges().get(xat.getMissatges().size() - 1).getText();
-                if (lastMessage != null)
-                    lastMessageTime.setText(lastMessage);
-                else lastMessageTime.setText(R.string.image);
+                if (xat.getMissatges().size() == 0)
+                    Log.d("Petaaaaaaaaaaaaaaaaaa ", lastIDs.get(position));
+                else {
+                    String lastMessage = xat.getMissatges().get(xat.getMissatges().size() - 1).getText();
+                    if (lastMessage != null)
+                        lastMessageTime.setText(lastMessage);
+                    else lastMessageTime.setText(R.string.image);
+                }
             }
         });
 
