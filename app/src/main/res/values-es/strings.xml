@@ -120,5 +120,16 @@
     <string name="Send">Envia</string>
     <string name="ReportEnviat"> Enviado satisfactoriamente</string>
     <string name="image">Imagen</string>
+    <string name="view_profile">Ver perfil</string>
+    <string name="aquire_Service"> por un servicio finalizado </string>
+    <string name="ayou_recieved"> has recibido </string>
+    <string name="you_sent"> has enviado</string>
 
+    <string name="reports">Informes</string>
+    <string name="no_reports">No hay informe para usuario</string>
+    <string name="view_reports">Ver todos los informes</string>
+
+    <string name="my_services">Mis servicios</string>
+    <string name="proveidor">Proveedor: </string>
+    <string name="estat">Estato: </string>
 </resources>

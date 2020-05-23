@@ -54,6 +54,15 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(notification.getTime().toDate());
         time.setText(date);
+        if(notification.getType() == 5) {
+            if (notification.getUserEmail().equals("demander")) {
+                notification.setContent(context.getResources().getString(R.string.you_sent)
+                        + " " + (notification.getPrice()) + " " + context.getResources().getString(R.string.coins) + " " + context.getResources().getString(R.string.aquire_Service));
+            } else {
+                notification.setContent(context.getResources().getString(R.string.ayou_recieved)
+                        + " " + (notification.getPrice()) + " " + context.getResources().getString(R.string.coins) + " " + context.getResources().getString(R.string.aquire_Service));
+            }
+        }
         if (notification.getType() == 4 && notification.getPrice() < 0) {
             notification.setContent(context.getResources().getString(R.string.you_spent)
                     +" "+ (-notification.getPrice()) +" "+ context.getResources().getString(R.string.to_acquire_gift));

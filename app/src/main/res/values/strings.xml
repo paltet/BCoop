@@ -95,7 +95,7 @@
     <string name="refuse">Refuse</string>
     <string name="chat_with">Chat with him/her</string>
     <string name="applicant">Applicant</string>
-    <string name="ability">Ability</string>
+    <string name="ability">Ability: </string>
     <string name="start_date">Start date</string>
     <string name="end_date">End date</string>
     <string name="duration">Duration</string>
@@ -120,6 +120,16 @@
     <string name="Send">Send</string>
     <string name="ReportEnviat"> Successfully sended</string>
     <string name="image">Image</string>
+    <string name="view_profile">View profile</string>
+    <string name="aquire_Service"> for a finished service </string>
+    <string name="ayou_recieved"> you have recieved </string>
+    <string name="you_sent"> you have sent</string>
 
+    <string name="reports">Reports</string>
+    <string name="no_reports">No reports for user</string>
+    <string name="view_reports">Look At All Reports</string>
 
+    <string name="my_services">My Services</string>
+    <string name="proveidor">Provider: </string>
+    <string name="estat">State: </string>
 </resources>

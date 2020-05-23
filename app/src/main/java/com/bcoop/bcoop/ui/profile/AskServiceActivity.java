@@ -63,7 +63,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
     private String idServei;
     private String habilitat_seleccionada; //habilitat seleccionda per l'spinner
     private Spinner serviceSelectorSpinner;
-    private Integer coins_to_pay;
+    private int coins_to_pay;
     private String demanderName;
     private String demander;
 
@@ -115,7 +115,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
                     serveisProveidorUpdate.add(idServei);
                     firestore.collection("Usuari").document(emailProveidor).update("serveis", serveisProveidorUpdate);
 
-                    //actualitzacionsConfirmacio();
+                    actualitzacionsConfirmacio();
 
                     ConectFirebase conectFirebase = new ConectFirebase();
                     Timestamp ts = new Timestamp(date);
@@ -255,7 +255,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
 
         //posar el servei amb idServei a "finalitzat" i donar-li una valoració i comentari(agafarlos de front)
         Comentari comentariValoracio = new Comentari("aquest es el comentari de valoració1", currentUser.getNom());
-        int estrellesValoracio = 0;
+        int estrellesValoracio = 3;
 
         //actualitzo servei
         firestore.collection("Servei").document(idServei).update("estat", "finalitzat");
@@ -307,9 +307,11 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
 
 
         //notificacio trading information (transfer de monedes)
-        Notification notification1 = new Notification(coins_to_pay);
+        Notification notification1 = new Notification(coins_to_pay, "proveidor");
+        Notification notification2 = new Notification(coins_to_pay, "demander");
+        System.out.println("AQUESTESSS MONEDESSSSSSSSSSSSSSSSSSSSSS"+coins_to_pay);
         conectFirebase.pushNotification(notification1, emailProveidor);
-        conectFirebase.pushNotification(notification1, demander);
+        conectFirebase.pushNotification(notification2, demander);
 
 
     }

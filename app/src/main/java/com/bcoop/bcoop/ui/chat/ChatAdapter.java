@@ -21,6 +21,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 class ChatAdapter extends BaseAdapter {
@@ -28,15 +29,18 @@ class ChatAdapter extends BaseAdapter {
     private List<Missatge> missatges;
     private Context context;
     private String currentUser;
+    private List<Missatge> previous;
 
     private FirebaseStorage storage;
 
 
     public ChatAdapter() {}
 
-    public ChatAdapter(Context context, Xat xat) {
+    public ChatAdapter(Context context) {
         this.context = context;
-        this.missatges = xat.getMissatges();
+        this.missatges = new ArrayList<>();
+        this.previous = new ArrayList<>();
+
         currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         storage = FirebaseStorage.getInstance();
     }
@@ -86,7 +90,8 @@ class ChatAdapter extends BaseAdapter {
     }
 
     public void addedMessages(List<Missatge> missatgeList) {
-        missatges = missatgeList;
+        this.missatges = previous;
+        this.missatges.addAll(missatgeList);
         notifyDataSetChanged();
     }
 
@@ -108,5 +113,16 @@ class ChatAdapter extends BaseAdapter {
             }
         }
         else img.setImageResource(R.drawable.profile);
+    }
+
+    public void setPrevious(List<Missatge> message) {
+        this.missatges = message;
+        this.previous = message;
+    }
+
+    public void addMissatges(List<Missatge> msg) {
+        this.missatges = previous;
+        this.missatges.addAll(msg);
+        notifyDataSetChanged();
     }
 }

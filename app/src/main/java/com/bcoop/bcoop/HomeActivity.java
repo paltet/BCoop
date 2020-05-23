@@ -63,7 +63,6 @@ public class HomeActivity extends AppCompatActivity {
                 String newToken = instanceIdResult.getToken();
                 final DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Usuari").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                 documentReference.update("token", newToken);
-                Toast.makeText(HomeActivity.this, newToken, Toast.LENGTH_SHORT).show();
                 documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {

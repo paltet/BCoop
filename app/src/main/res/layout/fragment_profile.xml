@@ -74,7 +74,7 @@
             <ExpandableListView
                 android:id="@+id/listHabilitats"
                 android:layout_width="match_parent"
-                android:layout_height="430dp"
+                android:layout_height="405dp"
                 android:layout_marginTop="10dp"
                 android:divider="@android:color/darker_gray"
                 android:dividerHeight="0.5dp"
@@ -91,20 +91,18 @@
                 android:textColor="@color/white" />
 
             <Button
-                android:id="@+id/proves"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="proves"
-                android:textColor="@color/red" />
-
-            <Button
                 android:id="@+id/Report"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/Report" />
+
+            <Button
+                android:id="@+id/viewReportsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/view_reports" />
 
         </LinearLayout>
     </ScrollView>

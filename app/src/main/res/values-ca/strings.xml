@@ -124,4 +124,16 @@
     <string name="NotEnoughCoins">no disposes de prous monedes</string>
     <string name="InvalidServiceDate">data escollida no valida</string>
     <string name="image">Imatge</string>
+    <string name="view_profile">Veure perfil</string>
+    <string name="aquire_Service"> per un servei finalitzat </string>
+    <string name="ayou_recieved"> has rebut </string>
+    <string name="you_sent"> has enviat</string>
+
+    <string name="reports">Informes</string>
+    <string name="no_reports">No hi ha informe per a usuari</string>
+    <string name="view_reports">Veure tos els Informes</string>
+
+    <string name="my_services">Els Meus Serveis</string>
+    <string name="proveidor">Proveïdor: </string>
+    <string name="estat">Estat: </string>
 </resources>

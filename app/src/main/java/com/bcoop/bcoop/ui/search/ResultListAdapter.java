@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bcoop.bcoop.HomeActivity;
+import com.bcoop.bcoop.Model.HabilitatDetall;
 import com.bcoop.bcoop.ProfileActivity;
 import com.bcoop.bcoop.R;
 import com.bcoop.bcoop.UserSearch;
@@ -31,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.ViewHolder> {
 
@@ -38,9 +40,11 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
     // Store a member variable for the users
     private ArrayList<UserSearch> users;
     private UserSearch actUser;
+    private String habilitat_seleccionada;
     // Pass in the contact array into the constructor
-    public ResultListAdapter(ArrayList<UserSearch> users) {
+    public ResultListAdapter(ArrayList<UserSearch> users, String habilitat_seleccionada) {
         this.users = users;
+        this.habilitat_seleccionada = habilitat_seleccionada;
     }
 
     @NonNull
@@ -69,15 +73,25 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
         TextView nameTextView = holder.nameTextView;
         nameTextView.setText(user.getName());
         Button button = holder.xatButton;
-        button.setText("Veure perfil");
+        button.setText(R.string.view_profile);
         Picasso.get().load("https://images.pexels.com/photos/248771/pexels-photo-248771.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=346&w=640").into(holder.profileImageView);
         //falta agafar la distancia i el rating
 
         TextView distance = holder.distTextView;
         distance.setText(user.getDistance());
 
+
+        System.out.println("AQUESTA ES LA HABILITAAAAAAAAAAAAATTTTTTTTTTTTTTT"+ habilitat_seleccionada);
         TextView rating = holder.ratingTextView;
-        rating.setText(String.valueOf(user.getRating()));
+        //agafem el rating de la habiliat del user en qüestió
+        int estrellesHabilitat;
+        Map<String, HabilitatDetall> habilitatsDetallProveidor = user.getHabilitats();
+        for (Map.Entry<String, HabilitatDetall> entry : habilitatsDetallProveidor.entrySet()) {
+            if (entry.getKey().equals(habilitat_seleccionada)) {
+                HabilitatDetall habilitatDetall = entry.getValue();
+                rating.setText(String.valueOf(habilitatDetall.getValoracio()));
+            }
+        }
 
         //per amagar o no la expandableList
         boolean isExpanded = users.get(position).isExpanded();
