@@ -134,4 +134,5 @@
     <string name="estat">Estado: </string>
 
     <string name="lastBan">Fecha del último bloqueo: </string>
+    <string name="noBan">"No se ha bloqueado nunca"</string>
 </resources>

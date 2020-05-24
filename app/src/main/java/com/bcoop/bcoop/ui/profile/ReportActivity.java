@@ -17,6 +17,7 @@ import com.bcoop.bcoop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +31,9 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public class ReportActivity extends AppCompatActivity {
@@ -44,6 +48,7 @@ public class ReportActivity extends AppCompatActivity {
         ListView reports = findViewById(R.id.messagesList);
         TextView numReps = findViewById(R.id.numberReports);
         TextView username = findViewById(R.id.usernameText);
+        TextView lastBan = findViewById(R.id.lastBanText);
         userImage = findViewById(R.id.userImage);
         userImage.setImageResource(R.drawable.profile);
 
@@ -60,7 +65,7 @@ public class ReportActivity extends AppCompatActivity {
                     if (task.getResult() != null) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             informe.add(document.getString("Informe"));
-                            date.add(document.getString("data"));
+                            date.add(changeTimeFormat(document.getString("data")));
                         }
                     }
                     numReps.setText(String.valueOf(informe.size()));
@@ -77,6 +82,12 @@ public class ReportActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     Usuari user = documentSnapshot.toObject(Usuari.class);
+                    Date lastBlogueig = user.getLastBloqueig();
+                    if (lastBlogueig != null) {
+                        lastBan.setText(R.string.lastBan);
+                        lastBan.setText(lastBan.getText().toString().concat(" ").concat(changeTimeFormat(lastBlogueig.toString())));
+                    }
+                    else lastBan.setText(R.string.noBan);
                     getImageFromStorage(user.getFoto());
                     username.setText(user.getNom());
                 }
@@ -101,4 +112,61 @@ public class ReportActivity extends AppCompatActivity {
             }
         }
     }
+
+    private String changeTimeFormat(String timeDate) {
+        String date = timeDate.substring(8, 10);
+        date = date.concat("/");
+        String mes = timeDate.substring(4, 7);
+        int num = convertMonth(mes);
+        if (num < 10)
+            date = date.concat("0");
+        date = date.concat(Integer.toString(num));
+        date = date.concat("/");
+        date = date.concat(timeDate.substring(timeDate.length()-4));
+        return date;
+    }
+
+    private int convertMonth(String mes) {
+        int month = 1;
+        switch (mes) {
+            case "Jan":
+                month = 1;
+                break;
+            case "Feb":
+                month = 2;
+                break;
+            case "Mar":
+                month = 3;
+                break;
+            case "Apr":
+                month = 4;
+                break;
+            case "May":
+                month = 5;
+                break;
+            case "Jun":
+                month = 6;
+                break;
+            case "Jul":
+                month = 7;
+                break;
+            case "Aug":
+                month = 8;
+                break;
+            case "Sep":
+                month = 9;
+                break;
+            case "Oct":
+                month = 10;
+                break;
+            case "Nov":
+                month = 11;
+                break;
+            case "Dec":
+                month = 12;
+                break;
+        }
+        return month;
+    }
+
 }
