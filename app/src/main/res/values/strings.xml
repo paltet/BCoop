@@ -132,4 +132,6 @@
     <string name="my_services">My Services</string>
     <string name="proveidor">Provider: </string>
     <string name="estat">State: </string>
+
+    <string name="lastBan">Last Ban Date: </string>
 </resources>

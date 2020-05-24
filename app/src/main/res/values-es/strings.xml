@@ -131,5 +131,7 @@
 
     <string name="my_services">Mis servicios</string>
     <string name="proveidor">Proveedor: </string>
-    <string name="estat">Estato: </string>
+    <string name="estat">Estado: </string>
+
+    <string name="lastBan">Fecha del último bloqueo: </string>
 </resources>

@@ -136,4 +136,6 @@
     <string name="my_services">Els Meus Serveis</string>
     <string name="proveidor">Proveïdor: </string>
     <string name="estat">Estat: </string>
+
+    <string name="lastBan">Data de l\'últim bloqueig: </string>
 </resources>

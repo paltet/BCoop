@@ -56,6 +56,16 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/lastBanText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lastBan"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textSize="20dp"
+        android:layout_marginBottom="10dp" />
+
     <ListView
         android:id="@+id/messagesList"
         android:layout_width="match_parent"
