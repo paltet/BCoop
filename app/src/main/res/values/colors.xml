@@ -10,4 +10,5 @@
     <color name="lightGrey">#CECECE</color>
     <color name="darkGrey">#141414</color>
     <color name="white">#FFFFFF</color>
+    <color name="selectedChat">#57e3ff</color>
 </resources>
