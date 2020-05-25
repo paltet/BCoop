@@ -3,6 +3,7 @@ package com.bcoop.bcoop.ui.chat;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +34,7 @@ public class MyChatsAdapter extends BaseAdapter {
     private List<String> myXats;
     private String otherUser;
     private List<String> lastIDs;
+    private int selected;
 
     private FirebaseFirestore firestore;
     private FirebaseStorage storage;
@@ -40,6 +43,7 @@ public class MyChatsAdapter extends BaseAdapter {
         this.context = context;
         this.myXats = xats;
         this.lastIDs = lastIDs;
+        selected = -1;
 
         firestore = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -70,6 +74,8 @@ public class MyChatsAdapter extends BaseAdapter {
         img.setImageResource(R.drawable.profile);
         final TextView username = convertView.findViewById(R.id.usernameText);
 
+        if (selected == position)
+            convertView.setBackgroundColor(Color.LTGRAY);
 
         final DocumentReference documentReferenceUsuari = firestore.collection("Usuari").document(otherUser);
         documentReferenceUsuari.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -118,7 +124,22 @@ public class MyChatsAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private String changeTimeFormat(Date lastMessage) {
-        return  lastMessage.toString().substring(11, 16);
+    public void update(List<String> delete) {
+        for (String deleteXat : delete)
+            myXats.remove(deleteXat);
+        notifyDataSetChanged();
+    }
+
+    public void changeBackground(int position) {
+        selected = position;
+        notifyDataSetChanged();
+    }
+
+    public void clearSelection(String removeChat) {
+        selected = -1;
+        int index = myXats.indexOf(removeChat);
+        myXats.remove(index);
+        lastIDs.remove(index);
+        notifyDataSetChanged();
     }
 }
