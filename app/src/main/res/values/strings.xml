@@ -135,4 +135,9 @@
 
     <string name="lastBan">Last Ban Date: </string>
     <string name="noBan">" It has never been blocked"</string>
+    <string name="prize_code">Enter prize code manually: </string>
+    <string name="scan_code">Scan the prize code: </string>
+    <string name="prize_used">Failure to use, the prize code has been used. </string>
+    <string name="prize_no_exist">Failure to use, the prize code does not exist. </string>
+
 </resources>
