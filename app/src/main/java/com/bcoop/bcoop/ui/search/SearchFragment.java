@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bcoop.bcoop.Model.Servei;
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
 import com.bcoop.bcoop.UserSearch;
@@ -47,6 +49,7 @@ public class SearchFragment extends Fragment {
     ArrayList<UserSearch> users = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth  mAuth = FirebaseAuth.getInstance();
+    private ArrayList<Servei> meusServeis = new ArrayList<>();
 
 
 
@@ -62,7 +65,7 @@ public class SearchFragment extends Fragment {
                 textView.setText(s);
             }
         });*/
-
+        searchMeusServeis();
         setCurrentUSer();
         setHabilitats(root);
         Log.d("habilitatsFinal", String.valueOf(habilites));
@@ -95,6 +98,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MyServicesActivity.class);
+                UtilityClass.getInstance().setList(meusServeis);
                 startActivity(intent);
             }
         });
@@ -230,12 +234,37 @@ public class SearchFragment extends Fragment {
     private void setCurrentUSer(){
 
         db.collection("Usuari").document(mAuth.getCurrentUser().getEmail())
-            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 currentUser = documentSnapshot.toObject(Usuari.class);
             }
         });
+
+    }
+
+
+
+    private void searchMeusServeis() {
+        //omplim la llista de serveis amb els serveis que en soc demander
+        String myEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        db.collection("Servei")
+                .whereEqualTo("demander", myEmail)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                Servei meuServei = document.toObject(Servei.class);
+                                Servei meuServeiAfegir = new Servei(meuServei.getIdServei(), meuServei.getProveidor(), meuServei.getDemander(), meuServei.getHabilitat(),
+                                        meuServei.getDate(), meuServei.getCoins_to_pay(), meuServei.getMessage(), meuServei.getEstat(),
+                                        meuServei.getComentariValoracio(), meuServei.getEstrellesValoracio());
+                                meusServeis.add(meuServeiAfegir);
+                            }
+                        }
+                    }
+                });
 
     }
 

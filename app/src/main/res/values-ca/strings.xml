@@ -143,4 +143,8 @@
     <string name="scan_code">Escanegeu el codi del premi: </string>
     <string name="prize_used">L\'ús ha fallat, el codi de premi s’ha utilitzat. </string>
     <string name="prize_no_exist">L\'ús ha fallat, el codi de premi no existeix. </string>
+
+    <string name="esta_pendent" > "Servei pendent de confirmació. Prova de xatejar amb el proveidor.</string>
+    <string name="monedes_a_pagar">"monedes a pagar:"</string>
+    <string name="pay">"Pagar"</string>
 </resources>

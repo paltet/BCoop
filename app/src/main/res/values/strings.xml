@@ -139,5 +139,8 @@
     <string name="scan_code">Scan the prize code: </string>
     <string name="prize_used">Failure to use, the prize code has been used. </string>
     <string name="prize_no_exist">Failure to use, the prize code does not exist. </string>
+    <string name="esta_pendent" > "Service pending of confirmation. Try chatting with your provider.</string>
+    <string name="monedes_a_pagar">"coins to pay:"</string>
+    <string name="pay">"Pay"</string>
 
 </resources>
