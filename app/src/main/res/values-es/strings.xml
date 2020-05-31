@@ -146,4 +146,9 @@
 
     <string name="levelup">Has subido al nivel </string>
 
+    <string name="descripcio">Descripción</string>
+    <string name="PriceName">Nombre Premio</string>
+
+
+
 </resources>
