@@ -34,7 +34,7 @@ public class MyChatsAdapter extends BaseAdapter {
     private List<String> myXats;
     private String otherUser;
     private List<String> lastIDs;
-    private int selected;
+    private List<Boolean> selected;
 
     private FirebaseFirestore firestore;
     private FirebaseStorage storage;
@@ -43,7 +43,9 @@ public class MyChatsAdapter extends BaseAdapter {
         this.context = context;
         this.myXats = xats;
         this.lastIDs = lastIDs;
-        selected = -1;
+        selected = new ArrayList<>();
+        for (int i = 0; i < this.myXats.size(); ++i)
+            selected.add(i, false);
 
         firestore = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -74,7 +76,7 @@ public class MyChatsAdapter extends BaseAdapter {
         img.setImageResource(R.drawable.profile);
         final TextView username = convertView.findViewById(R.id.usernameText);
 
-        if (selected == position)
+        if (selected.get(position))
             convertView.setBackgroundColor(Color.LTGRAY);
 
         final DocumentReference documentReferenceUsuari = firestore.collection("Usuari").document(otherUser);
@@ -124,22 +126,26 @@ public class MyChatsAdapter extends BaseAdapter {
         return convertView;
     }
 
+    private String changeTimeFormat(Date lastMessage) {
+        return  lastMessage.toString().substring(11, 16);
+    }
+
     public void update(List<String> delete) {
         for (String deleteXat : delete)
             myXats.remove(deleteXat);
+        for (int i = 0; i < this.myXats.size(); ++i)
+            selected.add(i, false);
         notifyDataSetChanged();
     }
 
     public void changeBackground(int position) {
-        selected = position;
+        selected.set(position, !selected.get(position));
         notifyDataSetChanged();
     }
 
-    public void clearSelection(String removeChat) {
-        selected = -1;
-        int index = myXats.indexOf(removeChat);
-        myXats.remove(index);
-        lastIDs.remove(index);
+    public void clearSelection() {
+        for (int i = 0; i < this.myXats.size(); ++i)
+            selected.add(i, false);
         notifyDataSetChanged();
     }
 }
