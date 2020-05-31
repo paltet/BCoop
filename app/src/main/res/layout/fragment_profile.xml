@@ -104,6 +104,20 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/view_reports" />
 
+            <Button
+            android:id="@+id/makeAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/makeAdmin" />
+
+            <Button
+                android:id="@+id/blockUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/blockUser" />
+
         </LinearLayout>
     </ScrollView>
 

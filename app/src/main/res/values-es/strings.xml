@@ -146,6 +146,14 @@
 
     <string name="levelup">Has subido al nivel </string>
 
+    <string name="descripcio">Descripción</string>
+    <string name="PriceName">Nombre Premio</string>
+
+
+
+    <string name="makeAdmin">Hacer usuario admin</string>
+    <string name="blockUser">Bloquear usuario</string>
+
     <string name="service_completed">Servicio Completado</string>
     <string name="add_comment">Añade un comentario (opcional)</string>
     <string name="rate_service">¿Cómo valoras el servicio?</string>

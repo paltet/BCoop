@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="350dp"
+    android:layout_gravity="center"
+    >
+
+    <TextView
+        android:id="@+id/addPriceDBText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="@string/prize"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/NameDB"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addPriceDBText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:hint="@string/PriceName"
+        android:inputType="textLongMessage" />
+
+    <EditText
+        android:id="@+id/descripcioPriceDB"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/NameDB"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:hint="@string/descripcio"
+        android:inputType="textLongMessage" />
+
+    <EditText
+        android:id="@+id/preu"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descripcioPriceDB"
+        android:ems="10"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/price"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/addPriceDBItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/preu"
+        android:text="Add"
+        android:layout_marginTop="18dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        />
+
+
+</RelativeLayout>

@@ -25,6 +25,11 @@
     <string name="Report">Informe</string>
     <string name="Send">Envia</string>
     <string name="ReportEnviat"> Enviat satisfactòriament</string>
+    <string name="descripcio">Descripció</string>
+    <string name="PriceName">Nom Premi</string>
+
+
+
 
 
 
@@ -148,6 +153,9 @@
     <string name="monedes_a_pagar">"monedes a pagar:"</string>
     <string name="pay">"Pagar"</string>
     <string name="levelup">Has pujat al nivell </string>
+
+    <string name="makeAdmin">Fer usuari admin</string>
+    <string name="blockUser">Bloquejar usuari</string>
     <string name="service_completed">Servei Completat</string>
     <string name="add_comment">Afegeix un comentari (opcional)</string>
     <string name="rate_service">Com valores el servei?</string>
