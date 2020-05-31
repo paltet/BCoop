@@ -143,4 +143,6 @@
     <string name="monedes_a_pagar">"coins to pay:"</string>
     <string name="pay">"Pay"</string>
 
+    <string name="levelup">You reached level </string>
+
 </resources>

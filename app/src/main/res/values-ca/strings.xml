@@ -147,4 +147,5 @@
     <string name="esta_pendent" > "Servei pendent de confirmació. Prova de xatejar amb el proveidor.</string>
     <string name="monedes_a_pagar">"monedes a pagar:"</string>
     <string name="pay">"Pagar"</string>
+    <string name="levelup">Has pujat al nivell </string>
 </resources>
