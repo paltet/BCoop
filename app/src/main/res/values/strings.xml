@@ -144,5 +144,8 @@
     <string name="pay">"Pay"</string>
 
     <string name="levelup">You reached level </string>
+    <string name="service_completed">Service Completed</string>
+    <string name="add_comment">Add a comment (optional)</string>
+    <string name="rate_service">How was the service?</string>
 
 </resources>
