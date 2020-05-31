@@ -134,4 +134,7 @@
     <string name="estat">State: </string>
 
     <string name="lastBan">Last Ban Date: </string>
+
+    <string name="makeAdmin">Make Admin</string>
+
 </resources>

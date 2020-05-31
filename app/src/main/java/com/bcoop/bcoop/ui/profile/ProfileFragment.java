@@ -56,7 +56,7 @@ public class ProfileFragment extends Fragment {
     private Button report;
     private Button viewReport;
     private String uriImage;
-    private Button proves;
+    private Button makeAdmin;
     private Button ReportSendButton;
     private EditText EditReport;
     private boolean admin = false;
@@ -124,6 +124,7 @@ public class ProfileFragment extends Fragment {
                     admin = documentSnapshot.getBoolean("esAdministrador");
                     if (admin) {
                         viewReport.setVisibility(View.VISIBLE);
+                        makeAdmin.setVisibility(View.VISIBLE);
                         viewReport.setTextColor(Color.BLACK);
                         viewReport.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
                         viewReport.setOnClickListener(new View.OnClickListener() {
@@ -135,15 +136,25 @@ public class ProfileFragment extends Fragment {
                                 startActivity(intent);
                             }
                         });
+
+
+                        makeAdmin.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                makeadmin(email);
+                            }
+                        });
                     }
                 }
             }
         });
 
         logout = root.findViewById(R.id.logout);
+        makeAdmin = root.findViewById(R.id.makeAdmin);
         report = root.findViewById(R.id.Report);
         viewReport = root.findViewById(R.id.viewReportsButton);
         viewReport.setVisibility(View.GONE);
+        makeAdmin.setVisibility(View.GONE);
 
         if (email.equals(mAuth.getCurrentUser().getEmail())) {
             logout.setOnClickListener(new View.OnClickListener() {
@@ -203,6 +214,11 @@ public class ProfileFragment extends Fragment {
             });
         }
         return root;
+    }
+
+    private void makeadmin(String email) {
+
+        firestore.collection("Usuari").document(email).update("esAdministrador", true);
     }
 
     private String getLocality(double locationLatitude, double locationLongitude) {
