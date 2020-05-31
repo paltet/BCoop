@@ -12,6 +12,7 @@ public class Usuari {
     private String nom;
     private String foto;
     private boolean esPremium;
+    private boolean isBlocked;
     private int monedes;
     private double locationLatitude;
     private double locationLongitude;
@@ -37,6 +38,7 @@ public class Usuari {
         esPremium = false;
         monedes = 0;
         esAdministrador = false;
+        isBlocked = false;
         habilitats = new HashMap<>();
         xats = new HashMap<>();
         idiomas = new ArrayList<>();

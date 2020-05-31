@@ -153,4 +153,7 @@
     <string name="monedes_a_pagar">"monedes a pagar:"</string>
     <string name="pay">"Pagar"</string>
     <string name="levelup">Has pujat al nivell </string>
+
+    <string name="makeAdmin">Fer usuari admin</string>
+    <string name="blockUser">Bloquejar usuari</string>
 </resources>
