@@ -10,16 +10,18 @@ public class Premi {
     private Integer preu;
     private Timestamp time;
     private boolean use;
+    private String id;
 
     public Premi() {
     }
 
-    public Premi(String nom, String descripció, String imatge, Integer preu, Timestamp time) {
+    public Premi(String nom, String descripció, String imatge, Integer preu, Timestamp time, String id) {
         this.nom = nom;
         this.descripció = descripció;
         this.imatge = imatge;
         this.preu = preu;
         this.time = time;
+        this.id = id;
     }
 
     public String getNom() {
@@ -62,4 +64,19 @@ public class Premi {
         this.time = time;
     }
 
+    public boolean isUse() {
+        return use;
+    }
+
+    public void setUse(boolean use) {
+        this.use = use;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

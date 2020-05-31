@@ -2,6 +2,7 @@ package com.bcoop.bcoop.Model;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ public class Usuari {
     private int valoracio;
     private List<Premi> premis;
     private String token;
+    private Date lastBloqueig;
 
     public Usuari() {}
 
@@ -185,5 +187,13 @@ public class Usuari {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Date getLastBloqueig() {
+        return lastBloqueig;
+    }
+
+    public void setLastBloqueig(Date lastBloqueig) {
+        this.lastBloqueig = lastBloqueig;
     }
 }

@@ -138,6 +138,14 @@
     <string name="estat">Estat: </string>
 
     <string name="lastBan">Data de l\'últim bloqueig: </string>
+    <string name="noBan">"No s'ha bloquejat mai"</string>
+    <string name="prize_code">Introduïu el codi de premi manualment: </string>
+    <string name="scan_code">Escanegeu el codi del premi: </string>
+    <string name="prize_used">L\'ús ha fallat, el codi de premi s’ha utilitzat. </string>
+    <string name="prize_no_exist">L\'ús ha fallat, el codi de premi no existeix. </string>
 
-    <string name="makeAdmin">Fer Admin</string>
+    <string name="esta_pendent" > "Servei pendent de confirmació. Prova de xatejar amb el proveidor.</string>
+    <string name="monedes_a_pagar">"monedes a pagar:"</string>
+    <string name="pay">"Pagar"</string>
+    <string name="levelup">Has pujat al nivell </string>
 </resources>
