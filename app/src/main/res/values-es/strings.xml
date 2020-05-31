@@ -146,4 +146,7 @@
 
     <string name="levelup">Has subido al nivel </string>
 
+    <string name="makeAdmin">Hacer usuario admin</string>
+    <string name="blockUser">Bloquear usuario</string>
+
 </resources>

@@ -38,6 +38,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -57,6 +58,7 @@ public class ProfileFragment extends Fragment {
     private Button viewReport;
     private String uriImage;
     private Button makeAdmin;
+    private Button blockUser;
     private Button ReportSendButton;
     private EditText EditReport;
     private boolean admin = false;
@@ -125,6 +127,7 @@ public class ProfileFragment extends Fragment {
                     if (admin) {
                         viewReport.setVisibility(View.VISIBLE);
                         makeAdmin.setVisibility(View.VISIBLE);
+                        blockUser.setVisibility(View.VISIBLE);
                         viewReport.setTextColor(Color.BLACK);
                         viewReport.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
                         viewReport.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +137,13 @@ public class ProfileFragment extends Fragment {
                                 intent.putExtra("otherUser", email);
                                 intent.setClass(ProfileFragment.super.requireActivity(), ReportActivity.class);
                                 startActivity(intent);
+                            }
+                        });
+
+                        blockUser.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                blockUser(email);
                             }
                         });
 
@@ -151,10 +161,12 @@ public class ProfileFragment extends Fragment {
 
         logout = root.findViewById(R.id.logout);
         makeAdmin = root.findViewById(R.id.makeAdmin);
+        blockUser = root.findViewById(R.id.blockUser);
         report = root.findViewById(R.id.Report);
         viewReport = root.findViewById(R.id.viewReportsButton);
         viewReport.setVisibility(View.GONE);
         makeAdmin.setVisibility(View.GONE);
+        blockUser.setVisibility(View.GONE);
 
         if (email.equals(mAuth.getCurrentUser().getEmail())) {
             logout.setOnClickListener(new View.OnClickListener() {
@@ -214,6 +226,13 @@ public class ProfileFragment extends Fragment {
             });
         }
         return root;
+    }
+
+    private void blockUser(String email) {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        firestore.collection("Usuari").document(email).update("isBlocked", true);
+        firestore.collection("Usuar").document(email).update("lastBloqueig", formatter.format(date));
     }
 
     private void makeadmin(String email) {
