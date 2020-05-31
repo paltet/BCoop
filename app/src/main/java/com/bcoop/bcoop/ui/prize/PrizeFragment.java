@@ -47,7 +47,7 @@ public class PrizeFragment extends Fragment {
                                 String descripció = document.getString("descripció");
                                 String imatge = document.getString("imatge");
                                 Integer preu = document.getDouble("preu").intValue();
-                                premiList.add(new Premi(nom, descripció, imatge, preu, null));
+                                premiList.add(new Premi(nom, descripció, imatge, preu, null, null));
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
@@ -61,6 +61,13 @@ public class PrizeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), MyPremi.class);
+                startActivity(intent);
+            }
+        });
+        root.findViewById(R.id.Scan).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ScanActivity.class);
                 startActivity(intent);
             }
         });

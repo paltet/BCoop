@@ -131,5 +131,19 @@
 
     <string name="my_services">Mis servicios</string>
     <string name="proveidor">Proveedor: </string>
-    <string name="estat">Estato: </string>
+    <string name="estat">Estado: </string>
+
+    <string name="lastBan">Fecha del último bloqueo: </string>
+    <string name="noBan">"No se ha bloqueado nunca"</string>
+    <string name="prize_code">Introduce el código de premio manualmente: </string>
+    <string name="scan_code">Escanea el código del premio: </string>
+    <string name="prize_used">Uso fallido, el código del premio ha sido utilizado. </string>
+    <string name="prize_no_exist">Uso fallido, el código del premio no existe. </string>
+
+    <string name="esta_pendent" > "Confirmación del servicio pendiente. Prueba de chatear con tu proveedor.</string>
+    <string name="monedes_a_pagar">"monedas a pagar:"</string>
+    <string name="pay">"Pagar"</string>
+
+    <string name="levelup">Has subido al nivel </string>
+
 </resources>

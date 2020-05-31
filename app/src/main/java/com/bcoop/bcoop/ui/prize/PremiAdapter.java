@@ -3,6 +3,7 @@ package com.bcoop.bcoop.ui.prize;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +23,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import static android.content.ContentValues.TAG;
@@ -68,11 +76,14 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
         preu.append(": " + String.valueOf(premi.getPreu()) + " " + context.getResources().getString(R.string.coins));
 
         if (isMyPremis) {
-            preu.append("\n" +premi.getTime().toDate());
+            String pattern = "dd/MM/yyyy HH:mm";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date = simpleDateFormat.format(premi.getTime().toDate());
+            preu.append("\n" +date);
             Button btn = view.findViewById(R.id.Comprar);
             btn.setText(R.string.use);
-            btn.setVisibility(View.GONE);
-
+            btn.setVisibility(View.VISIBLE);
+            if (premi.isUse()) btn.setVisibility(View.GONE);
         }
         view.findViewById(R.id.Comprar).setOnClickListener(new View.OnClickListener() {
              @Override
@@ -95,6 +106,7 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
                 db.collection("Usuari").document(email)
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -107,19 +119,25 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
                                     Toast.makeText(getContext(), R.string.notEnough, Toast.LENGTH_SHORT).show();
                                 }
                                 else {
-                                    db.collection("Usuari").document(email)
-                                            .update("monedes", FieldValue.increment(-p.getPreu()),
-                                                    "premis", FieldValue.arrayUnion(p))
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Toast.makeText(getContext(), R.string.success, Toast.LENGTH_SHORT).show();
-                                                }
-                                            })
+
+                                    Map<String, Object> data = new HashMap<>();
+                                    data.put("isUsed", false);
+                                    data.put("user", email);
+                                    db.collection("Premi Venut").add(data)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            p.setId(documentReference.getId());
+                                            db.collection("Usuari").document(email).collection("premis").add(p);
+                                            db.collection("Usuari").document(email).update("monedes", FieldValue.increment(-p.getPreu()));
+                                            Toast.makeText(getContext(), R.string.success, Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    })
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getContext(), R.string.abort, Toast.LENGTH_SHORT).show();
+                                                    Log.w(TAG, "Error adding document", e);
                                                 }
                                             });
 
@@ -145,9 +163,15 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
 
     public void showAlertDialogUse(View v, final Premi p){
         p.setTime(Timestamp.now());
-        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        final View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_code,null);
+        ImageView code = dialogView.findViewById(R.id.code);
+
+        MaterialAlertDialogBuilder alert = new MaterialAlertDialogBuilder(getContext());
+        alert.setView(dialogView);
         alert.setTitle(R.string.use);
-        alert.setMessage(R.string.usePrize);
+        alert.setMessage(p.getId());
+        Bitmap mBitmap = QRCodeUtil.createQRCodeBitmap(p.getId(), 480, 480);
+        code.setImageBitmap(mBitmap);
         alert.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
