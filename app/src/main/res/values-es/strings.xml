@@ -142,4 +142,22 @@
     <string name="prize_no_exist">Uso fallido, el código del premio no existe. </string>
     <string name="scan">Introducir código</string>
 
+    <string name="esta_pendent" > "Confirmación del servicio pendiente. Prueba de chatear con tu proveedor.</string>
+    <string name="monedes_a_pagar">"monedas a pagar:"</string>
+    <string name="pay">"Pagar"</string>
+
+    <string name="levelup">Has subido al nivel </string>
+
+    <string name="descripcio">Descripción</string>
+    <string name="PriceName">Nombre Premio</string>
+
+
+
+    <string name="makeAdmin">Hacer usuario admin</string>
+    <string name="blockUser">Bloquear usuario</string>
+
+    <string name="service_completed">Servicio Completado</string>
+    <string name="add_comment">Añade un comentario (opcional)</string>
+    <string name="rate_service">¿Cómo valoras el servicio?</string>
+
 </resources>

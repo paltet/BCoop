@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +23,12 @@ import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.Model.Servei;
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
+import com.bcoop.bcoop.ui.chat.ChatFragment;
+import com.bcoop.bcoop.ui.chat.ChatWithAnotherUserActivity;
 import com.bcoop.bcoop.ui.notification.ConectFirebase;
+import com.bcoop.bcoop.ui.search.MyServicesActivity;
+import com.bcoop.bcoop.ui.search.SearchFragment;
+import com.bcoop.bcoop.ui.search.UtilityClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -66,6 +72,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
     private int coins_to_pay;
     private String demanderName;
     private String demander;
+    ArrayList<Servei> meusServeis = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +111,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
                     demander = currentUser.getEmail();
                     demanderName = currentUser.getNom();
                     String estat = "pendent";
+                    //nou document Servei
                     DocumentReference ref = firestore.collection("Servei").document();
                     idServei = ref.getId();
                     //els altres valors ja han estat agafats abans de clicar el botó add_service
@@ -115,7 +123,9 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
                     serveisProveidorUpdate.add(idServei);
                     firestore.collection("Usuari").document(emailProveidor).update("serveis", serveisProveidorUpdate);
 
-                    actualitzacionsConfirmacio();
+
+                    //actualitzem estats del servei...
+                    //actualitzacionsConfirmacio();
 
                     ConectFirebase conectFirebase = new ConectFirebase();
                     Timestamp ts = new Timestamp(date);
@@ -153,7 +163,15 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
                     else Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.InvalidServiceDate), Toast.LENGTH_SHORT).show();
                 }
 
+                //treure un Toast dient que s'ha enviat.
+                Intent intent = new Intent();
+                intent.putExtra("otherUserEmail", emailProveidor);
+                intent.setClass(getApplicationContext(), ChatWithAnotherUserActivity.class);
+                startActivity(intent);
+
             }
+
+
         });
     }
 
@@ -258,7 +276,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
         int estrellesValoracio = 3;
 
         //actualitzo servei
-        firestore.collection("Servei").document(idServei).update("estat", "finalitzat");
+        firestore.collection("Servei").document(idServei).update("estat", "en curs");
         firestore.collection("Servei").document(idServei).update("comentariValoracio", comentariValoracio);
         firestore.collection("Servei").document(idServei).update("estrellesValoracio", estrellesValoracio);
         //actualitzo DetallsHabilitat de la habilitat del proveidor
@@ -289,11 +307,13 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
 
         }
 
+        /*
         //actualitzem monedes de proveidor i demander
         int monedesDemanderUpdate = currentUser.getMonedes() - coins_to_pay;//el que confirma el servei es el demander
         int monedesProveidorUpdate = proveidorUser.getMonedes() + coins_to_pay;
         firestore.collection("Usuari").document(emailProveidor).update("monedes", monedesProveidorUpdate);
         firestore.collection("Usuari").document(currentUser.getEmail()).update("monedes", monedesDemanderUpdate);
+        */
 
         //enviar notificacio de confirmacio i de transfer de monedes
         ConectFirebase conectFirebase = new ConectFirebase();
@@ -305,13 +325,13 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
 
         conectFirebase.pushNotification(notification, emailProveidor);
 
-
+        /*
         //notificacio trading information (transfer de monedes)
         Notification notification1 = new Notification(coins_to_pay, "proveidor");
         Notification notification2 = new Notification(coins_to_pay, "demander");
         System.out.println("AQUESTESSS MONEDESSSSSSSSSSSSSSSSSSSSSS"+coins_to_pay);
         conectFirebase.pushNotification(notification1, emailProveidor);
-        conectFirebase.pushNotification(notification2, demander);
+        conectFirebase.pushNotification(notification2, demander);*/
 
 
     }

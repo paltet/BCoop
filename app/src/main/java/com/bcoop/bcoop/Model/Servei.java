@@ -1,8 +1,12 @@
 package com.bcoop.bcoop.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Servei {
+public class Servei implements Comparable<Servei>{
     private String proveidor;
     private String demander;
     private String habilitat;
@@ -11,7 +15,7 @@ public class Servei {
     private String message;
     private String estat;
     public String idServei;
-    public String comentariValoracio;  //opcional
+    public Comentari comentariValoracio;  //opcional
     public Integer estrellesValoracio; // del 1 al 5
 
     public Servei() {}
@@ -26,6 +30,22 @@ public class Servei {
         this.message = message;
         this.estat = estat;
     }
+
+    public Servei(String idServei, String proveidor, String demander, String habilitat, Date date, Integer coins_to_pay, String message, String estat,
+                  Comentari comentariValoracio, Integer estrellesValoracio){
+        this.idServei = idServei;
+        this.proveidor = proveidor;
+        this.demander = demander;
+        this.habilitat = habilitat;
+        this.date = date;
+        this.coins_to_pay = coins_to_pay;
+        this.message = message;
+        this.estat = estat;
+        this.comentariValoracio = comentariValoracio;
+        this.estrellesValoracio = estrellesValoracio;
+    }
+
+
     //getters i setters
     public String getIdServei(){return idServei;}
 
@@ -77,16 +97,21 @@ public class Servei {
         this.message = message;
     }
 
-    public String getComentariValoracio() {
+    public Comentari getComentariValoracio() {
         return comentariValoracio;
     }
 
-    public void setComentariValoracio(String comentariValoracio) { this.comentariValoracio = comentariValoracio;   }
+    public void setComentariValoracio(Comentari comentariValoracio) { this.comentariValoracio = comentariValoracio;   }
 
     public Integer getEstrellesValoracio() {
         return estrellesValoracio;
     }
 
     public void setEstrellesValoracio(Integer estrellesValoracio) { this.estrellesValoracio = estrellesValoracio;   }
+
+    @Override
+    public int compareTo(Servei servei) {
+        return getDate().compareTo(servei.getDate());
+    }
 
 }
