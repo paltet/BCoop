@@ -124,11 +124,20 @@ public class PrizeFragment extends Fragment {
 
             }
         });
+
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(min.getText()) || TextUtils.isEmpty(max.getText())) {
+                if (TextUtils.isEmpty(min.getText()) && TextUtils.isEmpty(max.getText())) {
                     pmin = Integer.MIN_VALUE;
+                    pmax = Integer.MAX_VALUE;
+                }
+                else if (TextUtils.isEmpty(min.getText())) {
+                    pmin = Integer.MIN_VALUE;
+                    pmax = Integer.parseInt(max.getText().toString());
+                }
+                else if (TextUtils.isEmpty(max.getText())) {
+                    pmin = Integer.parseInt(min.getText().toString());
                     pmax = Integer.MAX_VALUE;
                 }
                 else {
@@ -155,68 +164,45 @@ public class PrizeFragment extends Fragment {
                             }
 
                         });
-            }
-        });
-
-        premiList = new ArrayList<>();
-        listView = (ListView) root.findViewById(R.id.listView);
-        db.collection("Premi").whereGreaterThanOrEqualTo("preu", pmin).whereLessThanOrEqualTo("preu", pmax)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Premi premi = document.toObject(Premi.class);
-                                premiList.add(premi);
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                        PremiAdapter adapter = new PremiAdapter(getContext(), R.layout.my_list_item, premiList, false);
-                        listView.setAdapter(adapter);
-                    }
-
+                }
             });
-        root.findViewById(R.id.VeurePremis).
 
-            setOnClickListener(new View.OnClickListener() {
+        root.findViewById(R.id.VeurePremis).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View view){
                     Intent intent = new Intent(getContext(), MyPremi.class);
                     startActivity(intent);
                 }
             });
-        root.findViewById(R.id.Scan).
 
-            setOnClickListener(new View.OnClickListener() {
+        root.findViewById(R.id.Scan).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View view){
                     Intent intent = new Intent(getContext(), ScanActivity.class);
                     startActivity(intent);
                 }
-            });
+         });
 
 
         return root;
-        }
+    }
 
 
     private void isAdmin() {
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        final boolean[] adminlocal = {true};
-        final DocumentReference documentReference = db.collection("Usuari").document(email);
-        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    Usuari usuari = new Usuari();
-                    usuari = documentSnapshot.toObject(Usuari.class);
-                    adminlocal[0] = usuari.isEsAdministrador();
-                    if (adminlocal[0]) dbAdd.setVisibility(View.VISIBLE);
-                    else dbAdd.setVisibility(View.INVISIBLE);
+            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+            final boolean[] adminlocal = {true};
+            final DocumentReference documentReference = db.collection("Usuari").document(email);
+            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        Usuari usuari = new Usuari();
+                        usuari = documentSnapshot.toObject(Usuari.class);
+                        adminlocal[0] = usuari.isEsAdministrador();
+                        if (adminlocal[0]) dbAdd.setVisibility(View.VISIBLE);
+                        else dbAdd.setVisibility(View.INVISIBLE);
+                    }
                 }
-            }
-        });
+            });
     }
 }
