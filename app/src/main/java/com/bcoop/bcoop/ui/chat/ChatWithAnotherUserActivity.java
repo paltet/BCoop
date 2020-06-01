@@ -79,6 +79,7 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
     private APIService apiService;
     private boolean first = false;
     private boolean otherFirst = false;
+    private boolean firstReadOfLastChat = false;
     private List<Missatge> missatges;
 
     private static final int PERMISSION_REQUEST = 0;
@@ -268,7 +269,10 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
                 }
             });
         }
-        else messagesList.setSelection(messagesList.getCount() - 1);
+        else {
+            messagesList.setSelection(messagesList.getCount() - 1);
+            firstReadOfLastChat = true;
+        }
 
 
         final DocumentReference documentReference = firestore.collection("Xat").document(xatID);
@@ -277,7 +281,11 @@ public class ChatWithAnotherUserActivity extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 if (documentSnapshot.exists()) {
                     xat = documentSnapshot.toObject(Xat.class);
-                    chatAdapter.addedMessages(xat.getMissatges());
+                    if (firstReadOfLastChat) {
+                        chatAdapter.addMissatges(xat.getMissatges());
+                        firstReadOfLastChat = false;
+                    }
+                    else chatAdapter.addMissatge(xat.getMissatges().get(xat.getMissatges().size()-1));
                     messagesList.setSelection(messagesList.getCount() - 1);
                 }
             }

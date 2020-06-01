@@ -89,11 +89,6 @@ class ChatAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void addedMessages(List<Missatge> missatgeList) {
-        this.missatges = previous;
-        this.missatges.addAll(missatgeList);
-        notifyDataSetChanged();
-    }
 
     private void getImageFromStorage(String uriImage, View convertView) {
         final ImageView img = convertView.findViewById(R.id.message_body);
@@ -123,6 +118,11 @@ class ChatAdapter extends BaseAdapter {
     public void addMissatges(List<Missatge> msg) {
         this.missatges = previous;
         this.missatges.addAll(msg);
+        notifyDataSetChanged();
+    }
+
+    public void addMissatge(Missatge msg) {
+        this.missatges.add(msg);
         notifyDataSetChanged();
     }
 }
