@@ -100,9 +100,31 @@ public class PrizeFragment extends Fragment {
                     }
                 });
             }
-            });
+        });
 
 
+        premiList =new ArrayList<>();
+        listView =(ListView)root.findViewById(R.id.listView);
+        db.collection("Premi").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String nom = document.getString("nom");
+                        String descripció = document.getString("descripció");
+                        String imatge = document.getString("imatge");
+                        Integer preu = document.getDouble("preu").intValue();
+                        premiList.add(new Premi(nom, descripció, imatge, preu, null, null));
+                    }
+                } else {
+                    Log.w(TAG, "Error getting documents.", task.getException());
+                }
+                PremiAdapter adapter = new PremiAdapter(getContext(), R.layout.my_list_item, premiList, false);
+                listView.setAdapter(adapter);
+
+            }
+        });
+        accept.setOnClickListener(new View.OnClickListener() {
             premiList =new ArrayList<>();
             listView =(ListView)root.findViewById(R.id.listView);
             db.collection("Premi").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -203,5 +225,22 @@ public class PrizeFragment extends Fragment {
                     }
                 }
             });
+    }
+}
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        final boolean[] adminlocal = {true};
+        final DocumentReference documentReference = db.collection("Usuari").document(email);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    Usuari usuari = new Usuari();
+                    usuari = documentSnapshot.toObject(Usuari.class);
+                    adminlocal[0] = usuari.isEsAdministrador();
+                    if (adminlocal[0]) dbAdd.setVisibility(View.VISIBLE);
+                    else dbAdd.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 }
