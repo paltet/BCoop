@@ -76,7 +76,7 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
         preu.append(": " + String.valueOf(premi.getPreu()) + " " + context.getResources().getString(R.string.coins));
 
         if (isMyPremis) {
-            String pattern = "dd/MM/yyyy HH:mm";
+            String pattern = "dd/MM/yyyy";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             String date = simpleDateFormat.format(premi.getTime().toDate());
             preu.append("\n" +date);
@@ -98,7 +98,7 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
 
     public void showAlertDialogBuy(View v, final Premi p){
         p.setTime(Timestamp.now());
-        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        MaterialAlertDialogBuilder alert = new MaterialAlertDialogBuilder(getContext());
         alert.setTitle(R.string.buy);
         alert.setMessage(R.string.sure);
         alert.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
@@ -169,7 +169,7 @@ public class PremiAdapter extends ArrayAdapter<Premi> {
         MaterialAlertDialogBuilder alert = new MaterialAlertDialogBuilder(getContext());
         alert.setView(dialogView);
         alert.setTitle(R.string.use);
-        alert.setMessage(p.getId());
+        alert.setMessage(context.getResources().getString(R.string.to_store) + '\n' +p.getId());
         Bitmap mBitmap = QRCodeUtil.createQRCodeBitmap(p.getId(), 480, 480);
         code.setImageBitmap(mBitmap);
         alert.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {

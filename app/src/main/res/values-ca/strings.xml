@@ -65,6 +65,7 @@
     <string name="price">Preu</string>
     <string name="coins">Monedes</string>
     <string name="use">Utilitzar</string>
+    <string name="to_store">Mostrar el codi a la botiga.</string>
     <string name="usePrize">Voleu utilitzar aquest premi?</string>
     <string name="notEnough">No tens prou monedes</string>
 
@@ -143,4 +144,5 @@
     <string name="scan_code">Escanegeu el codi del premi: </string>
     <string name="prize_used">L\'ús ha fallat, el codi de premi s’ha utilitzat. </string>
     <string name="prize_no_exist">L\'ús ha fallat, el codi de premi no existeix. </string>
+    <string name="scan">Introduir codi</string>
 </resources>

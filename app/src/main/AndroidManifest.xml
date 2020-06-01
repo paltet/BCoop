@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.prize.ScanActivity"></activity>
+        <activity android:name=".ui.prize.ScanActivity"
+            android:theme="@style/AppThemeWithActionBar" />
+
         <activity android:name=".ui.search.MyServicesActivity" />
         <activity android:name=".ui.profile.ReportAdaptar" />
         <activity android:name=".ui.profile.ReportActivity" />
@@ -42,7 +44,8 @@
         <activity android:name=".InitConfigActivity" />
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/AppThemeWithActionBar" />
+            android:theme="@style/AppThemeWithActionBar"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/AppThemeWithActionBar" />

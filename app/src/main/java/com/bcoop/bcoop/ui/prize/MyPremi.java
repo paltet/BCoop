@@ -2,6 +2,7 @@ package com.bcoop.bcoop.ui.prize;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -63,5 +64,15 @@ public class MyPremi extends AppCompatActivity {
                 listView.setAdapter(adapter);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

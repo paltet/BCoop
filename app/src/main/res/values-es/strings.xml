@@ -57,6 +57,7 @@
     <string name="mostrar_mes_coment">Muestra más comentarios</string>
     <string name="coins">Monedas</string>
     <string name="use">Utilizar</string>
+    <string name="to_store">Muestra el código a la tienda.</string>
     <string name="usePrize">¿Quieres utilizar este premio?</string>
     <string name="notEnough">No tienes suficientes monedas</string>
 
@@ -139,5 +140,6 @@
     <string name="scan_code">Escanea el código del premio: </string>
     <string name="prize_used">Uso fallido, el código del premio ha sido utilizado. </string>
     <string name="prize_no_exist">Uso fallido, el código del premio no existe. </string>
+    <string name="scan">Introducir código</string>
 
 </resources>
