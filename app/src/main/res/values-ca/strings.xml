@@ -160,4 +160,9 @@
     <string name="add_comment">Afegeix un comentari (opcional)</string>
     <string name="rate_service">Com valores el servei?</string>
     <string name="scan">Introduir codi</string>
+
+    <string name="incidence_question">Quin ha estat el problema?</string>
+    <string name="incidence_write">Explica\'ns qué ha passat</string>
+
+
 </resources>

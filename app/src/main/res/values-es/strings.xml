@@ -160,4 +160,7 @@
     <string name="add_comment">Añade un comentario (opcional)</string>
     <string name="rate_service">¿Cómo valoras el servicio?</string>
 
+    <string name="incidence_question">¿Cual ha sido el problema?</string>
+    <string name="incidence_write">Explícanos qué ha pasado</string>
+
 </resources>

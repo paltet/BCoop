@@ -155,5 +155,8 @@
     <string name="makeAdmin">Make user admin</string>
     <string name="blockUser">Block user</string>
 
+    <string name="incidence_question">What was your problem?</string>
+    <string name="incidence_write">Tell us about what happened</string>
+
 
 </resources>
