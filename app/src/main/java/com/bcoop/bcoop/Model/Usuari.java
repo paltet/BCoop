@@ -12,17 +12,18 @@ public class Usuari {
     private String nom;
     private String foto;
     private boolean esPremium;
+    private boolean isBlocked;
     private int monedes;
     private double locationLatitude;
     private double locationLongitude;
     private boolean esAdministrador;
+    private boolean esTienda;
     private Map<String, HabilitatDetall> habilitats;
     private Map<String, List<String>> xats;
     private List<String> idiomas;
     private List<String> serveis; //llista amb els idServei de tots els seus serveis
     private int nivell;
     private int valoracio;
-    private List<Premi> premis;
     private String token;
     private Date lastBloqueig;
 
@@ -37,13 +38,13 @@ public class Usuari {
         esPremium = false;
         monedes = 0;
         esAdministrador = false;
+        isBlocked = false;
         habilitats = new HashMap<>();
         xats = new HashMap<>();
         idiomas = new ArrayList<>();
         serveis = new ArrayList<>();
         nivell = 1;
         valoracio = 0;
-        premis = new ArrayList<>();
     }
 
     public String getEmail() {
@@ -157,14 +158,6 @@ public class Usuari {
         this.serveis = serveis;
     }
 
-    public List<Premi> getPremis() {
-        return premis;
-    }
-
-    public void setPremis(List<Premi> premis) {
-        this.premis = premis;
-    }
-
     public double getLocationLatitude() {
         return locationLatitude;
     }
@@ -195,5 +188,13 @@ public class Usuari {
 
     public void setLastBloqueig(Date lastBloqueig) {
         this.lastBloqueig = lastBloqueig;
+    }
+
+    public boolean isEsTienda() {
+        return esTienda;
+    }
+
+    public void setEsTienda(boolean esTienda) {
+        this.esTienda = esTienda;
     }
 }

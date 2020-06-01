@@ -22,23 +22,51 @@
             android:id="@+id/imageView2"
             android:layout_width="29dp"
             android:layout_height="match_parent"
-            android:src="@drawable/embudo" />
+            android:src="@drawable/embudo"
+            android:layout_margin="10dp"/>
 
         <EditText
-            android:id="@+id/editText2"
-            android:layout_width="222dp"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/search" />
+            android:id="@+id/min"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:autofillHints="@string/userName"
+            android:background="@drawable/textview_border"
+            android:gravity="center"
+            android:hint="Min"
+            android:inputType="number"
+            android:textColorHint="@color/lightGreen"
+            android:textSize="16sp"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:layout_margin="10dp"/>
+
+        <EditText
+            android:id="@+id/max"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:autofillHints="@string/userName"
+            android:background="@drawable/textview_border"
+            android:gravity="center"
+            android:hint="Max"
+            android:inputType="number"
+            android:textColorHint="@color/lightGreen"
+            android:textSize="16sp"
+            android:layout_margin="10dp"/>
 
         <Button
             android:id="@+id/button"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:text="@string/accept"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
 
@@ -75,5 +103,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.11" />
+    <Button
+        android:id="@+id/Scan"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:text="@string/scan"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintEnd_toStartOf="@+id/VeurePremis"
+        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.11" />
+
+    <Button
+        android:id="@+id/AddPremiDB"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:text="Add DB"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintEnd_toStartOf="@+id/VeurePremis"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.111" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

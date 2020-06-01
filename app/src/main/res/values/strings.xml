@@ -56,6 +56,7 @@
     <string name="price">Price</string>
     <string name="coins"> Coins</string>
     <string name="use">Use</string>
+    <string name="to_store">Show the code to the store.</string>
     <string name="usePrize">Do you want to use this prize?</string>
     <string name="notEnough">You don\'t have enough coins</string>
 
@@ -135,4 +136,27 @@
 
     <string name="lastBan">Last Ban Date: </string>
     <string name="noBan">" It has never been blocked"</string>
+    <string name="prize_code">Enter prize code manually: </string>
+    <string name="scan_code">Scan the prize code: </string>
+    <string name="scan">Enter code</string>
+    <string name="prize_used">Failure to use, the prize code has been used. </string>
+    <string name="prize_no_exist">Failure to use, the prize code does not exist. </string>
+    <string name="esta_pendent" > "Service pending of confirmation. Try chatting with your provider.</string>
+    <string name="monedes_a_pagar">"coins to pay:"</string>
+    <string name="pay">"Pay"</string>
+    <string name="descripcio">Description</string>
+    <string name="PriceName">Prize Name</string>
+
+    <string name="levelup">You reached level </string>
+    <string name="service_completed">Service Completed</string>
+    <string name="add_comment">Add a comment (optional)</string>
+    <string name="rate_service">How was the service?</string>
+
+    <string name="makeAdmin">Make user admin</string>
+    <string name="blockUser">Block user</string>
+
+    <string name="incidence_question">What was your problem?</string>
+    <string name="incidence_write">Tell us about what happened</string>
+
+
 </resources>

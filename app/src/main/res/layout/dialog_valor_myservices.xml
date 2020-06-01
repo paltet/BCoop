@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="15dp">
+
 
     <TextView
         android:id="@+id/habilitat"
@@ -13,73 +13,82 @@
         android:gravity="center"
         android:padding="12dp"
         android:text="@string/ability"
-        android:textSize="14sp" />
-
+        android:textSize="14sp"
+        android:layout_below="@+id/proveidor"/>
     <TextView
-        android:id="@+id/habilitat2"
+        android:id="@+id/habilitatName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="12dp"
         android:text="@string/ability"
         android:textSize="14sp"
-        android:layout_toEndOf="@+id/habilitat"/>
+        android:layout_below="@+id/proveidor"
+        android:layout_alignParentRight="true"/>
     <TextView
-        android:id="@+id/proveidor"
+        android:id="@+id/dateFi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="12dp"
-        android:text="@string/proveidor"
+        android:text="@string/end_date"
         android:textSize="14sp"
         android:layout_below="@+id/habilitat"/>
     <TextView
-        android:id="@+id/proveidor2"
+        android:id="@+id/dateFi1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="12dp"
-        android:text="@string/proveidor"
+        android:text="End date"
         android:textSize="14sp"
         android:layout_below="@+id/habilitat"
-        android:layout_toEndOf="@+id/proveidor"/>
+        android:layout_alignParentRight="true"/>
     <TextView
-        android:id="@+id/estat"
+        android:id="@+id/valor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="12dp"
-        android:text="@string/estat"
+        android:text="@string/valoration"
         android:textSize="14sp"
-        android:layout_below="@+id/proveidor"/>
+        android:layout_below="@+id/dateFi"/>
     <TextView
-        android:id="@+id/estat2"
+        android:id="@+id/valor1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="12dp"
-        android:text="@string/estat"
+        android:text="@string/valoration"
         android:textSize="14sp"
-        android:layout_below="@+id/proveidor"
-        android:layout_toEndOf="@+id/estat"/>
+        android:layout_below="@+id/dateFi"
+        android:layout_alignParentRight="true"/>
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="12dp"
-        android:text="@string/start_date"
+        android:text="@string/comment"
         android:textSize="14sp"
-        android:layout_below="@+id/estat"/>
+        android:layout_below="@+id/valor"/>
     <TextView
-        android:id="@+id/date2"
+        android:id="@+id/comment1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:gravity="center"
-        android:padding="12dp"
-        android:text="@string/start_date"
+        android:text="@string/comment"
         android:textSize="14sp"
-        android:layout_below="@+id/estat"
-        android:layout_toEndOf="@+id/date"/>
+        android:layout_below="@+id/comment" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@+id/comment1"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp">
+    </LinearLayout>
+
 
 </RelativeLayout>

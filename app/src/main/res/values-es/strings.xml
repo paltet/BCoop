@@ -57,6 +57,7 @@
     <string name="mostrar_mes_coment">Muestra más comentarios</string>
     <string name="coins">Monedas</string>
     <string name="use">Utilizar</string>
+    <string name="to_store">Muestra el código a la tienda.</string>
     <string name="usePrize">¿Quieres utilizar este premio?</string>
     <string name="notEnough">No tienes suficientes monedas</string>
 
@@ -135,4 +136,31 @@
 
     <string name="lastBan">Fecha del último bloqueo: </string>
     <string name="noBan">"No se ha bloqueado nunca"</string>
+    <string name="prize_code">Introduce el código de premio manualmente: </string>
+    <string name="scan_code">Escanea el código del premio: </string>
+    <string name="prize_used">Uso fallido, el código del premio ha sido utilizado. </string>
+    <string name="prize_no_exist">Uso fallido, el código del premio no existe. </string>
+    <string name="scan">Introducir código</string>
+
+    <string name="esta_pendent" > "Confirmación del servicio pendiente. Prueba de chatear con tu proveedor.</string>
+    <string name="monedes_a_pagar">"monedas a pagar:"</string>
+    <string name="pay">"Pagar"</string>
+
+    <string name="levelup">Has subido al nivel </string>
+
+    <string name="descripcio">Descripción</string>
+    <string name="PriceName">Nombre Premio</string>
+
+
+
+    <string name="makeAdmin">Hacer usuario admin</string>
+    <string name="blockUser">Bloquear usuario</string>
+
+    <string name="service_completed">Servicio Completado</string>
+    <string name="add_comment">Añade un comentario (opcional)</string>
+    <string name="rate_service">¿Cómo valoras el servicio?</string>
+
+    <string name="incidence_question">¿Cual ha sido el problema?</string>
+    <string name="incidence_write">Explícanos qué ha pasado</string>
+
 </resources>
