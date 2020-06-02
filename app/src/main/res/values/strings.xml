@@ -158,5 +158,11 @@
     <string name="incidence_question">What was your problem?</string>
     <string name="incidence_write">Tell us about what happened</string>
 
+    <string name="valoration_enviada">service rating sent</string>
+    <string name="et_va_donar_servei_en">helped you with</string>
+    <string name="el_dia" >on</string>
+    <string name="solicitut_enviada">service request sent</string>
+    <string name="no_tens_serveis" >No services here ... Sure there is something your neighbors can help you with!</string>
+
 
 </resources>

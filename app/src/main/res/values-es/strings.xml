@@ -163,4 +163,10 @@
     <string name="incidence_question">¿Cual ha sido el problema?</string>
     <string name="incidence_write">Explícanos qué ha pasado</string>
 
+    <string name="valoration_enviada">valoración enviada</string>
+    <string name="et_va_donar_servei_en">te ayudó con</string>
+    <string name="el_dia" >el dia</string>
+    <string name="solicitut_enviada">solicitud de servecio enviada</string>
+    <string name="no_tens_serveis" >No tienes servicios... ¡Seguro que tus vecinos pueden ayudarte en algo!</string>
+
 </resources>

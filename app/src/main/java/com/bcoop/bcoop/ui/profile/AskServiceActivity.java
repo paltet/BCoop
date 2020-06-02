@@ -47,6 +47,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -115,7 +116,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
                     DocumentReference ref = firestore.collection("Servei").document();
                     idServei = ref.getId();
                     //els altres valors ja han estat agafats abans de clicar el botó add_service
-                    Servei servei = new Servei(idServei, emailProveidor, demander, habilitat_seleccionada, date, coins_to_pay, missatge, estat);
+                    Servei servei = new Servei(idServei, emailProveidor, demander, habilitat_seleccionada, date, coins_to_pay, missatge, estat, null, 10);
                     firestore.collection("Servei").document(idServei).set(servei);
 
                     //prova de afegir el servei creat a serveis del user proveidor
@@ -127,14 +128,22 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
                     //actualitzem estats del servei...
                     //actualitzacionsConfirmacio();
 
+                    //crear notificacio per al proveidor (s'esta fent una notificacio de tipus request servei)
+                    firestore.collection("Servei").document(idServei).update("estat", "pendent");
                     ConectFirebase conectFirebase = new ConectFirebase();
                     Timestamp ts = new Timestamp(date);
                     Notification notification = new Notification(demander, demanderName, habilitat_seleccionada, idServei, coins_to_pay, 0, ts, ts, missatge);
 
                     conectFirebase.pushNotification(notification, emailProveidor);
 
+                    //actualitzo la singleton class per poder refreshar rapid els meus serveis sense clicar el search
+                    meusServeis = UtilityClass.getInstance().getList();
+                    meusServeis.add(servei);
+                    UtilityClass.getInstance().setList(meusServeis);
+                    Collections.sort(meusServeis);
 
-                    //crear notificacio per al proveidor (s'esta fent una notificacio de tipus request servei)
+                    Toast.makeText(getApplicationContext(),  getApplicationContext().getString(R.string.solicitut_enviada), Toast.LENGTH_LONG).show();
+
 
                     // PER FER LA NOTIFICACIO PUSH => sendNotification(proveidor, demander, text);
 
@@ -163,11 +172,14 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
                     else Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.InvalidServiceDate), Toast.LENGTH_SHORT).show();
                 }
 
-                //treure un Toast dient que s'ha enviat.
+                /*fem que hagi de tirar cap enrera per tonrar al xat
                 Intent intent = new Intent();
                 intent.putExtra("otherUserEmail", emailProveidor);
                 intent.setClass(getApplicationContext(), ChatWithAnotherUserActivity.class);
-                startActivity(intent);
+                startActivity(intent);*/
+
+                //per tornar directament al xat i tancar la activty de askService
+                finish();
 
             }
 

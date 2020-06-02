@@ -36,6 +36,7 @@
 
 
 
+
     <string name="accept_privacy">Fent clic a continuació, acceptes les Condicions del servei i la Política de privadesa de BCoop.</string>
     <string name="unvalid_username">Introduïu un nom d’usuari vàlid</string>
     <string name="unvalid_email">Introduïu un correu electrònic vàlid</string>
@@ -163,6 +164,12 @@
 
     <string name="incidence_question">Quin ha estat el problema?</string>
     <string name="incidence_write">Explica\'ns qué ha passat</string>
+
+    <string name="valoration_enviada">valoració enviada</string>
+    <string name="et_va_donar_servei_en">et va ajudar amb</string>
+    <string name="el_dia" >el dia</string>
+    <string name="solicitut_enviada">solicitut de servei enviada</string>
+    <string name="no_tens_serveis" >No tens serveis... Segur que els teus veïns et poden ajudar en alguna cosa!</string>
 
 
 </resources>
