@@ -1,48 +1,32 @@
 package com.bcoop.bcoop.ui.search;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bcoop.bcoop.Model.HabilitatDetall;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.Model.Servei;
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
 import com.bcoop.bcoop.ui.chat.ChatWithAnotherUserActivity;
 import com.bcoop.bcoop.ui.notification.ConectFirebase;
-import com.bcoop.bcoop.ui.notification.NotificationFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.behavior.SwipeDismissBehavior;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 public class MyServicesActivity extends AppCompatActivity {
 
@@ -52,6 +36,8 @@ public class MyServicesActivity extends AppCompatActivity {
     Usuari currentUser, proveidorUser = new Usuari();
     boolean b1 = false;
     boolean b2 = false;
+    private Button acceptar;
+    private EditText nivell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +93,6 @@ public class MyServicesActivity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 
@@ -282,5 +267,91 @@ public class MyServicesActivity extends AppCompatActivity {
 
     }*/
 
+    private void pujarExperiencia() {
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        final DocumentReference documentReference = db.collection("Usuari").document(email);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    Usuari usuari = new Usuari();
+                    usuari = documentSnapshot.toObject(Usuari.class);
+                    int experiencia = usuari.getExperiencia();
+                    int nivell = usuari.getNivell();
+
+                    if (nivell == 1) {
+                        nivell = 2;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 2 && experiencia >= 300){
+                        nivell = 3;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 3 && experiencia >= 700){
+                        nivell = 4;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 4 && experiencia >= 1200){
+                        nivell = 5;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 5 && experiencia >= 1600){
+                        nivell = 6;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 6 && experiencia >= 2500){
+                        nivell = 7;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 7 && experiencia >= 3700){
+                        nivell = 8;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 8 && experiencia >= 5000){
+                        nivell = 9;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 9 && experiencia >= 7000) {
+                        nivell = 10;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+
+                    db.collection("Usuari").document(email).update("experiencia", experiencia + 100);
+                    db.collection("Usuari").document(email).update("nivell", nivell);
+                }
+            }
+        });
+    }
+
+
+    private void LvlUp(int level) {
+        final Dialog dialogView = new Dialog(this);
+        dialogView.setContentView(R.layout.popup_levelup);
+        dialogView.setCancelable(true);
+
+        TextView coins = dialogView.findViewById(R.id.levelNumber);
+        coins.setText(Integer.toString(level));
+
+        Button dialogBttn = (Button) dialogView.findViewById(R.id.accept);
+
+        dialogView.show();
+
+        dialogBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogView.dismiss();
+            }
+
+        });
+    }
 }
 

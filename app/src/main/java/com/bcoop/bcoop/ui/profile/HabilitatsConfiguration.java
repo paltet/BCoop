@@ -183,7 +183,6 @@ public class HabilitatsConfiguration extends AppCompatActivity {
                     }
                 });
 
-
             }
         });
 
@@ -263,6 +262,7 @@ public class HabilitatsConfiguration extends AppCompatActivity {
         });
     }
 
+
     private void isAdmin() {
 
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -282,6 +282,7 @@ public class HabilitatsConfiguration extends AppCompatActivity {
             }
         });
     }
+
 
     //amb firestore i posarlos a checeked els que tingui ja el user
     private void initItems(){

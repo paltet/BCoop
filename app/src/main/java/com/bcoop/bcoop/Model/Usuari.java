@@ -23,6 +23,7 @@ public class Usuari {
     private List<String> idiomas;
     private List<String> serveis; //llista amb els idServei de tots els seus serveis
     private int nivell;
+    private int experiencia;
     private int valoracio;
     private String token;
     private Date lastBloqueig;
@@ -44,6 +45,7 @@ public class Usuari {
         idiomas = new ArrayList<>();
         serveis = new ArrayList<>();
         nivell = 1;
+        experiencia = 0;
         valoracio = 0;
     }
 
@@ -101,6 +103,14 @@ public class Usuari {
 
     public void setNivell(int nivell) {
         this.nivell = nivell;
+    }
+
+    public int getExperiencia() {
+        return experiencia;
+    }
+
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
     }
 
     public int getValoracio() {
