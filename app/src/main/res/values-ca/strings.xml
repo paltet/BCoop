@@ -2,10 +2,10 @@
     <string name="app_name">BCoop</string>
     <string name="userName">Nom d\'usuari</string>
     <string name="password">Contrasenya</string>
-    <string name="login">Iniciar essió</string>
+    <string name="login">Iniciar sessió</string>
     <string name="register">Registrar-se</string>
     <string name="login_with_google">Iniciar la sessió amb Google</string>
-    <string name="confirm">Confirmar la contrassenya</string>
+    <string name="confirm">Confirmar la contrasenya</string>
     <string name="email">Correu electrònic</string>
     <string name="logout">Tancar sessió</string>
     <string name="search">Cercar</string>
@@ -14,12 +14,12 @@
     <string name="profile">Perfil</string>
     <string name="gifts"> Premis </string>
     <string name="accept"> Acceptar </string>
-    <string name="success"> Compra satisfactoria </string>
+    <string name="success"> Compra satisfactòria </string>
     <string name="abort"> Compra cancel·lada </string>
     <string name="level">Nivell </string>
     <string name="veurePremis">Els meus premis</string>
-    <string name="configHabilitatsUser">Configuració habilitats </string>
-    <string name="back">Enrrere</string>
+    <string name="configHabilitatsUser">Configuració d\'habilitats </string>
+    <string name="back">Enrere</string>
     <string name="MyPrizes">Els Meus Premis</string>
     <string name="ReportUser">Explica que ha passat aquí.</string>
     <string name="Report">Informe</string>
@@ -45,7 +45,7 @@
     <string name="confirm_passwd">La contrasenya de confirmació no coincideix</string>
 
     <string name="error_register_email_already_used">Adreça de correu electrònic ja utilitzada</string>
-    <string name="error_register">S\'ha produït un error durant el registre i torna-ho a provar</string>
+    <string name="error_register">S\'ha produït un error durant el registre, torna-ho a provar</string>
 
     <string name="en" translatable="false">EN</string>
     <string name="es" translatable="false">ES</string>
@@ -58,11 +58,11 @@
     <string name="click_to_change_image">Fes clic a la imatge per pujar la teva</string>
     <string name="initial_setup_location">Confirma que resideixes aquí</string>
 
-    <string name="failed">Ha fallat. Si us plau torna-ho a provar</string>
+    <string name="failed">Ha fallat. Si us plau torna-ho a provar.</string>
 
     <string name="buy">Adquirir regal</string>
-    <string name="sure">Voleu aquirir aquest regal?</string>
-    <string name="cancel">Cancelar</string>
+    <string name="sure">Voleu adquirir aquest regal?</string>
+    <string name="cancel">Cancel·lar</string>
     <string name="select_image">Seleccioneu una imatge</string>
     <string name="location_no_available">Assegureu-vos que la vostra ubicació estigui disponible</string>
     <string name="nivell" >Nivell</string>
@@ -88,17 +88,17 @@
     <string name="writeDelete">Escriu la teva contrasenya per a eliminar l\'usuari</string>
     <string name="confirmDelete">Confirmar Eliminar</string>
     <string name="time_at" />
-    <string name="incorrect_password">Wrong Password</string>
-    <string name="delete_perfil">Delete Profile</string>
-    <string name="perfil_cannot_delete">Failed to delete profile. Please try later</string>
+    <string name="incorrect_password">Contrasenya incorrecta</string>
+    <string name="delete_perfil">Eliminar perfil</string>
+    <string name="perfil_cannot_delete">Error en eliminar perfil.</string>
     <string name="user_settings">Configuració d\'usuari</string>
     <string name="EnQuePotsAjudar">En què pots ajudar als teus veïns?</string>
-    <string name="configiguracioHabUser">Configuració Habilitats</string>
+    <string name="configiguracioHabUser">Configuració d\'Habilitats</string>
 
     <string name="notification">Notificació</string>
 
     <string name="write_a_message">Escriu un missatge</string>
-    <string name="refuse">Rebuig</string>
+    <string name="refuse">Refusa</string>
     <string name="chat_with">Xateja amb ell/ella</string>
     <string name="applicant">Sol·licitant</string>
     <string name="ability">Habilitat</string>
@@ -120,7 +120,7 @@
     <string name="to_acquire_gift"> monedes per adquirir un regal.</string>
     <string name="delete_notification"> Vols suprimir aquesta notificació?</string>
     <string name="service_valoration">Valoració del Servei</string>
-    <string name="request_agreed">va acceptar la teva petició de servei. Puedes comprobar el detall del servei en la teva llista de servei.</string>
+    <string name="request_agreed">va acceptar la teva petició de servei. Pots comprovar els detalls del servei a la teva llista de serveis.</string>
     <string name="request_rejected">va rebutjar la teva petició del servei.</string>
     <string name="hour">Hores</string>
     <string name="sent_seccessfully">S\'ha enviat correctament</string>
@@ -150,7 +150,7 @@
     <string name="prize_used">L\'ús ha fallat, el codi de premi s’ha utilitzat. </string>
     <string name="prize_no_exist">L\'ús ha fallat, el codi de premi no existeix. </string>
 
-    <string name="esta_pendent" > "Servei pendent de confirmació. Prova de xatejar amb el proveidor.</string>
+    <string name="esta_pendent" > "Servei pendent de confirmació. Prova de xatejar amb el proveïdor.</string>
     <string name="monedes_a_pagar">"monedes a pagar:"</string>
     <string name="pay">"Pagar"</string>
     <string name="levelup">Has pujat al nivell </string>
