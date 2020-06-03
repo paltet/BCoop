@@ -73,7 +73,7 @@
     <string name="confirmNewPassword">Confirm New Password</string>
     <string name="writeDelete">Type your password to delete your user</string>
     <string name="confirmDelete">Confirm Delete</string>
-    <string name="time_at" />
+    <string name="time_at"> at </string>
     <string name="incorrect_password">Wrong Password</string>
     <string name="delete_perfil">Delete Profile</string>
     <string name="perfil_cannot_delete">Failed to delete profile. Please try later</string>

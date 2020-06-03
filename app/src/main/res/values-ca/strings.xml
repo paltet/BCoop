@@ -87,7 +87,7 @@
     <string name="confirmNewPassword">Confirmar nova contrasenya</string>
     <string name="writeDelete">Escriu la teva contrasenya per a eliminar l\'usuari</string>
     <string name="confirmDelete">Confirmar Eliminar</string>
-    <string name="time_at" />
+    <string name="time_at"> a les </string>
     <string name="incorrect_password">Contrasenya incorrecta</string>
     <string name="delete_perfil">Eliminar perfil</string>
     <string name="perfil_cannot_delete">Error en eliminar perfil.</string>

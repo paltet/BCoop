@@ -149,7 +149,9 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
         time = time.concat("/");
         time = time.concat(timeDate.substring(timeDate.length()-4));
         ago.setText(R.string.time_at);
+        time = time.concat(" ");
         time = time.concat(ago.getText().toString());
+        time = time.concat(" ");
         time = time.concat(timeDate.substring(11, 16));
         ago.setText(time);
     }
