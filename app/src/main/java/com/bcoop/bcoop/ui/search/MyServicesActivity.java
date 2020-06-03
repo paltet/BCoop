@@ -455,6 +455,7 @@ projectsListView.setEmptyView(empty);*/
                 meusServeis.add(serveiModified);
                 Collections.sort(meusServeis);
                 adapter.notifyDataSetChanged();
+                pujarExperiencia();
             }
         });
     }
