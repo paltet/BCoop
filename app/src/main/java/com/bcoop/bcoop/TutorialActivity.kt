@@ -5,11 +5,12 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.github.appintro.AppIntro
+import com.github.appintro.AppIntro2
 import com.github.appintro.AppIntroFragment
 import com.github.appintro.AppIntroPageTransformerType
 
 
-class TutorialActivity : AppIntro() {
+class TutorialActivity : AppIntro2() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Make sure you don't call setContentView!
@@ -24,19 +25,20 @@ class TutorialActivity : AppIntro() {
         ))
 
         addSlide(AppIntroFragment.newInstance(
-                title = "The title of your slide",
-                description = "A description that will be shown on the bottom",
-                backgroundColor = Color.BLUE
+                title = "Cerca Habilitats",
+                description = "Busca les habilitats que més t'interessen",
+                backgroundDrawable = R.drawable.foto1
+
                 ))
         addSlide(AppIntroFragment.newInstance(
-                title = "The title of your slide",
-                description = "A description that will be shown on the bottom",
-                backgroundColor = Color.GREEN
+                title = "Tria l'habilitat",
+                description = "Tria una entre les moltes habilitats disponibles",
+                backgroundDrawable = R.drawable.foto2
         ))
         addSlide(AppIntroFragment.newInstance(
-                title = "The title of your slide",
-                description = "A description that will be shown on the bottom",
-                backgroundColor = Color.YELLOW
+                title = "Visita el perfil",
+                description = "Mira el perfil de l'usuari que més t'interessa",
+                backgroundDrawable = R.drawable.foto3
         ))
 
     }
@@ -44,9 +46,9 @@ class TutorialActivity : AppIntro() {
     override fun onSkipPressed(currentFragment: Fragment?) {
         super.onSkipPressed(currentFragment)
         // Decide what to do when the user clicks on "Skip"
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
-        finish()
+        //val intent = Intent(this, HomeActivity::class.java)
+        //startActivity(intent)
+        //finish()
     }
 
     override fun onDonePressed(currentFragment: Fragment?) {
