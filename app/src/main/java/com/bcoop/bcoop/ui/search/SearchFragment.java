@@ -76,6 +76,9 @@ public class SearchFragment extends Fragment {
         searchMeusServeis();
         setCurrentUSer();
         setHabilitats(root);
+
+        //parche per que no peti ask service en el primer ask
+        UtilityClass.getInstance().setList(meusServeis);
         Log.d("habilitatsFinal", String.valueOf(habilites));
         setSpinnerContent(root);
 
