@@ -4,7 +4,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="login_with_google">Login with google</string>
+    <string name="login_with_google">Login with Google</string>
     <string name="confirm">Confirm Password</string>
     <string name="email">Email</string>
     <string name="logout">Logout</string>
@@ -123,7 +123,7 @@
     <string name="image">Image</string>
     <string name="view_profile">View profile</string>
     <string name="aquire_Service"> for a finished service </string>
-    <string name="ayou_recieved"> you have recieved </string>
+    <string name="ayou_recieved"> you have received </string>
     <string name="you_sent"> you have sent</string>
 
     <string name="reports">Reports</string>
