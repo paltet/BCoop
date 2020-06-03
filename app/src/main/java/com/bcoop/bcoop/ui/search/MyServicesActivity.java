@@ -477,7 +477,7 @@ projectsListView.setEmptyView(empty);*/
                 meusServeis.add(serveiModified);
                 Collections.sort(meusServeis);
                 adapter.notifyDataSetChanged();
-                pujarExperiencia();
+                pujarExperiencia(servei);
             }
         });
     }
@@ -513,9 +513,10 @@ projectsListView.setEmptyView(empty);*/
 
     }*/
 
-    private void pujarExperiencia() {
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        final DocumentReference documentReference = db.collection("Usuari").document(email);
+    private void pujarExperiencia(Servei servei) {
+        String emailProveidor = servei.getProveidor();
+        String emailDemander = servei.getDemander();
+        final DocumentReference documentReference = db.collection("Usuari").document(emailProveidor);
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -571,8 +572,70 @@ projectsListView.setEmptyView(empty);*/
                         LvlUp(nivell);
                     }
 
-                    db.collection("Usuari").document(email).update("experiencia", experiencia + 100);
-                    db.collection("Usuari").document(email).update("nivell", nivell);
+                    db.collection("Usuari").document(emailProveidor).update("experiencia", experiencia + 100);
+                    db.collection("Usuari").document(emailProveidor).update("nivell", nivell);
+                }
+            }
+        });
+
+        final DocumentReference documentReference2 = db.collection("Usuari").document(emailDemander);
+        documentReference2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    Usuari usuari = new Usuari();
+                    usuari = documentSnapshot.toObject(Usuari.class);
+                    int experiencia = usuari.getExperiencia();
+                    int nivell = usuari.getNivell();
+
+                    if (nivell == 1) {
+                        nivell = 2;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 2 && experiencia >= 300){
+                        nivell = 3;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 3 && experiencia >= 700){
+                        nivell = 4;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 4 && experiencia >= 1200){
+                        nivell = 5;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 5 && experiencia >= 1600){
+                        nivell = 6;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 6 && experiencia >= 2500){
+                        nivell = 7;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 7 && experiencia >= 3700){
+                        nivell = 8;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 8 && experiencia >= 5000){
+                        nivell = 9;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+                    else if (nivell == 9 && experiencia >= 7000) {
+                        nivell = 10;
+                        //notificacio
+                        LvlUp(nivell);
+                    }
+
+                    db.collection("Usuari").document(emailDemander).update("experiencia", experiencia + 100);
+                    db.collection("Usuari").document(emailDemander).update("nivell", nivell);
                 }
             }
         });
