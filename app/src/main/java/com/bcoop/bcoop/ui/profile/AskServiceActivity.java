@@ -145,6 +145,7 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
                     Toast.makeText(getApplicationContext(),  getApplicationContext().getString(R.string.solicitut_enviada), Toast.LENGTH_LONG).show();
 
 
+
                     // PER FER LA NOTIFICACIO PUSH => sendNotification(proveidor, demander, text);
 
                     //prova per veure els serveis que tinc FUNCIONA
@@ -171,13 +172,6 @@ public class AskServiceActivity extends AppCompatActivity implements DatePickerD
                         //si no tenim prous monedes pel servei o la data no es superior a currentDate
                     else Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.InvalidServiceDate), Toast.LENGTH_SHORT).show();
                 }
-
-                /*fem que hagi de tirar cap enrera per tonrar al xat
-                Intent intent = new Intent();
-                intent.putExtra("otherUserEmail", emailProveidor);
-                intent.setClass(getApplicationContext(), ChatWithAnotherUserActivity.class);
-                startActivity(intent);*/
-
                 //per tornar directament al xat i tancar la activty de askService
                 finish();
 
