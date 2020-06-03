@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bcoop.bcoop.MainActivity;
 import com.bcoop.bcoop.Model.Servei;
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
@@ -50,6 +51,8 @@ public class SearchFragment extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth  mAuth = FirebaseAuth.getInstance();
     private ArrayList<Servei> meusServeis = new ArrayList<>();
+    boolean isBlocked = false;
+    private  String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
 
 
@@ -65,6 +68,11 @@ public class SearchFragment extends Fragment {
                 textView.setText(s);
             }
         });*/
+
+
+
+
+
         searchMeusServeis();
         setCurrentUSer();
         setHabilitats(root);
@@ -105,6 +113,7 @@ public class SearchFragment extends Fragment {
 
         return root;
     }
+
 
     private void setSpinnerContent(View root) {
 

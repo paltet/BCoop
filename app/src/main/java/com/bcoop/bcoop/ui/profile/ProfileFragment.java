@@ -232,7 +232,7 @@ public class ProfileFragment extends Fragment {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         firestore.collection("Usuari").document(email).update("isBlocked", true);
-        firestore.collection("Usuar").document(email).update("lastBloqueig", formatter.format(date));
+        firestore.collection("Usuari").document(email).update("lastBloqueig", formatter.format(date));
     }
 
     private void makeadmin(String email) {

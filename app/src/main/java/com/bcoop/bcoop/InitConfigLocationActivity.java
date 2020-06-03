@@ -186,4 +186,6 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
+
 }
