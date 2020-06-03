@@ -115,7 +115,8 @@ public class InitConfigLocationActivity extends AppCompatActivity implements OnM
 
         DocumentReference documentReference = firestore.collection("Usuari").document(email);
         documentReference.set(usuari);
-        startActivity(new Intent(InitConfigLocationActivity.this, HomeActivity.class));
+        //startActivity(new Intent(InitConfigLocationActivity.this, HomeActivity.class));
+        startActivity(new Intent(InitConfigLocationActivity.this, TutorialActivity.class));
     }
 
 

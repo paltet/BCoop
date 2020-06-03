@@ -141,7 +141,7 @@
     <string name="scan">Enter code</string>
     <string name="prize_used">Failure to use, the prize code has been used. </string>
     <string name="prize_no_exist">Failure to use, the prize code does not exist. </string>
-    <string name="esta_pendent" > "Service pending of confirmation. Try chatting with your provider.</string>
+    <string name="esta_pendent"> "Service pending of confirmation. Try chatting with your provider.</string>
     <string name="monedes_a_pagar">"coins to pay:"</string>
     <string name="pay">"Pay"</string>
     <string name="descripcio">Description</string>
@@ -160,9 +160,9 @@
 
     <string name="valoration_enviada">service rating sent</string>
     <string name="et_va_donar_servei_en">helped you with</string>
-    <string name="el_dia" >on</string>
+    <string name="el_dia">on</string>
     <string name="solicitut_enviada">service request sent</string>
-    <string name="no_tens_serveis" >No services here ... Sure there is something your neighbors can help you with!</string>
+    <string name="no_tens_serveis">No services here ... Sure there is something your neighbors can help you with!</string>
 
 
 </resources>

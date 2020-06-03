@@ -14,9 +14,11 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.prize.ScanActivity"
+        <activity android:name=".TutorialActivity"
+            android:label="Tutorial" />
+        <activity
+            android:name=".ui.prize.ScanActivity"
             android:theme="@style/AppThemeWithActionBar" />
-
         <activity android:name=".ui.search.MyServicesActivity" />
         <activity android:name=".ui.profile.ReportAdaptar" />
         <activity android:name=".ui.profile.ReportActivity" />
@@ -45,7 +47,7 @@
         <activity
             android:name=".HomeActivity"
             android:theme="@style/AppThemeWithActionBar"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/AppThemeWithActionBar" />
@@ -58,7 +60,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
