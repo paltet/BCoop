@@ -81,6 +81,13 @@
         android:text="@string/comment"
         android:textSize="14sp"
         android:layout_below="@+id/comment" />
+    <Button
+        android:id="@+id/Report1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/Report"
+        android:layout_below="@+id/comment1" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

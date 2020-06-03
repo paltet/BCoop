@@ -1,16 +1,11 @@
 package com.bcoop.bcoop.ui.search;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.view.View;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -20,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bcoop.bcoop.Model.Comentari;
 import com.bcoop.bcoop.Model.HabilitatDetall;
 import com.bcoop.bcoop.Model.Notification;
@@ -28,25 +25,11 @@ import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
 import com.bcoop.bcoop.ui.chat.ChatWithAnotherUserActivity;
 import com.bcoop.bcoop.ui.notification.ConectFirebase;
-import com.bcoop.bcoop.ui.notification.NotificationFragment;
-import com.bcoop.bcoop.ui.profile.HabilitatsConfiguration;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.behavior.SwipeDismissBehavior;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.StorageReference;
-
-import org.w3c.dom.Text;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -55,8 +38,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -76,6 +61,10 @@ public class MyServicesActivity extends AppCompatActivity {
     private Bitmap bitmap;
     boolean star1Empty = true;
     private EditText nivell;
+    private Button report;
+    private EditText EditReport;
+    private Button ReportSendButton;
+
 
     /*
     ProjectListAdapter projectListAdapter = new ProjectListAdapter();
@@ -180,6 +169,7 @@ projectsListView.setEmptyView(empty);*/
         TextView dateFi1 = dialogView.findViewById(R.id.dateFi1);
         TextView valor1 = dialogView.findViewById(R.id.valor1);
         TextView comment1 = dialogView.findViewById(R.id.comment1);
+        report = dialogView.findViewById(R.id.Report1);
 
 
         habilitatName.setText(servei.getHabilitat());
@@ -191,6 +181,38 @@ projectsListView.setEmptyView(empty);*/
         comment1.setText(servei.getComentariValoracio().getContingut());
 
         dialogView.show();
+
+
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View viewReport = getLayoutInflater().inflate(R.layout.activity_report_service, null);
+                final AlertDialog.Builder alertReport = new AlertDialog.Builder(MyServicesActivity.this);
+                alertReport.setView(viewReport);
+                final AlertDialog alertDialogReport = alertReport.create();
+                alertDialogReport.setCanceledOnTouchOutside(true);
+
+                alertDialogReport.show();
+                EditReport = viewReport.findViewById(R.id.incidenciaForm);
+                ReportSendButton = viewReport.findViewById(R.id.sendButton);
+                ReportSendButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                        String item = EditReport.getText().toString();
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("Informe", item);
+                        data.put("user", email);
+                        Date date = Calendar.getInstance().getTime();
+                        data.put("data", date.toString());
+                        db.collection("Reports").add(data);
+                        alertDialogReport.dismiss();
+                        Toast.makeText(MyServicesActivity.this, R.string.ReportEnviat, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
 
     }
 
