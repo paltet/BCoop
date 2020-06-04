@@ -23,7 +23,8 @@
         <activity android:name=".ui.profile.ReportAdaptar" />
         <activity android:name=".ui.profile.ReportActivity" />
         <activity android:name=".ui.profile.AskServiceActivity" />
-        <activity android:name=".ui.chat.ChatWithAnotherUserActivity" />
+        <activity android:name=".ui.chat.ChatWithAnotherUserActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ui.profile.HabilitatsConfiguration" />
         <activity

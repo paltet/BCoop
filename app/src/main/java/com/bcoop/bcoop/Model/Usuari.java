@@ -37,7 +37,7 @@ public class Usuari {
         this.locationLatitude = locationLatitude;
         this.locationLongitude = locationLongitude;
         esPremium = false;
-        monedes = 0;
+        monedes = 150;
         esAdministrador = false;
         blocked = false;
         habilitats = new HashMap<>();

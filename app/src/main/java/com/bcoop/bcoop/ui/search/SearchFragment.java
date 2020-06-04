@@ -129,7 +129,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 habilitat_seleccionada = parent.getSelectedItem().toString();
-                Toast.makeText(parent.getContext(), "Seleccionada:"+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(parent.getContext(), "Seleccionada:"+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
                 searchUsers(parent.getItemAtPosition(position).toString());
             } //still never shows up in toast
 
@@ -172,6 +172,7 @@ public class SearchFragment extends Fragment {
                                     }
 
                                 }
+
                             }
 
                             adapter = new ResultListAdapter(users, habilitat_seleccionada);

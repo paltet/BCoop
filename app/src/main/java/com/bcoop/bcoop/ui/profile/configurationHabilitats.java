@@ -96,6 +96,6 @@ public class configurationHabilitats extends AppCompatActivity {
             message+="option8 \n";
             //cridar a afegir al arrayList de habilitats del user, si ja esta afegida no afegirla
         }
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

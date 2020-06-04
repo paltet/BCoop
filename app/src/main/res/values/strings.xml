@@ -164,5 +164,27 @@
     <string name="solicitut_enviada">service request sent</string>
     <string name="no_tens_serveis">No services here ... Sure there is something your neighbors can help you with!</string>
 
+    <string name="name_profile">Name</string>
+    <string name="distance">Distance</string>
+    <string name="rating">Rating:</string>
+
+    <string name="tutorial1">Search abilities</string>
+    <string name="tutorial1_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial3">Navigate to a profile</string>
+    <string name="tutorial3_2">Navigate to the profile that you are most interested in</string>
+    <string name="tutorial4">Chat with the user</string>
+    <string name="tutorial4_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial5">Send a service request to the user</string>
+    <string name="tutorial5_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial6">Search abilities</string>
+    <string name="tutorial6_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial7">Search abilities</string>
+    <string name="tutorial7_2">See the services that you\'ve in progress</string>
+    <string name="tutorial8">And get prizes!</string>
+    <string name="tutorial8_2">Configure your profile</string>
+    <string name="tutorial9">And get prizes!</string>
+    <string name="tutorial9_2">Choose tha ability that you\'re interested in</string>
+
+
 
 </resources>

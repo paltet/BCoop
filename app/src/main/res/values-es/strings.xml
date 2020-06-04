@@ -169,4 +169,26 @@
     <string name="solicitut_enviada">solicitud de servecio enviada</string>
     <string name="no_tens_serveis" >No tienes servicios... ¡Seguro que tus vecinos pueden ayudarte en algo!</string>
 
+    <string name="name_profile">Nombre</string>
+    <string name="distance">Distancia</string>
+    <string name="rating">Puntuación:</string>
+
+
+    <string name="tutorial1">Busca habilidades</string>
+    <string name="tutorial1_2">Escoge la habilidad que te interesa</string>
+    <string name="tutorial3">Visita un perfil</string>
+    <string name="tutorial3_2">Visita el perfil que más te interesa</string>
+    <string name="tutorial4">Chatea con el usuario</string>
+    <string name="tutorial4_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial5">Pide un servicio al usuario</string>
+    <string name="tutorial5_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial6">Search abilities</string>
+    <string name="tutorial6_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial7">Search abilities</string>
+    <string name="tutorial7_2">Mira los servicios que tienes activos</string>
+    <string name="tutorial8">Search abilities</string>
+    <string name="tutorial8_2">Configura tu perfil</string>
+    <string name="tutorial9">I consigue regalos!</string>
+    <string name="tutorial9_2">Choose tha ability that you\'re interested in</string>
+
 </resources>

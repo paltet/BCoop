@@ -171,5 +171,28 @@
     <string name="solicitut_enviada">solicitut de servei enviada</string>
     <string name="no_tens_serveis" >No tens serveis... Segur que els teus veïns et poden ajudar en alguna cosa!</string>
 
+    <string name="name_profile">Nom</string>
+    <string name="distance">Distància</string>
+    <string name="rating">Puntuació:</string>
+
+    <string name="to_store">Mostra el codi a la botiga</string>
+
+    <string name="tutorial1">Busca habilitats</string>
+    <string name="tutorial1_2">Tria l\'habilitat que t\'interessa</string>
+    <string name="tutorial3">Visita un perfil</string>
+    <string name="tutorial3_2">Visita el perfil que més t\'interessa</string>
+    <string name="tutorial4">Xateja amb l\'usuari</string>
+    <string name="tutorial4_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial5">Demana un servei a l\'usuari</string>
+    <string name="tutorial5_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial6">Search abilities</string>
+    <string name="tutorial6_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial7">Search abilities</string>
+    <string name="tutorial7_2">Mira els serveis que tens actius</string>
+    <string name="tutorial8">Search abilities</string>
+    <string name="tutorial8_2">Configura el teu perfil</string>
+    <string name="tutorial9">I aconsegueix regals!</string>
+    <string name="tutorial9_2">Choose tha ability that you\'re interested in</string>
+
 
 </resources>

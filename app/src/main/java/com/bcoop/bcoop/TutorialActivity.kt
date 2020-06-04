@@ -25,29 +25,59 @@ class TutorialActivity : AppIntro2() {
         ))
 
         addSlide(AppIntroFragment.newInstance(
-                title = "Cerca Habilitats",
-                description = "Busca les habilitats que més t'interessen",
+                title = getString(R.string.tutorial1),
+                description = getString(R.string.tutorial1_2),
                 backgroundDrawable = R.drawable.foto1
 
                 ))
+
         addSlide(AppIntroFragment.newInstance(
-                title = "Tria l'habilitat",
-                description = "Tria una entre les moltes habilitats disponibles",
-                backgroundDrawable = R.drawable.foto2
-        ))
-        addSlide(AppIntroFragment.newInstance(
-                title = "Visita el perfil",
-                description = "Mira el perfil de l'usuari que més t'interessa",
+                title = getString(R.string.tutorial3),
+                description = getString(R.string.tutorial3_2),
                 backgroundDrawable = R.drawable.foto3
         ))
+
+        addSlide(AppIntroFragment.newInstance(
+                title = getString(R.string.tutorial4),
+                //description = getString(R.string.tutorial4_2),
+                backgroundDrawable = R.drawable.foto4
+
+        ))
+        addSlide(AppIntroFragment.newInstance(
+                title = getString(R.string.tutorial5),
+                //description = getString(R.string.tutorial5_2),
+                backgroundDrawable = R.drawable.foto5
+        ))
+        addSlide(AppIntroFragment.newInstance(
+                //title = getString(R.string.tutorial6),
+                //description = getString(R.string.tutorial6_2),
+                backgroundDrawable = R.drawable.foto6
+        ))
+        addSlide(AppIntroFragment.newInstance(
+                //title = getString(R.string.tutorial7),
+                description = getString(R.string.tutorial7_2),
+                backgroundDrawable = R.drawable.foto7
+
+        ))
+        addSlide(AppIntroFragment.newInstance(
+                //title = getString(R.string.tutorial8),
+                description = getString(R.string.tutorial8_2),
+                backgroundDrawable = R.drawable.foto9
+        ))
+        addSlide(AppIntroFragment.newInstance(
+                title = getString(R.string.tutorial9),
+                //description = getString(R.string.tutorial9_2),
+                backgroundDrawable = R.drawable.foto8
+        ))
+
 
     }
 
     override fun onSkipPressed(currentFragment: Fragment?) {
         super.onSkipPressed(currentFragment)
         // Decide what to do when the user clicks on "Skip"
-        //val intent = Intent(this, HomeActivity::class.java)
-        //startActivity(intent)
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
         //finish()
     }
 

@@ -74,7 +74,7 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
         nameTextView.setText(user.getName());
         Button button = holder.xatButton;
         button.setText(R.string.view_profile);
-        Picasso.get().load("https://images.pexels.com/photos/248771/pexels-photo-248771.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=346&w=640").into(holder.profileImageView);
+        //Picasso.get().load("https://images.pexels.com/photos/248771/pexels-photo-248771.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=346&w=640").into(holder.profileImageView);
         //falta agafar la distancia i el rating
 
         TextView distance = holder.distTextView;
@@ -129,7 +129,7 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Vi
 
             nameTextView = (TextView) itemView.findViewById(R.id.Name);
 
-            profileImageView = (ImageView) itemView.findViewById(R.id.circleImage);
+            //profileImageView = (ImageView) itemView.findViewById(R.id.circleImage);
             xatButton = (Button) itemView.findViewById(R.id.buttonXat);
             ratingTextView = (TextView) itemView.findViewById(R.id.ratingTextView);
             distTextView = (TextView) itemView.findViewById(R.id.distTextView);
