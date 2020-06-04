@@ -121,9 +121,9 @@ public class HabilitatsConfiguration extends AppCompatActivity {
                 public void onClick(View view) {
                     boolean newState = !list.get(position).isChecked();
                     list.get(position).checked = newState;
-                    Toast.makeText(getApplicationContext(),
-                            itemStr + "setOnClickListener\nchecked: " + newState,
-                            Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(),
+                      //      itemStr + "setOnClickListener\nchecked: " + newState,
+                        //    Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -199,9 +199,9 @@ public class HabilitatsConfiguration extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(HabilitatsConfiguration.this,
-                        ((Item) (parent.getItemAtPosition(position))).ItemString,
-                        Toast.LENGTH_LONG).show();
+                //Toast.makeText(HabilitatsConfiguration.this,
+                  //      ((Item) (parent.getItemAtPosition(position))).ItemString,
+                    //    Toast.LENGTH_LONG).show();
             }
         });
 
@@ -255,7 +255,7 @@ public class HabilitatsConfiguration extends AppCompatActivity {
 
                     }
                 }
-                Toast.makeText(HabilitatsConfiguration.this, str, Toast.LENGTH_LONG).show();
+                //Toast.makeText(HabilitatsConfiguration.this, str, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(HabilitatsConfiguration.this, ConfigProfileActivity.class);
                 startActivity(intent);
             }
