@@ -188,7 +188,8 @@ public class MainActivity extends AppCompatActivity {
                                     if(task.getResult().exists()) startActivity(new Intent(MainActivity.this, HomeActivity.class));
                                     else{
                                         Intent intent = new Intent(MainActivity.this, InitConfigActivity.class);
-                                        intent.putExtra("username", usermail);
+                                        String username = usermail.split("@")[0];
+                                        intent.putExtra("username", username);
                                         startActivity(intent);
                                     }
                                 }
