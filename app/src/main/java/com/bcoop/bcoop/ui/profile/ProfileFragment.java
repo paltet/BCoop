@@ -248,7 +248,7 @@ public class ProfileFragment extends Fragment {
     private void blockUser(String email) {
         Date date = Calendar.getInstance().getTime();
         //SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        firestore.collection("Usuari").document(email).update("isBlocked", true);
+        firestore.collection("Usuari").document(email).update("blocked", true);
         firestore.collection("Usuari").document(email).update("lastBloqueig", date);
     }
 
