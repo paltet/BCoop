@@ -113,13 +113,11 @@ public class SearchFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
         return root;
     }
 
 
     private void setSpinnerContent(View root) {
-
         searchSpinner = root.findViewById(R.id.spinner1);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, habilites);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -139,7 +137,6 @@ public class SearchFragment extends Fragment {
             }
         };
         searchSpinner.setOnItemSelectedListener(mListener); // Register this spinner for a mListener
-
     }
 
     private void searchUsers(String hability) {
@@ -163,30 +160,19 @@ public class SearchFragment extends Fragment {
                                 Usuari user = document.toObject(Usuari.class);
                                 Double loc = user.getLocationLatitude();
                                 if(loc != null && (!currentuser.equals(user.getEmail()))){
-
                                     list.add(user);
                                     users.add(new UserSearch(user.getNom(), calculateDistance(user.getLocationLatitude(), user.getLocationLongitude()), getPhoto(user.getFoto()), user.getHabilitats(), user.getLocationLatitude(), user.getLocationLongitude(), user.getValoracio(), user.getEmail()));
                                     Log.d("distance", String.valueOf(users));
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                         users.sort(Comparator.comparing(UserSearch::getDistance));
                                     }
-
                                 }
-
                             }
-
                             adapter = new ResultListAdapter(users, habilitat_seleccionada);
                             mResultList.setAdapter(adapter);
-
-
-                        } else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
-                        }
+                        } else Log.d("TAG", "Error getting documents: ", task.getException());
                     }
                 });
-
-
-
     }
 
     private String getPhoto(String foto) {
@@ -217,9 +203,7 @@ public class SearchFragment extends Fragment {
 
 
     private void setHabilitats(final View root){
-
         final ArrayList<String> habilitats = new ArrayList<>();
-
         db.collection("Habilitat")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -232,20 +216,13 @@ public class SearchFragment extends Fragment {
                                 habilites = habilitats;
                             }
                             setSpinnerContent(root);
-
-                        } else {
-
                         }
                     }
                 });
-
         Log.d("habilitats", String.valueOf(habilites));
-
-
     }
 
     private void setCurrentUSer(){
-
         db.collection("Usuari").document(mAuth.getCurrentUser().getEmail())
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -253,7 +230,6 @@ public class SearchFragment extends Fragment {
                 currentUser = documentSnapshot.toObject(Usuari.class);
             }
         });
-
     }
 
 
@@ -278,11 +254,5 @@ public class SearchFragment extends Fragment {
                         }
                     }
                 });
-
     }
-
-
-
-
-
 }
