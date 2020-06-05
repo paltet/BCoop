@@ -159,7 +159,7 @@ public class SearchFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Usuari user = document.toObject(Usuari.class);
                                 Double loc = user.getLocationLatitude();
-                                if(loc != null && (!currentuser.equals(user.getEmail()))){
+                                if(!currentuser.equals(user.getEmail())){
                                     list.add(user);
                                     users.add(new UserSearch(user.getNom(), calculateDistance(user.getLocationLatitude(), user.getLocationLongitude()), getPhoto(user.getFoto()), user.getHabilitats(), user.getLocationLatitude(), user.getLocationLongitude(), user.getValoracio(), user.getEmail()));
                                     Log.d("distance", String.valueOf(users));
