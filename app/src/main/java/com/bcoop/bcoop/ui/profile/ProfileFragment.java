@@ -129,6 +129,7 @@ public class ProfileFragment extends Fragment {
                         viewReport.setVisibility(View.VISIBLE);
                         makeAdmin.setVisibility(View.VISIBLE);
                         blockUser.setVisibility(View.VISIBLE);
+                        makeShop.setVisibility(View.VISIBLE);
                         viewReport.setTextColor(Color.BLACK);
                         viewReport.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
                         viewReport.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +176,7 @@ public class ProfileFragment extends Fragment {
         viewReport = root.findViewById(R.id.viewReportsButton);
         viewReport.setVisibility(View.GONE);
         makeAdmin.setVisibility(View.GONE);
+        makeShop.setVisibility(View.GONE);
         blockUser.setVisibility(View.GONE);
 
         if (email.equals(mAuth.getCurrentUser().getEmail())) {
@@ -189,6 +191,8 @@ public class ProfileFragment extends Fragment {
                 }
             });
             report.setVisibility(View.GONE);
+            makeAdmin.setVisibility(View.GONE);
+            makeShop.setVisibility(View.GONE);
         }
         else {
             logout.setText(R.string.chat);
