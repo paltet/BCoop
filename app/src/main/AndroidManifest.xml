@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.bcoop.bcoop">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,8 +14,17 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.profile.AskServiceActivity"></activity>
-        <activity android:name=".ui.chat.ChatWithAnotherUserActivity" />
+        <activity android:name=".TutorialActivity"
+            android:label="Tutorial" />
+        <activity
+            android:name=".ui.prize.ScanActivity"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity android:name=".ui.search.MyServicesActivity" />
+        <activity android:name=".ui.profile.ReportAdaptar" />
+        <activity android:name=".ui.profile.ReportActivity" />
+        <activity android:name=".ui.profile.AskServiceActivity" />
+        <activity android:name=".ui.chat.ChatWithAnotherUserActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ui.profile.HabilitatsConfiguration" />
         <activity
@@ -37,7 +47,8 @@
         <activity android:name=".InitConfigActivity" />
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/AppThemeWithActionBar" />
+            android:theme="@style/AppThemeWithActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/AppThemeWithActionBar" />
@@ -50,6 +61,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" />
 
         <service
             android:name=".ui.chat.chatnotification.MyFirebaseMessagingService"

@@ -4,7 +4,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="login_with_google">Login with google</string>
+    <string name="login_with_google">Login with Google</string>
     <string name="confirm">Confirm Password</string>
     <string name="email">Email</string>
     <string name="logout">Logout</string>
@@ -56,6 +56,7 @@
     <string name="price">Price</string>
     <string name="coins"> Coins</string>
     <string name="use">Use</string>
+    <string name="to_store">Show the code to the store.</string>
     <string name="usePrize">Do you want to use this prize?</string>
     <string name="notEnough">You don\'t have enough coins</string>
 
@@ -72,14 +73,14 @@
     <string name="confirmNewPassword">Confirm New Password</string>
     <string name="writeDelete">Type your password to delete your user</string>
     <string name="confirmDelete">Confirm Delete</string>
-    <string name="time_at" />
+    <string name="time_at"> at </string>
     <string name="incorrect_password">Wrong Password</string>
     <string name="delete_perfil">Delete Profile</string>
     <string name="perfil_cannot_delete">Failed to delete profile. Please try later</string>
 
     <string name="user_settings">User Settings</string>
     <string name="EnQuePotsAjudar">How can you help your neighbours?</string>
-    <string name="configiguracioHabUser">Abilities Cinfiguration</string>
+    <string name="configiguracioHabUser">Abilities Configuration</string>
 
     <string name="notification">Notification</string>
 
@@ -95,7 +96,7 @@
     <string name="refuse">Refuse</string>
     <string name="chat_with">Chat with him/her</string>
     <string name="applicant">Applicant</string>
-    <string name="ability">Ability</string>
+    <string name="ability">Ability: </string>
     <string name="start_date">Start date</string>
     <string name="end_date">End date</string>
     <string name="duration">Duration</string>
@@ -120,6 +121,74 @@
     <string name="Send">Send</string>
     <string name="ReportEnviat"> Successfully sended</string>
     <string name="image">Image</string>
+    <string name="view_profile">View profile</string>
+    <string name="aquire_Service"> for a finished service </string>
+    <string name="ayou_recieved"> you have received </string>
+    <string name="you_sent"> you have sent</string>
+
+    <string name="reports">Reports</string>
+    <string name="no_reports">No reports for user</string>
+    <string name="view_reports">Look At All Reports</string>
+
+    <string name="my_services">My Services</string>
+    <string name="proveidor">Provider: </string>
+    <string name="estat">State: </string>
+
+    <string name="lastBan">Last Ban Date: </string>
+    <string name="noBan">" It has never been blocked"</string>
+    <string name="prize_code">Enter prize code manually: </string>
+    <string name="scan_code">Scan the prize code: </string>
+    <string name="scan">Enter code</string>
+    <string name="prize_used">Failure to use, the prize code has been used. </string>
+    <string name="prize_no_exist">Failure to use, the prize code does not exist. </string>
+    <string name="esta_pendent"> "Service pending of confirmation. Try chatting with your provider.</string>
+    <string name="monedes_a_pagar">"coins to pay:"</string>
+    <string name="pay">"Pay"</string>
+    <string name="descripcio">Description</string>
+    <string name="PriceName">Prize Name</string>
+
+    <string name="levelup">You reached level </string>
+    <string name="service_completed">Service Completed</string>
+    <string name="add_comment">Add a comment (optional)</string>
+    <string name="rate_service">How was the service?</string>
+
+    <string name="makeAdmin">Make user admin</string>
+    <string name="makeShop">Enable shop functions</string>
+    <string name="blockUser">Block user</string>
+
+    <string name="incidence_question">What was your problem?</string>
+    <string name="incidence_write">Tell us about what happened</string>
+
+    <string name="valoration_enviada">service rating sent</string>
+    <string name="et_va_donar_servei_en">helped you with</string>
+    <string name="el_dia">on</string>
+    <string name="solicitut_enviada">service request sent</string>
+    <string name="no_tens_serveis">No services here ... Sure there is something your neighbors can help you with!</string>
+
+    <string name="name_profile">Name</string>
+    <string name="distance">Distance</string>
+    <string name="rating">Rating:</string>
+
+    <string name="tutorial1">Search abilities</string>
+    <string name="tutorial1_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial3">Navigate to a profile</string>
+    <string name="tutorial3_2">Navigate to the profile that you are most interested in</string>
+    <string name="tutorial4">Chat with the user</string>
+    <string name="tutorial4_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial5">Send a service request to the user</string>
+    <string name="tutorial5_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial6">Search abilities</string>
+    <string name="tutorial6_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial7">Search abilities</string>
+    <string name="tutorial7_2">See the services that you\'ve in progress</string>
+    <string name="tutorial8">And get prizes!</string>
+    <string name="tutorial8_2">Configure your profile</string>
+    <string name="tutorial9">And get prizes!</string>
+    <string name="tutorial9_2">Choose tha ability that you\'re interested in</string>
+    <string name="demanar_servei">Request a service</string>
+
+    <string name="language">eng</string>
+
 
 
 </resources>

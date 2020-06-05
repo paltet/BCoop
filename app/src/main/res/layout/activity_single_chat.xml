@@ -46,7 +46,7 @@
     <ListView
         android:id="@+id/messagesList"
         android:layout_width="match_parent"
-        android:layout_height="674dp"
+        android:layout_height="640dp"
         android:divider="@color/white" />
 
 

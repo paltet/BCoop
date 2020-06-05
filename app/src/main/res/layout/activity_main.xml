@@ -99,7 +99,7 @@
             android:ems="10"
             android:gravity="center"
             android:hint="@string/email"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:textColorHint="@color/lightGreen"
             android:textSize="16sp" />
 

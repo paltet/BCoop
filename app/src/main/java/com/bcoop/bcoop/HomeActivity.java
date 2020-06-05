@@ -39,7 +39,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
-
 import static android.content.ContentValues.TAG;
 
 public class HomeActivity extends AppCompatActivity {
@@ -56,14 +55,12 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         //BottomNavigationView navView = findViewById(R.id.nav_view);
 
-
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 String newToken = instanceIdResult.getToken();
                 final DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Usuari").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                 documentReference.update("token", newToken);
-                Toast.makeText(HomeActivity.this, newToken, Toast.LENGTH_SHORT).show();
                 documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -141,6 +138,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onDestroy() {

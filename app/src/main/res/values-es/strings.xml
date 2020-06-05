@@ -57,6 +57,7 @@
     <string name="mostrar_mes_coment">Muestra más comentarios</string>
     <string name="coins">Monedas</string>
     <string name="use">Utilizar</string>
+    <string name="to_store">Muestra el código a la tienda.</string>
     <string name="usePrize">¿Quieres utilizar este premio?</string>
     <string name="notEnough">No tienes suficientes monedas</string>
 
@@ -73,7 +74,7 @@
     <string name="confirmNewPassword">Confirmar nueva contraseña</string>
     <string name="writeDelete">Escribe tu contraseña para eliminar el usuario</string>
     <string name="confirmDelete">Confirmar Eliminar</string>
-    <string name="time_at" />
+    <string name="time_at"> a las </string>
     <string name="incorrect_password">Wrong Password</string>
     <string name="delete_perfil">Delete Profile</string>
     <string name="perfil_cannot_delete">Failed to delete profile. Please try later</string>
@@ -120,5 +121,78 @@
     <string name="Send">Envia</string>
     <string name="ReportEnviat"> Enviado satisfactoriamente</string>
     <string name="image">Imagen</string>
+    <string name="view_profile">Ver perfil</string>
+    <string name="aquire_Service"> por un servicio finalizado </string>
+    <string name="ayou_recieved"> has recibido </string>
+    <string name="you_sent"> has enviado</string>
+
+    <string name="reports">Informes</string>
+    <string name="no_reports">No hay informe para usuario</string>
+    <string name="view_reports">Ver todos los informes</string>
+
+    <string name="my_services">Mis servicios</string>
+    <string name="proveidor">Proveedor: </string>
+    <string name="estat">Estado: </string>
+
+    <string name="lastBan">Fecha del último bloqueo: </string>
+    <string name="noBan">"No se ha bloqueado nunca"</string>
+    <string name="prize_code">Introduce el código de premio manualmente: </string>
+    <string name="scan_code">Escanea el código del premio: </string>
+    <string name="prize_used">Uso fallido, el código del premio ha sido utilizado. </string>
+    <string name="prize_no_exist">Uso fallido, el código del premio no existe. </string>
+    <string name="scan">Introducir código</string>
+
+    <string name="esta_pendent" > "Confirmación del servicio pendiente. Prueba de chatear con tu proveedor.</string>
+    <string name="monedes_a_pagar">"monedas a pagar:"</string>
+    <string name="pay">"Pagar"</string>
+
+    <string name="levelup">Has subido al nivel </string>
+
+    <string name="descripcio">Descripción</string>
+    <string name="PriceName">Nombre Premio</string>
+
+
+
+    <string name="makeAdmin">Hacer usuario admin</string>
+    <string name="makeShop">Habilitar funciones tienda</string>
+    <string name="blockUser">Bloquear usuario</string>
+
+    <string name="service_completed">Servicio Completado</string>
+    <string name="add_comment">Añade un comentario (opcional)</string>
+    <string name="rate_service">¿Cómo valoras el servicio?</string>
+
+    <string name="incidence_question">¿Cual ha sido el problema?</string>
+    <string name="incidence_write">Explícanos qué ha pasado</string>
+
+    <string name="valoration_enviada">valoración enviada</string>
+    <string name="et_va_donar_servei_en">te ayudó con</string>
+    <string name="el_dia" >el dia</string>
+    <string name="solicitut_enviada">solicitud de servecio enviada</string>
+    <string name="no_tens_serveis" >No tienes servicios... ¡Seguro que tus vecinos pueden ayudarte en algo!</string>
+
+    <string name="name_profile">Nombre</string>
+    <string name="distance">Distancia</string>
+    <string name="rating">Puntuación:</string>
+
+
+    <string name="tutorial1">Busca habilidades</string>
+    <string name="tutorial1_2">Escoge la habilidad que te interesa</string>
+    <string name="tutorial3">Visita un perfil</string>
+    <string name="tutorial3_2">Visita el perfil que más te interesa</string>
+    <string name="tutorial4">Chatea con el usuario</string>
+    <string name="tutorial4_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial5">Pide un servicio al usuario</string>
+    <string name="tutorial5_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial6">Search abilities</string>
+    <string name="tutorial6_2">Choose tha ability that you\'re interested in</string>
+    <string name="tutorial7">Search abilities</string>
+    <string name="tutorial7_2">Mira los servicios que tienes activos</string>
+    <string name="tutorial8">Search abilities</string>
+    <string name="tutorial8_2">Configura tu perfil</string>
+    <string name="tutorial9">I consigue regalos!</string>
+    <string name="tutorial9_2">Choose tha ability that you\'re interested in</string>
+    <string name="demanar_servei">Pedir un Servicio</string>
+
+    <string name="language">es</string>
 
 </resources>

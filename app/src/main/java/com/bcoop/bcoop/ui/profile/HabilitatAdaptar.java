@@ -140,16 +140,18 @@ public class HabilitatAdaptar extends BaseExpandableListAdapter {
     private void changeTimeFormat(Date temps, TextView ago) {
         String timeDate = temps.toString();
         String time = timeDate.substring(8, 10);
-        time = time.concat("-");
+        time = time.concat("/");
         String mes = timeDate.substring(4, 7);
         int num = convertMonth(mes);
         if (num < 10)
             time = time.concat("0");
         time = time.concat(Integer.toString(num));
-        time = time.concat("-");
+        time = time.concat("/");
         time = time.concat(timeDate.substring(timeDate.length()-4));
         ago.setText(R.string.time_at);
+        time = time.concat(" ");
         time = time.concat(ago.getText().toString());
+        time = time.concat(" ");
         time = time.concat(timeDate.substring(11, 16));
         ago.setText(time);
     }

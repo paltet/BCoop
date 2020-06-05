@@ -2,6 +2,7 @@ package com.bcoop.bcoop.ui.profile;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -37,7 +38,10 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -51,10 +55,14 @@ public class ProfileFragment extends Fragment {
     private ImageView imageView;
     private Button logout;
     private Button report;
+    private Button viewReport;
     private String uriImage;
-    private Button proves;
+    private Button makeAdmin;
+    private Button makeShop;
+    private Button blockUser;
     private Button ReportSendButton;
     private EditText EditReport;
+    private boolean admin = false;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -111,27 +119,65 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
-        //inici codi de proves
-        proves = root.findViewById(R.id.proves);
-        View mView = getLayoutInflater().inflate(R.layout.popup_servei, null);
-
-        final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-        alert.setView(mView);
-        final AlertDialog alertDialog = alert.create();
-        alertDialog.setCanceledOnTouchOutside(true);
-        proves.setOnClickListener(new View.OnClickListener() {
+        final DocumentReference documentReferenceAdmin = firestore.collection("Usuari").document(mAuth.getCurrentUser().getEmail());
+        documentReferenceAdmin.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onClick(View view) {
-                alertDialog.show();
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    admin = documentSnapshot.getBoolean("esAdministrador");
+                    if (admin) {
+                        viewReport.setVisibility(View.VISIBLE);
+                        makeAdmin.setVisibility(View.VISIBLE);
+                        blockUser.setVisibility(View.VISIBLE);
+                        makeShop.setVisibility(View.VISIBLE);
+                        viewReport.setTextColor(Color.BLACK);
+                        viewReport.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
+                        viewReport.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent();
+                                intent.putExtra("otherUser", email);
+                                intent.setClass(ProfileFragment.super.requireActivity(), ReportActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                        blockUser.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                blockUser(email);
+                            }
+                        });
+
+
+                        makeAdmin.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                makeadmin(email);
+                            }
+                        });
+
+                        makeShop.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                makeShop(email);
+                            }
+                        });
+                    }
+                }
             }
         });
 
-        //fi codi de proves
-
         logout = root.findViewById(R.id.logout);
+        makeAdmin = root.findViewById(R.id.makeAdmin);
+        makeShop = root.findViewById(R.id.makeShop);
+        blockUser = root.findViewById(R.id.blockUser);
         report = root.findViewById(R.id.Report);
-
+        viewReport = root.findViewById(R.id.viewReportsButton);
+        viewReport.setVisibility(View.GONE);
+        makeAdmin.setVisibility(View.GONE);
+        makeShop.setVisibility(View.GONE);
+        blockUser.setVisibility(View.GONE);
 
         if (email.equals(mAuth.getCurrentUser().getEmail())) {
             logout.setOnClickListener(new View.OnClickListener() {
@@ -144,12 +190,14 @@ public class ProfileFragment extends Fragment {
                     startActivity(intent);
                 }
             });
-
+            report.setVisibility(View.GONE);
+            makeAdmin.setVisibility(View.GONE);
+            makeShop.setVisibility(View.GONE);
         }
         else {
-            //if not my user, then chat option
             logout.setText(R.string.chat);
-            logout.setTextColor(Color.DKGRAY);
+            logout.setTextColor(Color.BLACK);
+            logout.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -179,6 +227,8 @@ public class ProfileFragment extends Fragment {
                             Map<String, Object> data = new HashMap<>();
                             data.put("Informe", item);
                             data.put("user", email);
+                            Date date = Calendar.getInstance().getTime();
+                            data.put("data", date.toString());
                             firestore.collection("Reports").add(data);
                             alertDialogReport.dismiss();
                             Toast.makeText(getContext(), R.string.ReportEnviat, Toast.LENGTH_SHORT).show();
@@ -189,6 +239,21 @@ public class ProfileFragment extends Fragment {
             });
         }
         return root;
+    }
+
+    private void makeShop(String email) {
+        firestore.collection("Usuari").document(email).update("esTienda", true);
+    }
+
+    private void blockUser(String email) {
+        Date date = Calendar.getInstance().getTime();
+        firestore.collection("Usuari").document(email).update("blocked", true);
+        firestore.collection("Usuari").document(email).update("lastBloqueig", date);
+    }
+
+    private void makeadmin(String email) {
+
+        firestore.collection("Usuari").document(email).update("esAdministrador", true);
     }
 
     private String getLocality(double locationLatitude, double locationLongitude) {
@@ -223,6 +288,4 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
-
-
 }

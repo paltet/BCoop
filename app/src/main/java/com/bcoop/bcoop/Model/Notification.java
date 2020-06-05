@@ -67,6 +67,13 @@ public class Notification {
         this.time = Timestamp.now();
     }
 
+    public Notification(int price, String userEmail){
+        this.type = 5;
+        this.price = price;
+        this.time = Timestamp.now();
+        this.userEmail = userEmail;
+    }
+
     public boolean isRead() {
         return isRead;
     }

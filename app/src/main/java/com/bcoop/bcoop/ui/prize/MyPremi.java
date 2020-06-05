@@ -2,26 +2,34 @@ package com.bcoop.bcoop.ui.prize;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bcoop.bcoop.Model.Notification;
 import com.bcoop.bcoop.Model.Premi;
 import com.bcoop.bcoop.R;
+import com.bcoop.bcoop.ui.notification.NotificationAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import static android.content.ContentValues.TAG;
+import static com.google.firebase.firestore.Query.Direction.DESCENDING;
 
 public class MyPremi extends AppCompatActivity {
 
@@ -40,31 +48,31 @@ public class MyPremi extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
 
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        db.collection("Usuari").document(email)
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("Usuari").document(email).collection("premis").orderBy("time", DESCENDING)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        List<Map<String, Object>> list = (List<Map<String, Object>>) document.get("premis");
-                        for (Map<String, Object> hm : list) {
-                            String nom = (String) hm.get("nom");
-                            String descripció = (String) hm.get("descripció");
-                            String imatge = (String) hm.get("imatge");
-                            Integer preu = ((Long) hm.get("preu")).intValue();
-                            Timestamp time = (Timestamp) hm.get("time");
-                            premiList.add(new Premi(nom,descripció,imatge, preu, time));
-                        }
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Premi premi = document.toObject(Premi.class);
+                        premiList.add(premi);
                     }
-
                 } else {
                     Log.d(TAG, "Cached get failed: ", task.getException());
                 }
                 PremiAdapter adapter = new PremiAdapter(MyPremi.this, R.layout.my_list_item, premiList, true);
                 listView.setAdapter(adapter);
             }
-
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

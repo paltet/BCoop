@@ -35,6 +35,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.Locale;
 
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private Button signInButton;
     private GoogleSignInClient googleSignInClient;
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    private boolean isBlocked = false;
+    private FirebaseStorage db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,18 +85,42 @@ public class MainActivity extends AppCompatActivity {
                     password.requestFocus();
                 }
                 else {
-                    mAuth.signInWithEmailAndPassword(usr, psw).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+                    FirebaseFirestore.getInstance().collection("Usuari").document(mail.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()) {
-                                Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(MainActivity.this, HomeActivity.class));
-                            }
-                            else {
-                                Toast.makeText(MainActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    isBlocked = document.getBoolean("blocked");
+                                    if (isBlocked){
+
+                                        Toast.makeText(getApplicationContext(),
+                                                "Your user is blocked", Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                    else{
+
+                                        mAuth.signInWithEmailAndPassword(usr, psw).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if(task.isSuccessful()) {
+                                                    Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                                                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                                                }
+                                                else {
+                                                    Toast.makeText(MainActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
                             }
                         }
                     });
+
+
                 }
             }
         });
@@ -161,7 +188,8 @@ public class MainActivity extends AppCompatActivity {
                                     if(task.getResult().exists()) startActivity(new Intent(MainActivity.this, HomeActivity.class));
                                     else{
                                         Intent intent = new Intent(MainActivity.this, InitConfigActivity.class);
-                                        intent.putExtra("username", usermail);
+                                        String username = usermail.split("@")[0];
+                                        intent.putExtra("username", username);
                                         startActivity(intent);
                                     }
                                 }
@@ -229,5 +257,7 @@ public class MainActivity extends AppCompatActivity {
         }
         resources.updateConfiguration(config, dm);
     }
+
+
 
 }

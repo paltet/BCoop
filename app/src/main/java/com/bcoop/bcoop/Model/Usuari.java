@@ -2,6 +2,7 @@ package com.bcoop.bcoop.Model;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,18 +12,21 @@ public class Usuari {
     private String nom;
     private String foto;
     private boolean esPremium;
+    private boolean blocked;
     private int monedes;
     private double locationLatitude;
     private double locationLongitude;
     private boolean esAdministrador;
+    private boolean esTienda;
     private Map<String, HabilitatDetall> habilitats;
-    private List<String> xats;
+    private Map<String, List<String>> xats;
     private List<String> idiomas;
     private List<String> serveis; //llista amb els idServei de tots els seus serveis
     private int nivell;
+    private int experiencia;
     private int valoracio;
-    private List<Premi> premis;
     private String token;
+    private Date lastBloqueig;
 
     public Usuari() {}
 
@@ -33,15 +37,16 @@ public class Usuari {
         this.locationLatitude = locationLatitude;
         this.locationLongitude = locationLongitude;
         esPremium = false;
-        monedes = 0;
+        monedes = 150;
         esAdministrador = false;
+        blocked = false;
         habilitats = new HashMap<>();
-        xats = new ArrayList<>();
+        xats = new HashMap<>();
         idiomas = new ArrayList<>();
         serveis = new ArrayList<>();
         nivell = 1;
+        experiencia = 0;
         valoracio = 0;
-        premis = new ArrayList<>();
     }
 
     public String getEmail() {
@@ -100,6 +105,14 @@ public class Usuari {
         this.nivell = nivell;
     }
 
+    public int getExperiencia() {
+        return experiencia;
+    }
+
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
+    }
+
     public int getValoracio() {
         return valoracio;
     }
@@ -116,16 +129,27 @@ public class Usuari {
         this.habilitats = habilitats;
     }
 
-    public List<String> getXats() {
+    public Map<String, List<String>> getXats() {
         return xats;
     }
 
-    public void setXats(List<String> xats) {
+    public void setXats(Map<String, List<String>> xats) {
         this.xats = xats;
     }
 
-    public void addXats(String xat) {
-        this.xats.add(xat);
+    public void addXatWithUser(String with, String xat) {
+        if (this.xats.containsKey(with)) {
+            this.xats.get(with).add(xat);
+        }
+        else {
+            List<String> xats = new ArrayList<>();
+            xats.add(xat);
+            this.xats.put(with, xats);
+        }
+    }
+
+    public void deleteXatWithUser(String with) {
+        this.xats.remove(with);
     }
 
     public List<String> getIdiomas() {
@@ -142,14 +166,6 @@ public class Usuari {
 
     public void setServeis(List<String> serveis) {
         this.serveis = serveis;
-    }
-
-    public List<Premi> getPremis() {
-        return premis;
-    }
-
-    public void setPremis(List<Premi> premis) {
-        this.premis = premis;
     }
 
     public double getLocationLatitude() {
@@ -174,5 +190,29 @@ public class Usuari {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Date getLastBloqueig() {
+        return lastBloqueig;
+    }
+
+    public void setLastBloqueig(Date lastBloqueig) {
+        this.lastBloqueig = lastBloqueig;
+    }
+
+    public boolean isEsTienda() {
+        return esTienda;
+    }
+
+    public void setEsTienda(boolean esTienda) {
+        this.esTienda = esTienda;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }

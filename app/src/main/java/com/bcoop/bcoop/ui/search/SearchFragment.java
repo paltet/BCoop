@@ -1,5 +1,6 @@
 package com.bcoop.bcoop.ui.search;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -17,6 +20,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bcoop.bcoop.MainActivity;
+import com.bcoop.bcoop.Model.Servei;
 import com.bcoop.bcoop.Model.Usuari;
 import com.bcoop.bcoop.R;
 import com.bcoop.bcoop.UserSearch;
@@ -45,6 +50,9 @@ public class SearchFragment extends Fragment {
     ArrayList<UserSearch> users = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth  mAuth = FirebaseAuth.getInstance();
+    private ArrayList<Servei> meusServeis = new ArrayList<>();
+    boolean isBlocked = false;
+    private  String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
 
 
@@ -61,15 +69,23 @@ public class SearchFragment extends Fragment {
             }
         });*/
 
+
+
+
+
+        searchMeusServeis();
         setCurrentUSer();
         setHabilitats(root);
+
+        //parche per que no peti ask service en el primer ask
+        UtilityClass.getInstance().setList(meusServeis);
         Log.d("habilitatsFinal", String.valueOf(habilites));
         setSpinnerContent(root);
 
         mResultList = root.findViewById(R.id.ResultList);
 
 
-        adapter = new ResultListAdapter(users);
+        adapter = new ResultListAdapter(users, habilitat_seleccionada);
         mResultList.setAdapter(adapter);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -87,11 +103,21 @@ public class SearchFragment extends Fragment {
 
             }
         });*/
+
+        Button myServeces = root.findViewById(R.id.button2);
+        myServeces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MyServicesActivity.class);
+                UtilityClass.getInstance().setList(meusServeis);
+                startActivity(intent);
+            }
+        });
         return root;
     }
 
-    private void setSpinnerContent(View root) {
 
+    private void setSpinnerContent(View root) {
         searchSpinner = root.findViewById(R.id.spinner1);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, habilites);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -101,7 +127,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 habilitat_seleccionada = parent.getSelectedItem().toString();
-                Toast.makeText(parent.getContext(), "Seleccionada:"+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(parent.getContext(), "Seleccionada:"+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
                 searchUsers(parent.getItemAtPosition(position).toString());
             } //still never shows up in toast
 
@@ -111,13 +137,12 @@ public class SearchFragment extends Fragment {
             }
         };
         searchSpinner.setOnItemSelectedListener(mListener); // Register this spinner for a mListener
-
     }
 
     private void searchUsers(String hability) {
         Log.d("habilitatSeleccionada", hability);
         users = new ArrayList<>();
-        adapter = new ResultListAdapter(users);
+        adapter = new ResultListAdapter(users, habilitat_seleccionada);
         mResultList.setAdapter(adapter);
         final ArrayList<Usuari> list = new ArrayList<>();
         String currentuser = mAuth.getCurrentUser().getEmail();
@@ -134,30 +159,20 @@ public class SearchFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Usuari user = document.toObject(Usuari.class);
                                 Double loc = user.getLocationLatitude();
-                                if(loc != null && (!currentuser.equals(user.getEmail()))){
-
+                                if(!currentuser.equals(user.getEmail())){
                                     list.add(user);
                                     users.add(new UserSearch(user.getNom(), calculateDistance(user.getLocationLatitude(), user.getLocationLongitude()), getPhoto(user.getFoto()), user.getHabilitats(), user.getLocationLatitude(), user.getLocationLongitude(), user.getValoracio(), user.getEmail()));
                                     Log.d("distance", String.valueOf(users));
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                         users.sort(Comparator.comparing(UserSearch::getDistance));
                                     }
-
                                 }
                             }
-
-                            adapter = new ResultListAdapter(users);
+                            adapter = new ResultListAdapter(users, habilitat_seleccionada);
                             mResultList.setAdapter(adapter);
-
-
-                        } else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
-                        }
+                        } else Log.d("TAG", "Error getting documents: ", task.getException());
                     }
                 });
-
-
-
     }
 
     private String getPhoto(String foto) {
@@ -188,9 +203,7 @@ public class SearchFragment extends Fragment {
 
 
     private void setHabilitats(final View root){
-
         final ArrayList<String> habilitats = new ArrayList<>();
-
         db.collection("Habilitat")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -203,32 +216,43 @@ public class SearchFragment extends Fragment {
                                 habilites = habilitats;
                             }
                             setSpinnerContent(root);
-
-                        } else {
-
                         }
                     }
                 });
-
         Log.d("habilitats", String.valueOf(habilites));
-
-
     }
 
     private void setCurrentUSer(){
-
         db.collection("Usuari").document(mAuth.getCurrentUser().getEmail())
-            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 currentUser = documentSnapshot.toObject(Usuari.class);
             }
         });
-
     }
 
 
 
-
-
+    private void searchMeusServeis() {
+        //omplim la llista de serveis amb els serveis que en soc demander
+        String myEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        db.collection("Servei")
+                .whereEqualTo("demander", myEmail)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                Servei meuServei = document.toObject(Servei.class);
+                                Servei meuServeiAfegir = new Servei(meuServei.getIdServei(), meuServei.getProveidor(), meuServei.getDemander(), meuServei.getHabilitat(),
+                                        meuServei.getDate(), meuServei.getCoins_to_pay(), meuServei.getMessage(), meuServei.getEstat(),
+                                        meuServei.getComentariValoracio(), meuServei.getEstrellesValoracio());
+                                meusServeis.add(meuServeiAfegir);
+                            }
+                        }
+                    }
+                });
+    }
 }

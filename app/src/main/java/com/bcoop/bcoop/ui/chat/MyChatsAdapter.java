@@ -3,6 +3,8 @@ package com.bcoop.bcoop.ui.chat;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,22 +25,27 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class MyChatsAdapter extends BaseAdapter {
     private Context context;
     private List<String> myXats;
-    private String currentUser;
     private String otherUser;
+    private List<String> lastIDs;
+    private List<Boolean> selected;
 
     private FirebaseFirestore firestore;
     private FirebaseStorage storage;
 
-    public MyChatsAdapter(Context context, List<String> xats) {
+    public MyChatsAdapter(Context context, List<String> xats, List<String> lastIDs) {
         this.context = context;
         this.myXats = xats;
-        currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        this.lastIDs = lastIDs;
+        selected = new ArrayList<>();
+        for (int i = 0; i < this.myXats.size(); ++i)
+            selected.add(i, false);
 
         firestore = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -61,17 +68,16 @@ public class MyChatsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        String id = (String) getItem(position);
+        otherUser = (String) getItem(position);
 
         convertView = LayoutInflater.from(context).inflate(R.layout.layout_current_chat, null);
         final TextView lastMessageTime = convertView.findViewById(R.id.lastMessageTimeText);
         final ImageView img = convertView.findViewById(R.id.userImage);
         img.setImageResource(R.drawable.profile);
         final TextView username = convertView.findViewById(R.id.usernameText);
-        String[] users = id.split(",");
-        if (users[0].equals(currentUser))
-            otherUser = users[1];
-        else otherUser = users[0];
+
+        if (selected.get(position))
+            convertView.setBackgroundColor(Color.LTGRAY);
 
         final DocumentReference documentReferenceUsuari = firestore.collection("Usuari").document(otherUser);
         documentReferenceUsuari.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -101,15 +107,19 @@ public class MyChatsAdapter extends BaseAdapter {
             }
         });
 
-        final DocumentReference documentReference = firestore.collection("Xat").document(id);
+        final DocumentReference documentReference = firestore.collection("Xat").document(lastIDs.get(position));
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Xat xat = documentSnapshot.toObject(Xat.class);
-                String lastMessage = xat.getMissatges().get(xat.getMissatges().size() - 1).getText();
-                if (lastMessage != null)
-                    lastMessageTime.setText(lastMessage);
-                else lastMessageTime.setText(R.string.image);
+                if (xat.getMissatges().size() == 0)
+                    Log.d("Petaaaaaaaaaaaaaaaaaa ", lastIDs.get(position));
+                else {
+                    String lastMessage = xat.getMissatges().get(xat.getMissatges().size() - 1).getText();
+                    if (lastMessage != null)
+                        lastMessageTime.setText(lastMessage);
+                    else lastMessageTime.setText(R.string.image);
+                }
             }
         });
 
@@ -118,5 +128,24 @@ public class MyChatsAdapter extends BaseAdapter {
 
     private String changeTimeFormat(Date lastMessage) {
         return  lastMessage.toString().substring(11, 16);
+    }
+
+    public void update(List<String> delete) {
+        for (String deleteXat : delete)
+            myXats.remove(deleteXat);
+        for (int i = 0; i < this.myXats.size(); ++i)
+            selected.add(i, false);
+        notifyDataSetChanged();
+    }
+
+    public void changeBackground(int position) {
+        selected.set(position, !selected.get(position));
+        notifyDataSetChanged();
+    }
+
+    public void clearSelection() {
+        for (int i = 0; i < this.myXats.size(); ++i)
+            selected.add(i, false);
+        notifyDataSetChanged();
     }
 }
