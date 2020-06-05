@@ -154,6 +154,7 @@
 
 
     <string name="makeAdmin">Hacer usuario admin</string>
+    <string name="makeShop">Habilitar funciones tienda</string>
     <string name="blockUser">Bloquear usuario</string>
 
     <string name="service_completed">Servicio Completado</string>

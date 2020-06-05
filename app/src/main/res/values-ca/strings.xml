@@ -156,6 +156,7 @@
     <string name="levelup">Has pujat al nivell </string>
 
     <string name="makeAdmin">Fer usuari admin</string>
+    <string name="makeShop">Habilitar funcions botiga</string>
     <string name="blockUser">Bloquejar usuari</string>
     <string name="service_completed">Servei Completat</string>
     <string name="add_comment">Afegeix un comentari (opcional)</string>

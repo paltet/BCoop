@@ -153,6 +153,7 @@
     <string name="rate_service">How was the service?</string>
 
     <string name="makeAdmin">Make user admin</string>
+    <string name="makeShop">Enable shop functions</string>
     <string name="blockUser">Block user</string>
 
     <string name="incidence_question">What was your problem?</string>

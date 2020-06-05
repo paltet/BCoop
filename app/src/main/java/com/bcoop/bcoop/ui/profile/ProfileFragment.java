@@ -58,6 +58,7 @@ public class ProfileFragment extends Fragment {
     private Button viewReport;
     private String uriImage;
     private Button makeAdmin;
+    private Button makeShop;
     private Button blockUser;
     private Button ReportSendButton;
     private EditText EditReport;
@@ -154,6 +155,13 @@ public class ProfileFragment extends Fragment {
                                 makeadmin(email);
                             }
                         });
+
+                        makeShop.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                makeShop(email);
+                            }
+                        });
                     }
                 }
             }
@@ -161,6 +169,7 @@ public class ProfileFragment extends Fragment {
 
         logout = root.findViewById(R.id.logout);
         makeAdmin = root.findViewById(R.id.makeAdmin);
+        makeShop = root.findViewById(R.id.makeShop);
         blockUser = root.findViewById(R.id.blockUser);
         report = root.findViewById(R.id.Report);
         viewReport = root.findViewById(R.id.viewReportsButton);
@@ -226,6 +235,10 @@ public class ProfileFragment extends Fragment {
             });
         }
         return root;
+    }
+
+    private void makeShop(String email) {
+        firestore.collection("Usuari").document(email).update("esTienda", true);
     }
 
     private void blockUser(String email) {
